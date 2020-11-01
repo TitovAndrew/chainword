@@ -1,10 +1,10 @@
 D:\4 курс\Программная инженерия\chainword\Chainword\Chainword\bin\Debug\Chainword.exe.config
 D:\4 курс\Программная инженерия\chainword\Chainword\Chainword\bin\Debug\Chainword.exe
 D:\4 курс\Программная инженерия\chainword\Chainword\Chainword\bin\Debug\Chainword.pdb
-D:\4 курс\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.Form1.resources
 D:\4 курс\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.Properties.Resources.resources
 D:\4 курс\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.csproj.GenerateResource.cache
 D:\4 курс\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.csproj.CoreCompileInputs.cache
 D:\4 курс\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.exe
 D:\4 курс\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.pdb
-D:\4 курс\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.csprojAssemblyReference.cache
+D:\4 курс\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.MenuUser.resources
+D:\4 курс\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.AuthorizationForm.resources

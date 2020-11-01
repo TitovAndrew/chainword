@@ -1,6 +1,6 @@
 ﻿namespace Chainword
 {
-    partial class Form1
+    partial class AuthorizationForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -58,6 +58,7 @@
             this.info_button.TabIndex = 54;
             this.info_button.Text = "i";
             this.info_button.UseVisualStyleBackColor = true;
+            this.info_button.Click += new System.EventHandler(this.Info_button_Click);
             // 
             // entry_button
             // 
@@ -118,7 +119,7 @@
             this.label1.TabIndex = 48;
             this.label1.Text = "Вход";
             // 
-            // Form1
+            // AuthorizationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -133,9 +134,9 @@
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "AuthorizationForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "Авторизация";
             this.ResumeLayout(false);
             this.PerformLayout();
 
