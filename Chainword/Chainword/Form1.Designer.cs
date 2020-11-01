@@ -92,6 +92,7 @@
             // 
             // password
             // 
+            this.password.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.password.Location = new System.Drawing.Point(133, 117);
             this.password.Multiline = true;
             this.password.Name = "password";
@@ -100,6 +101,7 @@
             // 
             // login
             // 
+            this.login.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.login.Location = new System.Drawing.Point(133, 60);
             this.login.Multiline = true;
             this.login.Name = "login";

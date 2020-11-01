@@ -25,6 +25,7 @@ namespace Chainword
         private void Entry_button_Click(object sender, EventArgs e)
         {
             //MessageBox.Show(log + " " + pas);
+
         }
 
         string GetHash(string input)
@@ -43,7 +44,7 @@ namespace Chainword
 
             if (log.IndexOfAny(theCharacetrers) != -1)
                 MessageBox.Show("Логин и пароль должны состоять из букв и цифр");
-            else if(log == "" || pas == "")
+            else if (log == "" || pas == "")
             {
                 MessageBox.Show("Заполните все поля");
             }
@@ -58,7 +59,7 @@ namespace Chainword
                 {
                     using (StreamWriter sw = new StreamWriter(writePath, true, System.Text.Encoding.Default))
                     {
-                        
+
                     }
                     using (StreamReader fs = new StreamReader(writePath))
                     {
@@ -66,14 +67,27 @@ namespace Chainword
                         {
                             string temp = fs.ReadLine();
                             if (temp == null) break;
+                            temp += "\n";
                             login += temp;
                         }
-                        // Надо будет разделить строку на пробелы, удалить четные элементы, а потом проверять
-                        MessageBox.Show(login);
-                        if (login.Contains(log + " "))
+
+                        string x = null;
+                        string[] char_user = login.Split(new char[] { '\n' });
+
+                        string[] result = new string[char_user.Length];
+                        for (int i = 0; i < char_user.Length; i++)
                         {
-                            MessageBox.Show("Пользователь с данным логином уже существует");
-                            check = false;
+                            string[] login1 = char_user[i].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            result[i] = login1[0];
+                            x += result[i] + "\n";
+                        }
+                        for (int i = 0; i < result.Length; i++)
+                        {
+                            if (result[i].Equals(log))
+                            {
+                                check = false;
+                                MessageBox.Show("Пользователь с данным логином уже существует");
+                            }
                         }
                     }
                     if (check)
