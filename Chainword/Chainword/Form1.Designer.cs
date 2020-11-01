@@ -47,7 +47,7 @@
             this.register_button.TabIndex = 55;
             this.register_button.Text = "Регистрация";
             this.register_button.UseVisualStyleBackColor = true;
-            this.register_button.Click += new System.EventHandler(this.register_button_Click);
+            this.register_button.Click += new System.EventHandler(this.Register_button_Click);
             // 
             // info_button
             // 
@@ -68,7 +68,7 @@
             this.entry_button.TabIndex = 53;
             this.entry_button.Text = "Войти";
             this.entry_button.UseVisualStyleBackColor = true;
-            this.entry_button.Click += new System.EventHandler(this.entry_button_Click);
+            this.entry_button.Click += new System.EventHandler(this.Entry_button_Click);
             // 
             // label3
             // 
