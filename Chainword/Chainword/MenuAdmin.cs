@@ -13,7 +13,6 @@ namespace Chainword
 {
     public partial class MenuAdmin : Form
     {
-
         public MenuAdmin()
         {
             InitializeComponent();

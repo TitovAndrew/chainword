@@ -99,7 +99,7 @@
             this.Dictionary_listBox.Location = new System.Drawing.Point(0, 42);
             this.Dictionary_listBox.Margin = new System.Windows.Forms.Padding(4);
             this.Dictionary_listBox.Name = "Dictionary_listBox";
-            this.Dictionary_listBox.Size = new System.Drawing.Size(838, 379);
+            this.Dictionary_listBox.Size = new System.Drawing.Size(835, 379);
             this.Dictionary_listBox.TabIndex = 28;
             // 
             // Download_button
