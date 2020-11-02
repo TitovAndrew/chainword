@@ -8,3 +8,17 @@ D:\4 курс\Программная инженерия\chainword\Chainword\Chai
 D:\4 курс\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.pdb
 D:\4 курс\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.MenuUser.resources
 D:\4 курс\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.AuthorizationForm.resources
+D:\Учеба\4 курс\1 семестр\Программная инженерия\Курсач\chainword\Chainword\Chainword\bin\Debug\Chainword.exe.config
+D:\Учеба\4 курс\1 семестр\Программная инженерия\Курсач\chainword\Chainword\Chainword\bin\Debug\Chainword.exe
+D:\Учеба\4 курс\1 семестр\Программная инженерия\Курсач\chainword\Chainword\Chainword\bin\Debug\Chainword.pdb
+D:\Учеба\4 курс\1 семестр\Программная инженерия\Курсач\chainword\Chainword\Chainword\obj\Debug\Chainword.csprojAssemblyReference.cache
+D:\Учеба\4 курс\1 семестр\Программная инженерия\Курсач\chainword\Chainword\Chainword\obj\Debug\Chainword.AuthorizationForm.resources
+D:\Учеба\4 курс\1 семестр\Программная инженерия\Курсач\chainword\Chainword\Chainword\obj\Debug\Chainword.MenuUser.resources
+D:\Учеба\4 курс\1 семестр\Программная инженерия\Курсач\chainword\Chainword\Chainword\obj\Debug\Chainword.Properties.Resources.resources
+D:\Учеба\4 курс\1 семестр\Программная инженерия\Курсач\chainword\Chainword\Chainword\obj\Debug\Chainword.csproj.GenerateResource.cache
+D:\Учеба\4 курс\1 семестр\Программная инженерия\Курсач\chainword\Chainword\Chainword\obj\Debug\Chainword.csproj.CoreCompileInputs.cache
+D:\Учеба\4 курс\1 семестр\Программная инженерия\Курсач\chainword\Chainword\Chainword\obj\Debug\Chainword.exe
+D:\Учеба\4 курс\1 семестр\Программная инженерия\Курсач\chainword\Chainword\Chainword\obj\Debug\Chainword.pdb
+D:\Учеба\4 курс\1 семестр\Программная инженерия\Курсач\chainword\Chainword\Chainword\obj\Debug\Chainword.MenuAdmin.resources
+D:\Учеба\4 курс\1 семестр\Программная инженерия\Курсач\chainword\Chainword\Chainword\obj\Debug\Chainword.CreateCross.resources
+D:\Учеба\4 курс\1 семестр\Программная инженерия\Курсач\chainword\Chainword\Chainword\obj\Debug\Chainword.Info.resources
