@@ -22,3 +22,7 @@ D:\Учеба\4 курс\1 семестр\Программная инженер�
 D:\Учеба\4 курс\1 семестр\Программная инженерия\Курсач\chainword\Chainword\Chainword\obj\Debug\Chainword.MenuAdmin.resources
 D:\Учеба\4 курс\1 семестр\Программная инженерия\Курсач\chainword\Chainword\Chainword\obj\Debug\Chainword.CreateCross.resources
 D:\Учеба\4 курс\1 семестр\Программная инженерия\Курсач\chainword\Chainword\Chainword\obj\Debug\Chainword.Info.resources
+D:\4 курс\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.csprojAssemblyReference.cache
+D:\4 курс\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.CreateCross.resources
+D:\4 курс\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.Info.resources
+D:\4 курс\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.MenuAdmin.resources
