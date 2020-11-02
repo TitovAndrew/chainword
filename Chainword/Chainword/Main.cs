@@ -86,13 +86,7 @@ namespace Chainword
                 MessageBox.Show("Неправильно введен логин или пароль");
             }
         }
-        string GetHash(string input)
-        {
-            var md5 = MD5.Create();
-            var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(input));
-
-            return Convert.ToBase64String(hash);
-        }
+        
 
         private void Register_button_Click(object sender, EventArgs e)
         {
