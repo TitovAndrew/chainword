@@ -64,6 +64,9 @@ namespace Chainword
             {
                 MessageBox.Show("Имя кроссворда должно состоять из букв латинского, русского алфавита, цифр и нижнего подчеркивания");
             }
+
+            Form ifrm = new FillingCross("wgwrgreg");
+            ifrm.Show();
         }
 
         private void CreateCross_Load(object sender, EventArgs e)
