@@ -38,7 +38,7 @@ namespace Chainword
             }
         }
 
-        void GetAllFiles(string rootDirectory, string fileExtension, ListBox files)
+        void ShowAllFiles(string rootDirectory, string fileExtension, ListBox files)
         {
             string test = null;
             string[] f = Directory.GetFiles(rootDirectory, fileExtension); // массив путей до файлов dict
@@ -61,7 +61,7 @@ namespace Chainword
 
         private void Download_button_Click(object sender, EventArgs e)
         {
-            GetAllFiles(Environment.CurrentDirectory, "*.dict", Dictionary_listBox);
+            ShowAllFiles(Environment.CurrentDirectory, "*.dict", Dictionary_listBox);
         }
 
         private void Createcross_button_Click(object sender, EventArgs e)
