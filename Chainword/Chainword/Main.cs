@@ -43,31 +43,7 @@ namespace Chainword
                         login += temp;
                     }
 
-                    string[] char_user = login.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
-                    for(int i = 0; i < char_user.Length; i++)
-                    {
-                        string[] login1 = char_user[i].Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
-                        if (log == login1[0] && GetHash(pas) == login1[1])
-                        {
-                            if (log == "admin" && GetHash(pas) == login1[1])
-                            {
-                                checkadmin = true;
-                                Form ma = new MenuAdmin();
-                                ma.Show();
-                                password.Text = "";
-                                this.Hide();
-                                break;
-                            }
-                            check = true;
-                            break;
-                        }
-                        else
-                        {
-                            check = false;
-                            checkadmin = false;
-                        }
-                        
-                    }
+                    
                     if (check)
                     {
                         Form mu = new MenuUser();
