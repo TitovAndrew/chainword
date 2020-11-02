@@ -15,7 +15,6 @@ namespace Chainword
         public MenuUser()
         {
             InitializeComponent();
-            MinimizeBox = false;
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
@@ -25,6 +24,11 @@ namespace Chainword
         }
 
         private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

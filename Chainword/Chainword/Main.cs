@@ -15,17 +15,17 @@ namespace Chainword
 {
     public partial class AuthorizationForm : Form
     {
-        private readonly char[] theCharacetrers = new[] { '&', '\\', '/', '!', '%', '#', '^', '(', ')', '?', '|', '~', '+', ' ', '{', '}', '*', ',', '[', ']', '$', ';', ':', '=' };
+        //private readonly char[] theCharacetrers = new[] { '&', '\\', '/', '!', '%', '#', '^', '(', ')', '?', '|', '~', '+', ' ', '{', '}', '*', ',', '[', ']', '$', ';', ':', '=' };
 
         public AuthorizationForm()
         {
             InitializeComponent();
-            MinimizeBox = false;
         }
 
         private void Entry_button_Click(object sender, EventArgs e)
         {
             bool check = true;
+            bool checkadmin = true;
             string log = login.Text;
             string pas = password.Text;
             string writePath = Environment.CurrentDirectory + "\\" + "data_user.usr";
@@ -49,10 +49,24 @@ namespace Chainword
                         string[] login1 = char_user[i].Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
                         if (log == login1[0] && GetHash(pas) == login1[1])
                         {
+                            if (log == "admin" && GetHash(pas) == login1[1])
+                            {
+                                checkadmin = true;
+                                Form ma = new MenuAdmin();
+                                ma.Show();
+                                password.Text = "";
+                                this.Hide();
+                                break;
+                            }
                             check = true;
                             break;
                         }
-                        else check = false; 
+                        else
+                        {
+                            check = false;
+                            checkadmin = false;
+                        }
+                        
                     }
                     if (check)
                     {
@@ -67,7 +81,7 @@ namespace Chainword
             {
                 MessageBox.Show("Не удалось авторизоваться");
             }
-            if (!check)
+            if (!check && !checkadmin)
             {
                 MessageBox.Show("Неправильно введен логин или пароль");
             }
@@ -86,9 +100,9 @@ namespace Chainword
             string log = login.Text;
             string pas = password.Text;
 
-            if (log.IndexOfAny(theCharacetrers) != -1)
-                MessageBox.Show("Логин и пароль должны состоять из букв и цифр");
-            else if (log == "" || pas == "")
+            //if (log.IndexOfAny(theCharacetrers) != -1)
+               // MessageBox.Show("Логин и пароль должны состоять из букв и цифр");
+            if (log == "" || pas == "")
             {
                 MessageBox.Show("Заполните все поля");
             }
@@ -167,9 +181,8 @@ namespace Chainword
 
         private void Info_button_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Для регистрации необходимо заполнить оба поля" + Environment.NewLine +
-                "Длина логина и пароля должна быть от 3 до 15 символов" + Environment.NewLine +
-                "Логин и пароль должен состоять из латинских букв, цифр и нижнего подчеркивания");
+            Form inf = new Info();
+            inf.Show();
         }
     }
 }
