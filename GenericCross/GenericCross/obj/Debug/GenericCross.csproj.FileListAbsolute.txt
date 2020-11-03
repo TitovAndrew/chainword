@@ -1,0 +1,10 @@
+D:\4 курс\Программная инженерия\chainword\GenericCross\GenericCross\bin\Debug\GenericCross.exe.config
+D:\4 курс\Программная инженерия\chainword\GenericCross\GenericCross\bin\Debug\GenericCross.exe
+D:\4 курс\Программная инженерия\chainword\GenericCross\GenericCross\bin\Debug\GenericCross.pdb
+D:\4 курс\Программная инженерия\chainword\GenericCross\GenericCross\obj\Debug\GenericCross.csprojAssemblyReference.cache
+D:\4 курс\Программная инженерия\chainword\GenericCross\GenericCross\obj\Debug\GenericCross.Form1.resources
+D:\4 курс\Программная инженерия\chainword\GenericCross\GenericCross\obj\Debug\GenericCross.Properties.Resources.resources
+D:\4 курс\Программная инженерия\chainword\GenericCross\GenericCross\obj\Debug\GenericCross.csproj.GenerateResource.cache
+D:\4 курс\Программная инженерия\chainword\GenericCross\GenericCross\obj\Debug\GenericCross.csproj.CoreCompileInputs.cache
+D:\4 курс\Программная инженерия\chainword\GenericCross\GenericCross\obj\Debug\GenericCross.exe
+D:\4 курс\Программная инженерия\chainword\GenericCross\GenericCross\obj\Debug\GenericCross.pdb
