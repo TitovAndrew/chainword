@@ -34,7 +34,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.NameCross_textBox = new System.Windows.Forms.TextBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.AvailableDictionary = new System.Windows.Forms.ComboBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.TypeCross_comboBox = new System.Windows.Forms.ComboBox();
@@ -48,10 +48,9 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(70, 9);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(109, 9);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(261, 33);
+            this.label2.Size = new System.Drawing.Size(319, 40);
             this.label2.TabIndex = 46;
             this.label2.Text = "Создание кроссворда";
             // 
@@ -59,20 +58,19 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label7.Location = new System.Drawing.Point(0, 99);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label7.Location = new System.Drawing.Point(0, 122);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(82, 23);
+            this.label7.Size = new System.Drawing.Size(105, 29);
             this.label7.TabIndex = 44;
             this.label7.Text = "Словарь:";
             // 
             // CreateCross_button
             // 
             this.CreateCross_button.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.CreateCross_button.Location = new System.Drawing.Point(266, 251);
-            this.CreateCross_button.Margin = new System.Windows.Forms.Padding(2);
+            this.CreateCross_button.Location = new System.Drawing.Point(355, 309);
+            this.CreateCross_button.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CreateCross_button.Name = "CreateCross_button";
-            this.CreateCross_button.Size = new System.Drawing.Size(126, 32);
+            this.CreateCross_button.Size = new System.Drawing.Size(168, 39);
             this.CreateCross_button.TabIndex = 42;
             this.CreateCross_button.Text = "Создать";
             this.CreateCross_button.UseVisualStyleBackColor = true;
@@ -82,10 +80,9 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(0, 245);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(0, 302);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(133, 46);
+            this.label1.Size = new System.Drawing.Size(172, 58);
             this.label1.TabIndex = 40;
             this.label1.Text = "Сгенерировать \r\nавтоматически";
             // 
@@ -93,38 +90,39 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(0, 61);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Location = new System.Drawing.Point(0, 75);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(147, 23);
+            this.label3.Size = new System.Drawing.Size(185, 29);
             this.label3.TabIndex = 39;
             this.label3.Text = "Имя кроссворда:";
             // 
             // NameCross_textBox
             // 
             this.NameCross_textBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.NameCross_textBox.Location = new System.Drawing.Point(166, 61);
-            this.NameCross_textBox.Margin = new System.Windows.Forms.Padding(2);
+            this.NameCross_textBox.Location = new System.Drawing.Point(221, 75);
+            this.NameCross_textBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.NameCross_textBox.Multiline = true;
             this.NameCross_textBox.Name = "NameCross_textBox";
-            this.NameCross_textBox.Size = new System.Drawing.Size(226, 25);
+            this.NameCross_textBox.Size = new System.Drawing.Size(300, 30);
             this.NameCross_textBox.TabIndex = 38;
             // 
-            // comboBox2
+            // AvailableDictionary
             // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(166, 102);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(226, 21);
-            this.comboBox2.TabIndex = 48;
+            this.AvailableDictionary.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.AvailableDictionary.FormattingEnabled = true;
+            this.AvailableDictionary.Location = new System.Drawing.Point(221, 126);
+            this.AvailableDictionary.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.AvailableDictionary.Name = "AvailableDictionary";
+            this.AvailableDictionary.Size = new System.Drawing.Size(300, 24);
+            this.AvailableDictionary.TabIndex = 48;
             // 
             // checkBox1
             // 
             this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBox1.Location = new System.Drawing.Point(166, 255);
+            this.checkBox1.Location = new System.Drawing.Point(221, 314);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(20, 20);
+            this.checkBox1.Size = new System.Drawing.Size(27, 25);
             this.checkBox1.TabIndex = 49;
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
@@ -132,10 +130,9 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(0, 136);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Location = new System.Drawing.Point(0, 167);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(46, 23);
+            this.label4.Size = new System.Drawing.Size(58, 29);
             this.label4.TabIndex = 50;
             this.label4.Text = "Вид:";
             // 
@@ -148,19 +145,19 @@
             "Змейка",
             "Линейный",
             "Спираль"});
-            this.TypeCross_comboBox.Location = new System.Drawing.Point(166, 139);
+            this.TypeCross_comboBox.Location = new System.Drawing.Point(221, 171);
+            this.TypeCross_comboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.TypeCross_comboBox.Name = "TypeCross_comboBox";
-            this.TypeCross_comboBox.Size = new System.Drawing.Size(226, 21);
+            this.TypeCross_comboBox.Size = new System.Drawing.Size(300, 24);
             this.TypeCross_comboBox.TabIndex = 51;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(0, 173);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label5.Location = new System.Drawing.Point(0, 213);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(231, 23);
+            this.label5.Size = new System.Drawing.Size(297, 29);
             this.label5.TabIndex = 52;
             this.label5.Text = "Кол-во букв в пересечении:";
             // 
@@ -172,19 +169,19 @@
             "1",
             "2",
             "3"});
-            this.AmountLetters_comboBox.Location = new System.Drawing.Point(279, 176);
+            this.AmountLetters_comboBox.Location = new System.Drawing.Point(372, 217);
+            this.AmountLetters_comboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.AmountLetters_comboBox.Name = "AmountLetters_comboBox";
-            this.AmountLetters_comboBox.Size = new System.Drawing.Size(113, 21);
+            this.AmountLetters_comboBox.Size = new System.Drawing.Size(149, 24);
             this.AmountLetters_comboBox.TabIndex = 53;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(0, 209);
-            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label6.Location = new System.Drawing.Point(0, 257);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(235, 23);
+            this.label6.Size = new System.Drawing.Size(299, 29);
             this.label6.TabIndex = 54;
             this.label6.Text = "Длина кроссворда в словах:";
             // 
@@ -211,16 +208,17 @@
             "18",
             "19",
             "20"});
-            this.LengthCross_comboBox.Location = new System.Drawing.Point(279, 212);
+            this.LengthCross_comboBox.Location = new System.Drawing.Point(372, 261);
+            this.LengthCross_comboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.LengthCross_comboBox.Name = "LengthCross_comboBox";
-            this.LengthCross_comboBox.Size = new System.Drawing.Size(113, 21);
+            this.LengthCross_comboBox.Size = new System.Drawing.Size(149, 24);
             this.LengthCross_comboBox.TabIndex = 55;
             // 
             // CreateCross
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(403, 294);
+            this.ClientSize = new System.Drawing.Size(537, 362);
             this.Controls.Add(this.LengthCross_comboBox);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.AmountLetters_comboBox);
@@ -228,7 +226,7 @@
             this.Controls.Add(this.TypeCross_comboBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.AvailableDictionary);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.CreateCross_button);
@@ -236,6 +234,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.NameCross_textBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CreateCross";
@@ -255,7 +254,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox NameCross_textBox;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox AvailableDictionary;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox TypeCross_comboBox;
         private System.Windows.Forms.Label label5;
