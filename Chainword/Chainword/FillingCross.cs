@@ -114,7 +114,6 @@ namespace Chainword
 
                     for (int i = 0; i < arr_words_list.Count; i++)
                         AvailableWords.Items.Add(arr_words_list[i]);
-                    //AvailableWords.Items.AddRange(arr_words);
                 }
                 else MessageBox.Show("В словаре невозможно найти слово, начинающееся с буквы " + last_chars[0]);
             }
@@ -197,42 +196,54 @@ namespace Chainword
                     string tmp = fs.ReadLine();
                     if (tmp == null) break;
                     tmp += "\n";
-                    //words += tmp;
-                    
+
+                    string last_word = null;
+                    foreach (var item in AddedWords.Items)
+                    {
+                        last_word = (string)item;
+                    }
+
+                    //MessageBox.Show(last_word.Substring(last_word.Length - 1));
+                    char[] f = (last_word.Substring(last_word.Length - 1)).ToCharArray();
                     if (AddedWords.Items.Count < 8)
                     {
-                        if (tmp[0].CompareTo(first_chars[AddedWords.Items.Count - 1][3]) != 0)
+                        if (tmp[0].CompareTo(f[0]) == 0)
                         {
-                            MessageBox.Show("слово нельзя найти так как оно начинается не на ПОСЛЕДНЮЮ БУквУ");
-                            break;
+                            words += tmp;
                         }
-                        else words += tmp;
                     }
                     else
                     {
-                        if (tmp[0].CompareTo(first_chars[AddedWords.Items.Count - 1][4]) != 0)
+                        if (tmp[0].CompareTo(f[0]) != 0)
                         {
-                            MessageBox.Show("слово нельзя найти так как оно начинается не на ПОСЛЕДНЮЮ БУквУ");
-                            break;
+                            words += tmp;
                         }
-                        else words += tmp;
                     }
                 }
-                string[] arr_words = words.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
 
-                List<string> arr_words_list = new List<string>();
-
-                for (int i = 0; i < arr_words.Length; i++)
+                if (words != null)
                 {
-                    if (arr_words[i].Contains(WordSearch.Text.ToUpper()))
-                    {
-                        arr_words_list.Add(arr_words[i]);                       
-                    }
-                }
-                for (int i = 0; i < arr_words_list.Count; i++)
-                    AvailableWords.Items.Add(arr_words_list[i]);
-            }
+                    string[] arr_words = words.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
 
+                    List<string> arr_words_list = new List<string>();
+
+                    for (int i = 0; i < arr_words.Length; i++)
+                    {
+                        if (arr_words[i].Contains(WordSearch.Text.ToUpper()))
+                        {
+                            arr_words_list.Add(arr_words[i]);
+                        }
+                    }
+                    for (int i = 0; i < arr_words_list.Count; i++)
+                        AvailableWords.Items.Add(arr_words_list[i]);
+                }
+                if (words.Length == 0)
+                {
+                    MessageBox.Show("Ошибка");
+                    //string y = "Ошибка";
+                }
+
+            }
         }
 
         void WordSearch_OnFocus(object sender, System.EventArgs e)
