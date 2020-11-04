@@ -16,8 +16,7 @@ namespace Chainword
     {
         public CreateCross()
         {
-            InitializeComponent();
-            //NameCross_textBox.TextChanged += new MouseEventHandler(Dictionary_listBox_DoubleClick);
+            InitializeComponent();         
             NameCross_textBox.TextChanged += NameCross_textBox_TextChanged;
             AvailableDictionary.SelectedIndexChanged += AvailableDictionary_SelectedIndexChanged;
             TypeCross_comboBox.SelectedIndex = 0;
@@ -25,7 +24,7 @@ namespace Chainword
             LengthCross_comboBox.SelectedIndex = 7;
             ShowAllFiles(Environment.CurrentDirectory, "*.dict", AvailableDictionary);
             CreateCross_button.Enabled = false;
-
+            
         }
 
         void ShowAllFiles(string rootDirectory, string fileExtension, ComboBox files)
@@ -70,12 +69,18 @@ namespace Chainword
             if (!Regex.IsMatch(NameCross_textBox.Text, "^[A-Za-zА-Яа-я0-9_]+$"))
             {
                 MessageBox.Show("Имя кроссворда должно состоять из букв латинского, русского алфавита, цифр и нижнего подчеркивания");
+            } 
+            else if (checkBox1.Checked == false)
+            {
+                Form ifrm = new FillingCross(NameCross_textBox.Text, result_path, TypeCross_comboBox.Text, int.Parse(AmountLetters_comboBox.Text), int.Parse(LengthCross_comboBox.Text));
+                ifrm.Show();
+                this.Close();
             }
             else
             {
-                Form ifrm = new FillingCross(result_path);
-                ifrm.Show();
+
             }
+
         }
         private void NameCross_textBox_TextChanged(object sender, EventArgs e)
         {

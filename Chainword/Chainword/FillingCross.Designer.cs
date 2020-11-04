@@ -30,7 +30,7 @@
         {
             this.label2 = new System.Windows.Forms.Label();
             this.WordSearch = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.search_button = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.AvailableWords = new System.Windows.Forms.ListBox();
             this.AddedWords = new System.Windows.Forms.ListBox();
@@ -43,9 +43,10 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(241, 9);
+            this.label2.Location = new System.Drawing.Point(181, 7);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(319, 40);
+            this.label2.Size = new System.Drawing.Size(261, 33);
             this.label2.TabIndex = 47;
             this.label2.Text = "Создание кроссворда";
             // 
@@ -53,39 +54,41 @@
             // 
             this.WordSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.WordSearch.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.WordSearch.Location = new System.Drawing.Point(12, 52);
-            this.WordSearch.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.WordSearch.Location = new System.Drawing.Point(9, 42);
+            this.WordSearch.Margin = new System.Windows.Forms.Padding(2, 0, 2, 2);
             this.WordSearch.Name = "WordSearch";
-            this.WordSearch.Size = new System.Drawing.Size(122, 28);
+            this.WordSearch.Size = new System.Drawing.Size(92, 24);
             this.WordSearch.TabIndex = 48;
             this.WordSearch.Text = "Поиск слова";
             // 
-            // button1
+            // search_button
             // 
-            this.button1.Location = new System.Drawing.Point(133, 51);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(30, 30);
-            this.button1.TabIndex = 49;
-            this.button1.Text = "🔎";
-            this.button1.UseVisualStyleBackColor = true;
+            this.search_button.Location = new System.Drawing.Point(100, 41);
+            this.search_button.Margin = new System.Windows.Forms.Padding(2, 2, 2, 0);
+            this.search_button.Name = "search_button";
+            this.search_button.Size = new System.Drawing.Size(22, 24);
+            this.search_button.TabIndex = 49;
+            this.search_button.Text = "🔎";
+            this.search_button.UseVisualStyleBackColor = true;
+            this.search_button.Click += new System.EventHandler(this.Search_button_Click);
             // 
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(169, 56);
+            this.comboBox1.Location = new System.Drawing.Point(127, 46);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(192, 24);
+            this.comboBox1.Size = new System.Drawing.Size(145, 21);
             this.comboBox1.TabIndex = 50;
             // 
             // AvailableWords
             // 
             this.AvailableWords.FormattingEnabled = true;
             this.AvailableWords.HorizontalScrollbar = true;
-            this.AvailableWords.ItemHeight = 16;
-            this.AvailableWords.Location = new System.Drawing.Point(12, 86);
+            this.AvailableWords.Location = new System.Drawing.Point(9, 70);
+            this.AvailableWords.Margin = new System.Windows.Forms.Padding(2);
             this.AvailableWords.Name = "AvailableWords";
-            this.AvailableWords.Size = new System.Drawing.Size(578, 356);
+            this.AvailableWords.Size = new System.Drawing.Size(434, 290);
             this.AvailableWords.TabIndex = 51;
             // 
             // AddedWords
@@ -93,19 +96,19 @@
             this.AddedWords.Enabled = false;
             this.AddedWords.FormattingEnabled = true;
             this.AddedWords.HorizontalScrollbar = true;
-            this.AddedWords.ItemHeight = 16;
-            this.AddedWords.Location = new System.Drawing.Point(596, 87);
+            this.AddedWords.Location = new System.Drawing.Point(447, 71);
+            this.AddedWords.Margin = new System.Windows.Forms.Padding(2);
             this.AddedWords.Name = "AddedWords";
-            this.AddedWords.Size = new System.Drawing.Size(192, 356);
+            this.AddedWords.Size = new System.Drawing.Size(145, 290);
             this.AddedWords.TabIndex = 52;
             // 
             // CreateCross_button
             // 
             this.CreateCross_button.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.CreateCross_button.Location = new System.Drawing.Point(596, 448);
-            this.CreateCross_button.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.CreateCross_button.Location = new System.Drawing.Point(447, 364);
+            this.CreateCross_button.Margin = new System.Windows.Forms.Padding(2);
             this.CreateCross_button.Name = "CreateCross_button";
-            this.CreateCross_button.Size = new System.Drawing.Size(192, 39);
+            this.CreateCross_button.Size = new System.Drawing.Size(144, 32);
             this.CreateCross_button.TabIndex = 53;
             this.CreateCross_button.Text = "Создать";
             this.CreateCross_button.UseVisualStyleBackColor = true;
@@ -113,10 +116,10 @@
             // AddWord
             // 
             this.AddWord.Font = new System.Drawing.Font("Calibri", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.AddWord.Location = new System.Drawing.Point(422, 448);
-            this.AddWord.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.AddWord.Location = new System.Drawing.Point(316, 364);
+            this.AddWord.Margin = new System.Windows.Forms.Padding(2);
             this.AddWord.Name = "AddWord";
-            this.AddWord.Size = new System.Drawing.Size(168, 39);
+            this.AddWord.Size = new System.Drawing.Size(126, 32);
             this.AddWord.TabIndex = 54;
             this.AddWord.Text = "Добавить слово";
             this.AddWord.UseVisualStyleBackColor = true;
@@ -125,10 +128,10 @@
             // DeleteLastWord
             // 
             this.DeleteLastWord.Font = new System.Drawing.Font("Calibri", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.DeleteLastWord.Location = new System.Drawing.Point(232, 447);
-            this.DeleteLastWord.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.DeleteLastWord.Location = new System.Drawing.Point(174, 363);
+            this.DeleteLastWord.Margin = new System.Windows.Forms.Padding(2);
             this.DeleteLastWord.Name = "DeleteLastWord";
-            this.DeleteLastWord.Size = new System.Drawing.Size(184, 39);
+            this.DeleteLastWord.Size = new System.Drawing.Size(138, 32);
             this.DeleteLastWord.TabIndex = 55;
             this.DeleteLastWord.Text = "Удалить последнее слово";
             this.DeleteLastWord.UseVisualStyleBackColor = true;
@@ -136,22 +139,23 @@
             // 
             // FillingCross
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 494);
+            this.ClientSize = new System.Drawing.Size(600, 401);
             this.Controls.Add(this.DeleteLastWord);
             this.Controls.Add(this.AddWord);
             this.Controls.Add(this.CreateCross_button);
             this.Controls.Add(this.AddedWords);
             this.Controls.Add(this.AvailableWords);
             this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.search_button);
             this.Controls.Add(this.WordSearch);
             this.Controls.Add(this.label2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "FillingCross";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FillingCross";
+            this.Text = "Создание кроссворда";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -160,7 +164,7 @@
         #endregion
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox WordSearch;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button search_button;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ListBox AvailableWords;
         private System.Windows.Forms.ListBox AddedWords;
