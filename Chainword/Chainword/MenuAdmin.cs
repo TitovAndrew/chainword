@@ -17,6 +17,7 @@ namespace Chainword
         {
             InitializeComponent();
             Dictionary_listBox.MouseDoubleClick += new MouseEventHandler(Dictionary_listBox_DoubleClick);
+
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
@@ -25,10 +26,10 @@ namespace Chainword
             ifrm.Show();
         }
 
-        private void tabControl1_Selected(object sender, TabControlEventArgs e)
+        /*private void tabControl1_Selected(object sender, TabControlEventArgs e)
         {
             e.TabPage.Text = "New Name";
-        }
+        }*/
 
         private void Dictionary_listBox_DoubleClick(object sender, EventArgs e)
         {

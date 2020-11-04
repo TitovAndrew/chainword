@@ -17,10 +17,15 @@ namespace Chainword
         public CreateCross()
         {
             InitializeComponent();
+            //NameCross_textBox.TextChanged += new MouseEventHandler(Dictionary_listBox_DoubleClick);
+            NameCross_textBox.TextChanged += NameCross_textBox_TextChanged;
+            AvailableDictionary.SelectedIndexChanged += AvailableDictionary_SelectedIndexChanged;
             TypeCross_comboBox.SelectedIndex = 0;
             AmountLetters_comboBox.SelectedIndex = 0;
             LengthCross_comboBox.SelectedIndex = 7;
             ShowAllFiles(Environment.CurrentDirectory, "*.dict", AvailableDictionary);
+            CreateCross_button.Enabled = false;
+
         }
 
         void ShowAllFiles(string rootDirectory, string fileExtension, ComboBox files)
@@ -54,10 +59,13 @@ namespace Chainword
         {
             string result_path = null; // Путь к выбранному словарю
             string[] f = Directory.GetFiles(Environment.CurrentDirectory, "*.dict"); // массив путей до файлов dict
-            for(int i = 0; i < f.Length; i++)
+            for (int i = 0; i < f.Length; i++)
             {
                 if (f[i].Contains(AvailableDictionary.Text))
+                { 
                     result_path = f[i];
+                }
+                
             }
             if (!Regex.IsMatch(NameCross_textBox.Text, "^[A-Za-zА-Яа-я0-9_]+$"))
             {
@@ -69,10 +77,28 @@ namespace Chainword
                 ifrm.Show();
             }
         }
-
-        private void CreateCross_Load(object sender, EventArgs e)
+        private void NameCross_textBox_TextChanged(object sender, EventArgs e)
         {
-            checkBox1.Size = new Size(40, 40);
+            if (AvailableDictionary.Text != "" && NameCross_textBox.Text != "")
+            {
+                CreateCross_button.Enabled = true;
+            }
+            else
+            {
+                CreateCross_button.Enabled = false;
+            }          
+        }
+
+        private void AvailableDictionary_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (AvailableDictionary.Text != "" && NameCross_textBox.Text != "")
+            {
+                CreateCross_button.Enabled = true;
+            }
+            else
+            {
+                CreateCross_button.Enabled = false;
+            }
         }
     }
 }
