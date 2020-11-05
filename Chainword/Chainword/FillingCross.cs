@@ -236,13 +236,16 @@ namespace Chainword
                     }
                     for (int i = 0; i < arr_words_list.Count; i++)
                         AvailableWords.Items.Add(arr_words_list[i]);
+
+                    if (arr_words_list.Count == 0)
+                    {
+                        MessageBox.Show("Нет подходящих вхождений");
+                    }
                 }
-                if (words.Length == 0)
+                else
                 {
                     MessageBox.Show("Ошибка");
-                    //string y = "Ошибка";
                 }
-
             }
         }
 
