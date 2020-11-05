@@ -40,10 +40,7 @@ namespace Chainword
 
                 File_Reader();
             }
-            catch
-            {
-
-            }
+            catch { }
         }
 
         void File_Reader()
@@ -64,8 +61,6 @@ namespace Chainword
             }
         }
 
-
-
         private void AddWord_Click(object sender, EventArgs e)
         {
             foreach (var item in AvailableWords.SelectedItems)
@@ -73,7 +68,7 @@ namespace Chainword
                 string str = (string)item;
                 string[] result = { (AddedWords.Items.Count + 1) + ". " + str.Split(' ')[0] };
                 AddedWords.Items.AddRange(result);
-                last_chars = result[0].Substring(result[0].Length - 1);
+                last_chars = result[0].Substring(result[0].Length - 3);
                 first_chars[k] = result[0];
                 k++;
             }
@@ -87,14 +82,28 @@ namespace Chainword
                     string tmp = fs.ReadLine();
                     if (tmp == null) break;
                     tmp += "\n";
-                    if (tmp[0].CompareTo(last_chars[0]) == 0)
-                        words += tmp;
+
+                    if (crossletters == 1)
+                    {
+                        if (tmp[0].CompareTo(last_chars[2]) == 0)
+                            words += tmp;
+                    }
+                    else if (crossletters == 2)
+                    {
+                        if (tmp[0].CompareTo(last_chars[1]) == 0 && tmp[1].CompareTo(last_chars[2]) == 0)
+                            words += tmp;
+                    }
+                    else
+                    {
+                        if (tmp[0].CompareTo(last_chars[0]) == 0 && tmp[1].CompareTo(last_chars[1]) == 0 && tmp[2].CompareTo(last_chars[2]) == 0)
+                            words += tmp;
+                    }
                 }
                 if (words != null)
                 {
                     string[] arr_words = words.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
                     List<string> arr_words_list = new List<string>();
-                    string[] x = null;
+                    string[] x;
                     for (int i = 0; i < arr_words.Length; i++)
                     {
                         foreach (var item in AddedWords.Items)
@@ -115,7 +124,16 @@ namespace Chainword
                     for (int i = 0; i < arr_words_list.Count; i++)
                         AvailableWords.Items.Add(arr_words_list[i]);
                 }
-                else MessageBox.Show("В словаре невозможно найти слово, начинающееся с буквы " + last_chars[0]);
+                else
+                {
+                    if (crossletters == 1)
+                        MessageBox.Show("В словаре невозможно найти слово, начинающееся с буквы " + last_chars[2]);
+                    else if (crossletters == 2)
+                        MessageBox.Show("В словаре невозможно найти слово, начинающееся с букв " + last_chars[1] + last_chars[2]);
+                    else
+                        MessageBox.Show("В словаре невозможно найти слово, начинающееся с букв " + last_chars[0] + last_chars[1] + last_chars[2]);
+                }
+                    
             }
             DeleteLastWord.Enabled = true;
 
@@ -137,26 +155,65 @@ namespace Chainword
                     string tmp = fs.ReadLine();
                     if (tmp == null) break;
                     tmp += "\n";
-                    if (AddedWords.Items.Count < 8)
+                    if (AddedWords.Items.Count < 9)
                     {
-                        if (tmp[0].CompareTo(first_chars[k - 1][3]) == 0)
-                        {                                                     
-                            words += tmp;
+                        if (crossletters == 1)
+                        {
+                            if (tmp[0].CompareTo(first_chars[k - 1][3]) == 0)
+                            {
+                                words += tmp;
+                            }
+                        }
+                        else if (crossletters == 2)
+                        {
+                            if (tmp[0].CompareTo(first_chars[k - 1][3]) == 0 && 
+                                tmp[1].CompareTo(first_chars[k - 1][4]) == 0)
+                            {
+                                words += tmp;
+                            }
+                        }
+                        else
+                        {
+                            if (tmp[0].CompareTo(first_chars[k - 1][3]) == 0 &&
+                                tmp[1].CompareTo(first_chars[k - 1][4]) == 0 &&
+                                tmp[2].CompareTo(first_chars[k - 1][5]) == 0)
+                            {
+                                words += tmp;
+                            }
                         }
                     }
                     else
                     {
-                        if (tmp[0].CompareTo(first_chars[k - 1][4]) == 0)
-                        {                                                     
-                            words += tmp;
+                        if (crossletters == 1)
+                        {
+                            if (tmp[0].CompareTo(first_chars[k - 1][4]) == 0)
+                            {
+                                words += tmp;
+                            }
+                        }
+                        else if (crossletters == 2)
+                        {
+                            if (tmp[0].CompareTo(first_chars[k - 1][4]) == 0
+                                && tmp[1].CompareTo(first_chars[k - 1][5]) == 0)
+                            {
+                                words += tmp;
+                            }
+                        }
+                        else
+                        {
+                            if (tmp[0].CompareTo(first_chars[k - 1][4]) == 0 &&
+                                tmp[1].CompareTo(first_chars[k - 1][5]) == 0 &&
+                                tmp[2].CompareTo(first_chars[k - 1][6]) == 0)
+                            {
+                                words += tmp;
+                            }
                         }
                     }
-
                 }
                 string[] arr_words = words.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
 
                 List<string> arr_words_list = new List<string>();
-                string[] x = null;
+                string[] x;
                 for (int i = 0; i < arr_words.Length; i++)
                 {
                     foreach (var item in AddedWords.Items)
@@ -203,36 +260,51 @@ namespace Chainword
                         last_word = (string)item;
                     }
 
-                    //MessageBox.Show(last_word.Substring(last_word.Length - 1));
-                    char[] f = (last_word.Substring(last_word.Length - 1)).ToCharArray();
-                    if (AddedWords.Items.Count < 8)
+                    if (last_word != null)
                     {
-                        if (tmp[0].CompareTo(f[0]) == 0)
+                        char[] f = (last_word.Substring(last_word.Length - 3)).ToCharArray();
+                        if (crossletters == 1)
                         {
-                            words += tmp;
+                            if (tmp[0].CompareTo(f[2]) == 0)
+                                words += tmp;
+                        }
+                        else if (crossletters == 2)
+                        {
+                            if (tmp[0].CompareTo(f[1]) == 0 && tmp[1].CompareTo(f[2]) == 0)
+                                words += tmp;
+                        }
+                        else
+                        {
+                            if (tmp[0].CompareTo(f[0]) == 0 && tmp[1].CompareTo(f[1]) == 0 && tmp[2].CompareTo(f[2]) == 0)
+                                words += tmp;
                         }
                     }
-                    else
-                    {
-                        if (tmp[0].CompareTo(f[0]) != 0)
-                        {
-                            words += tmp;
-                        }
-                    }
+                    else words += tmp;
                 }
 
                 if (words != null)
                 {
                     string[] arr_words = words.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
-
                     List<string> arr_words_list = new List<string>();
-
+                    string[] x;
                     for (int i = 0; i < arr_words.Length; i++)
                     {
-                        if (arr_words[i].Contains(WordSearch.Text.ToUpper()))
+                        foreach (var item in AddedWords.Items)
                         {
-                            arr_words_list.Add(arr_words[i]);
+                            x = ((string)item).Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+                            if (arr_words[i].Contains(x[1] + " "))
+                            {
+                                check++;
+                            }
                         }
+                        if (check == 0)
+                        {
+                            if (arr_words[i].Contains(WordSearch.Text.ToUpper()))
+                            {
+                                arr_words_list.Add(arr_words[i]);
+                            }
+                        }
+                        check = 0;
                     }
                     for (int i = 0; i < arr_words_list.Count; i++)
                         AvailableWords.Items.Add(arr_words_list[i]);
@@ -249,10 +321,101 @@ namespace Chainword
             }
         }
 
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedIndex == 0)
+                SortingListBox(2);
+            else if (comboBox1.SelectedIndex == 1)
+                SortingListBox(3);
+            else if (comboBox1.SelectedIndex == 2)
+                SortingListBox(0);
+            else
+                SortingListBox(1);
+        }
+
+        void SortingListBox(int x)
+        {
+            List<string[]> concept_definition = new List<string[]>();
+
+            foreach (var item in AvailableWords.Items)
+            {
+                string str = (string)item;
+                concept_definition.Add(new string[] { str.Split(' ')[0], str.Substring(str.IndexOf(' ')) });
+            }
+            AvailableWords.Items.Clear();
+
+            NameComparer nc = new NameComparer(x);
+
+            concept_definition.Sort(nc);
+
+            for (int i = 0; i < concept_definition.Count; i++)
+                AvailableWords.Items.Add(concept_definition[i][0] + " " + concept_definition[i][1]);
+        }
+
         void WordSearch_OnFocus(object sender, System.EventArgs e)
         {
             WordSearch.Text = "";
         }
-        
+
+    }
+
+    class NameComparer : IComparer<string[]>
+    {
+        int check;
+
+        public NameComparer(int check)
+        {
+            this.check = check;
+        }
+
+        public int Compare(string[] o1, string[] o2)
+        {
+            if (check == 0)
+            {
+                if (o1[0].Length > o2[0].Length)
+                {
+                    return 1;
+                }
+                else if (o1[0].Length < o2[0].Length)
+                {
+                    return -1;
+                }
+            }
+            else if (check == 1)
+            {
+                if (o1[0].Length > o2[0].Length)
+                {
+                    return -1;
+                }
+                else if (o1[0].Length < o2[0].Length)
+                {
+                    return 1;
+                }
+            }
+            else if (check == 2)
+            {
+                if (o1[0].CompareTo(o2[0]) > 0)
+                {
+                    return 1;
+                }
+                else if (o1[0].CompareTo(o2[0]) < 0)
+                {
+                    return -1;
+                }
+            }
+            else
+            {
+                if (o1[0].CompareTo(o2[0]) > 0)
+                {
+                    return -1;
+                }
+                else if (o1[0].CompareTo(o2[0]) < 0)
+                {
+                    return 1;
+                }
+            }
+
+            return 0;
+        }
     }
 }
