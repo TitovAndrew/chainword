@@ -34,7 +34,7 @@
             this.Createcross_button = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.Dictionary_listBox = new System.Windows.Forms.ListBox();
-            this.Download_button = new System.Windows.Forms.Button();
+            this.Create_button = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -77,7 +77,7 @@
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.Dictionary_listBox);
-            this.tabPage1.Controls.Add(this.Download_button);
+            this.tabPage1.Controls.Add(this.Create_button);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage1.Name = "tabPage1";
@@ -93,31 +93,28 @@
             this.Dictionary_listBox.FormattingEnabled = true;
             this.Dictionary_listBox.HorizontalScrollbar = true;
             this.Dictionary_listBox.ItemHeight = 25;
-            this.Dictionary_listBox.Items.AddRange(new object[] {
-            "dfdfgfgfdg",
-            "ssdfsdfsdf"});
             this.Dictionary_listBox.Location = new System.Drawing.Point(0, 42);
             this.Dictionary_listBox.Margin = new System.Windows.Forms.Padding(4);
             this.Dictionary_listBox.Name = "Dictionary_listBox";
-            this.Dictionary_listBox.Size = new System.Drawing.Size(835, 379);
+            this.Dictionary_listBox.Size = new System.Drawing.Size(838, 379);
             this.Dictionary_listBox.TabIndex = 28;
             // 
-            // Download_button
+            // Create_button
             // 
-            this.Download_button.Location = new System.Drawing.Point(7, 6);
-            this.Download_button.Margin = new System.Windows.Forms.Padding(4);
-            this.Download_button.Name = "Download_button";
-            this.Download_button.Size = new System.Drawing.Size(100, 28);
-            this.Download_button.TabIndex = 27;
-            this.Download_button.Text = "Добавить";
-            this.Download_button.UseVisualStyleBackColor = true;
-            this.Download_button.Click += new System.EventHandler(this.Download_button_Click);
+            this.Create_button.Location = new System.Drawing.Point(7, 6);
+            this.Create_button.Margin = new System.Windows.Forms.Padding(4);
+            this.Create_button.Name = "Create_button";
+            this.Create_button.Size = new System.Drawing.Size(100, 28);
+            this.Create_button.TabIndex = 27;
+            this.Create_button.Text = "Создать";
+            this.Create_button.UseVisualStyleBackColor = true;
+            this.Create_button.Click += new System.EventHandler(this.Create_button_Click);
             // 
             // MenuAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(869, 466);
+            this.ClientSize = new System.Drawing.Size(861, 466);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -139,6 +136,6 @@
         private System.Windows.Forms.Button Createcross_button;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.ListBox Dictionary_listBox;
-        private System.Windows.Forms.Button Download_button;
+        private System.Windows.Forms.Button Create_button;
     }
 }

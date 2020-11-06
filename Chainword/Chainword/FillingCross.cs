@@ -28,7 +28,6 @@ namespace Chainword
             InitializeComponent();
             DeleteLastWord.Enabled = false;
             CreateCross_button.Enabled = false;
-            WordSearch.Enter += new EventHandler(WordSearch_OnFocus);
 
             try
             {
@@ -133,7 +132,7 @@ namespace Chainword
                     else
                         MessageBox.Show("В словаре невозможно найти слово, начинающееся с букв " + last_chars[0] + last_chars[1] + last_chars[2]);
                 }
-                    
+
             }
             DeleteLastWord.Enabled = true;
 
@@ -166,7 +165,7 @@ namespace Chainword
                         }
                         else if (crossletters == 2)
                         {
-                            if (tmp[0].CompareTo(first_chars[k - 1][3]) == 0 && 
+                            if (tmp[0].CompareTo(first_chars[k - 1][3]) == 0 &&
                                 tmp[1].CompareTo(first_chars[k - 1][4]) == 0)
                             {
                                 words += tmp;
@@ -321,6 +320,24 @@ namespace Chainword
             }
         }
 
+        private void WordSearch_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (WordSearch.ForeColor == System.Drawing.Color.Gray)
+            {
+                WordSearch.Text = "";
+                WordSearch.ForeColor = System.Drawing.Color.Black;
+            }
+        }
+
+        private void WordSearch_Leave(object sender, EventArgs e)
+        {
+            if (WordSearch.Text == "")
+            {
+                WordSearch.Text = "Поиск слова";
+                WordSearch.ForeColor = System.Drawing.Color.Gray;
+            }
+        }
+
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBox1.SelectedIndex == 0)
@@ -352,70 +369,5 @@ namespace Chainword
                 AvailableWords.Items.Add(concept_definition[i][0] + " " + concept_definition[i][1]);
         }
 
-        void WordSearch_OnFocus(object sender, System.EventArgs e)
-        {
-            WordSearch.Text = "";
-        }
-
-    }
-
-    class NameComparer : IComparer<string[]>
-    {
-        int check;
-
-        public NameComparer(int check)
-        {
-            this.check = check;
-        }
-
-        public int Compare(string[] o1, string[] o2)
-        {
-            if (check == 0)
-            {
-                if (o1[0].Length > o2[0].Length)
-                {
-                    return 1;
-                }
-                else if (o1[0].Length < o2[0].Length)
-                {
-                    return -1;
-                }
-            }
-            else if (check == 1)
-            {
-                if (o1[0].Length > o2[0].Length)
-                {
-                    return -1;
-                }
-                else if (o1[0].Length < o2[0].Length)
-                {
-                    return 1;
-                }
-            }
-            else if (check == 2)
-            {
-                if (o1[0].CompareTo(o2[0]) > 0)
-                {
-                    return 1;
-                }
-                else if (o1[0].CompareTo(o2[0]) < 0)
-                {
-                    return -1;
-                }
-            }
-            else
-            {
-                if (o1[0].CompareTo(o2[0]) > 0)
-                {
-                    return -1;
-                }
-                else if (o1[0].CompareTo(o2[0]) < 0)
-                {
-                    return 1;
-                }
-            }
-
-            return 0;
-        }
     }
 }

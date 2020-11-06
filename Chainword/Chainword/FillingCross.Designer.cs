@@ -52,20 +52,22 @@
             // WordSearch
             // 
             this.WordSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.WordSearch.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.WordSearch.ForeColor = System.Drawing.Color.Gray;
             this.WordSearch.Location = new System.Drawing.Point(12, 52);
             this.WordSearch.Margin = new System.Windows.Forms.Padding(3, 0, 3, 2);
             this.WordSearch.Name = "WordSearch";
             this.WordSearch.Size = new System.Drawing.Size(121, 28);
             this.WordSearch.TabIndex = 48;
             this.WordSearch.Text = "Поиск слова";
+            this.WordSearch.MouseClick += new System.Windows.Forms.MouseEventHandler(this.WordSearch_MouseClick);
+            this.WordSearch.Leave += new System.EventHandler(this.WordSearch_Leave);
             // 
             // search_button
             // 
-            this.search_button.Location = new System.Drawing.Point(133, 50);
+            this.search_button.Location = new System.Drawing.Point(130, 52);
             this.search_button.Margin = new System.Windows.Forms.Padding(3, 2, 3, 0);
             this.search_button.Name = "search_button";
-            this.search_button.Size = new System.Drawing.Size(29, 30);
+            this.search_button.Size = new System.Drawing.Size(29, 28);
             this.search_button.TabIndex = 49;
             this.search_button.Text = "🔎";
             this.search_button.UseVisualStyleBackColor = true;
@@ -73,13 +75,14 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "По алфавиту (от А до Я)",
             "По алфавиту (от Я до А)",
             "По возрастанию",
             "По убыванию"});
-            this.comboBox1.Location = new System.Drawing.Point(169, 57);
+            this.comboBox1.Location = new System.Drawing.Point(165, 56);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(192, 24);

@@ -145,8 +145,7 @@ namespace Chainword
                             temp += "\n";
                             login += temp;
                         }
-
-                        string x = null;
+                        
                         string[] char_user = login.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
 
                         string[] result = new string[char_user.Length];

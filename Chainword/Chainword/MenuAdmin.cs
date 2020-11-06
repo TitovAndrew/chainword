@@ -17,7 +17,7 @@ namespace Chainword
         {
             InitializeComponent();
             Dictionary_listBox.MouseDoubleClick += new MouseEventHandler(Dictionary_listBox_DoubleClick);
-
+            ShowAllFiles(Environment.CurrentDirectory, "*.dict", Dictionary_listBox);
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
@@ -25,11 +25,6 @@ namespace Chainword
             Form ifrm = Application.OpenForms[0];
             ifrm.Show();
         }
-
-        /*private void tabControl1_Selected(object sender, TabControlEventArgs e)
-        {
-            e.TabPage.Text = "New Name";
-        }*/
 
         private void Dictionary_listBox_DoubleClick(object sender, EventArgs e)
         {
@@ -60,15 +55,18 @@ namespace Chainword
             }
         }
 
-        private void Download_button_Click(object sender, EventArgs e)
-        {
-            ShowAllFiles(Environment.CurrentDirectory, "*.dict", Dictionary_listBox);
-        }
 
         private void Createcross_button_Click(object sender, EventArgs e)
         {
             Form cc = new CreateCross();
             cc.Show();
+            this.Hide();
+        }
+
+        private void Create_button_Click(object sender, EventArgs e)
+        {
+            Form cd = new CreateDictionary();
+            cd.Show();
             this.Hide();
         }
     }

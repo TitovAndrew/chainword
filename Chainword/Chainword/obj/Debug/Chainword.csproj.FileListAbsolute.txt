@@ -28,3 +28,5 @@ D:\4 курс\Программная инженерия\chainword\Chainword\Chai
 D:\4 курс\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.MenuAdmin.resources
 D:\4 курс\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.FillingCross.resources
 D:\Учеба\4 курс\1 семестр\Программная инженерия\Курсач\chainword\Chainword\Chainword\obj\Debug\Chainword.FillingCross.resources
+D:\4 курс\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.CreateDictionary.resources
+D:\4 курс\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.FillingDictionary.resources
