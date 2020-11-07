@@ -357,7 +357,7 @@ namespace Chainword
             foreach (var item in AvailableWords.Items)
             {
                 string str = (string)item;
-                concept_definition.Add(new string[] { str.Split(' ')[0], str.Substring(str.IndexOf(' ')) });
+                concept_definition.Add(new string[] { str.Split(' ')[0], str.Substring(str.IndexOf(' ') + 1) });
             }
             AvailableWords.Items.Clear();
 
@@ -369,5 +369,10 @@ namespace Chainword
                 AvailableWords.Items.Add(concept_definition[i][0] + " " + concept_definition[i][1]);
         }
 
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            Form ifrm = Application.OpenForms[0];
+            ifrm.Show();
+        }
     }
 }

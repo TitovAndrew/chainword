@@ -14,6 +14,8 @@ namespace Chainword
 {
     public partial class CreateDictionary : Form
     {
+
+
         public CreateDictionary()
         {
             InitializeComponent();
@@ -38,7 +40,7 @@ namespace Chainword
                 {
                     using (StreamWriter sw = new StreamWriter(writePath, true, System.Text.Encoding.Default))
                     { }
-                    Form fd = new FillingDictionary();
+                    Form fd = new FillingDictionary(writePath);
                     fd.Show();
                     this.Close();
                 }
