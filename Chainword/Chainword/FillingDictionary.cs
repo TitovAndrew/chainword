@@ -13,6 +13,7 @@ namespace Chainword
 
         public FillingDictionary(string writePath)
         {
+            TopMost = true;
             this.writePath = writePath;
             InitializeComponent();
             FillAvailableWords(); // Добавляем в список все понятия, которые есть в словаре
@@ -47,12 +48,13 @@ namespace Chainword
 
         private void AddConcept_button_Click(object sender, EventArgs e)
         {
-            if (!Regex.IsMatch(AddWord_textBox.Text, "^[А-Яа-я]+$") &&
-                 !Regex.IsMatch(AddDefinition_textBox.Text, "^[А-Яа-я\\s]+$") ||
-                 AddWord_textBox.Text.Contains(" "))
+            if (!Regex.IsMatch(AddWord_textBox.Text, "^[А-Яа-я]+$"))
             {
-                MessageBox.Show("Слово должно состоять из кириллицы и не иметь пробелов\n" +
-                    "Определение должно состоять из кирриллицы");
+                MessageBox.Show("Слово должно состоять из кириллицы и не содержать пробелов");
+            }
+            else if (!Regex.IsMatch(AddDefinition_textBox.Text, "^[А-Яа-я\\s,-.:;?!]+$"))
+            {
+                MessageBox.Show("Определение должно состоять из кириллицы, пробелов и знаков препинания");
             }
             else
             {
@@ -218,7 +220,7 @@ namespace Chainword
 
         private void Save_button_Click(object sender, EventArgs e)
         {
-            using (StreamWriter sw = new StreamWriter(writePath, false, System.Text.Encoding.Default))
+            using (StreamWriter sw = new StreamWriter(writePath, false, System.Text.Encoding.UTF8))
             {
                 foreach (var item in all_concepts_list)
                 {
@@ -235,7 +237,7 @@ namespace Chainword
 
         private void SaveExit_button_Click(object sender, EventArgs e)
         {
-            using (StreamWriter sw = new StreamWriter(writePath, false, System.Text.Encoding.Default))
+            using (StreamWriter sw = new StreamWriter(writePath, false, System.Text.Encoding.UTF8))
             {
                 foreach (var item in all_concepts_list)
                 {

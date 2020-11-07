@@ -22,6 +22,29 @@ namespace Chainword
         string[] first_chars = new string[20];
         int k = 0;
 
+        // Конструктор для редактирования кроссвордов
+        public FillingCross(string PathToFile)
+        {
+            TopMost = true;
+            InitializeComponent();
+            DeleteLastWord.Enabled = false;
+            CreateCross_button.Enabled = false;
+
+            try
+            {
+                // Тут надо будет инициализировать поля, взяв данные из файла .cros, который в параметре конструктора
+                /*this.dictionary = dictionary;
+                this.namecross = namecross;
+                this.typecross = typecross;
+                this.crossletters = crossletters;
+                this.lengthcross = lengthcross;*/
+
+                File_Reader();
+            }
+            catch { }
+        }
+
+        // Конструктор для создания кроссворда
         public FillingCross(string namecross, string dictionary, string typecross, int crossletters, int lengthcross)
         {
             TopMost = true;

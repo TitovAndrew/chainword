@@ -38,7 +38,7 @@ namespace Chainword
                 }
                 catch
                 {
-                    using (StreamWriter sw = new StreamWriter(writePath, true, System.Text.Encoding.Default))
+                    using (StreamWriter sw = new StreamWriter(writePath, true, System.Text.Encoding.UTF8))
                     { }
                     Form fd = new FillingDictionary(writePath);
                     fd.Show();
