@@ -42,7 +42,7 @@ namespace Chainword
             {
                 //разбиваем наш путь на части
                 string[] path = f[i].Split(new string[] { "\\" }, StringSplitOptions.RemoveEmptyEntries);
-                
+
                 for (int j = 0; j < path.Length; j++)
                 {
                     test += path[j] + "\n";
@@ -55,18 +55,17 @@ namespace Chainword
             }
         }
 
-
-        private void Createcross_button_Click(object sender, EventArgs e)
-        {
-            Form cc = new CreateCross();
-            cc.Show();
-            this.Hide();
-        }
-
-        private void Create_button_Click(object sender, EventArgs e)
+        private void Create_button_Click_1(object sender, EventArgs e)
         {
             Form cd = new CreateDictionary();
             cd.Show();
+            this.Hide();
+        }
+
+        private void Createcross_button_Click_1(object sender, EventArgs e)
+        {
+            Form cc = new CreateCross();
+            cc.Show();
             this.Hide();
         }
     }

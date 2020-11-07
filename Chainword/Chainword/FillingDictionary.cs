@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Chainword
@@ -15,6 +16,8 @@ namespace Chainword
             this.writePath = writePath;
             InitializeComponent();
             FillAvailableWords(); // Добавляем в список все понятия, которые есть в словаре
+            AddConcept_button.Enabled = false;
+            DeleteConcept_button.Enabled = false;
         }
 
         void FillAvailableWords()
@@ -36,7 +39,7 @@ namespace Chainword
                     {
                         all_concepts_list.Add(arr_concepts[i]);
                     }
-                    UpdateListBox(AvailableWords); // Обновляем листобкс
+                    UpdateListBox(AvailableWords, all_concepts_list); // Обновляем листобкс
                 }
 
             }
@@ -44,12 +47,25 @@ namespace Chainword
 
         private void AddConcept_button_Click(object sender, EventArgs e)
         {
-            // Добавляем понятия в листбокс и в список понятий
-            string new_concept = AddWord_textBox.Text.ToUpper() + " " + AddDefinition_textBox.Text;
-            AvailableWords.Items.Add(new_concept);
-            all_concepts_list.Add(new_concept);
-            AddWord_textBox.Text = "";
-            AddDefinition_textBox.Text = "";
+            if (!Regex.IsMatch(AddWord_textBox.Text, "^[А-Яа-я]+$") &&
+                 !Regex.IsMatch(AddDefinition_textBox.Text, "^[А-Яа-я\\s]+$") ||
+                 AddWord_textBox.Text.Contains(" "))
+            {
+                MessageBox.Show("Слово должно состоять из кириллицы и не иметь пробелов\n" +
+                    "Определение должно состоять из кирриллицы");
+            }
+            else
+            {
+                // Добавляем понятия в листбокс и в список понятий
+                string new_concept = AddWord_textBox.Text.ToUpper() + " " + AddDefinition_textBox.Text;
+                AvailableWords.Items.Add(new_concept);
+                all_concepts_list.Add(new_concept);
+                AddWord_textBox.Text = "Слово";
+                AddWord_textBox.ForeColor = System.Drawing.Color.Gray;
+                AddDefinition_textBox.Text = "Определение";
+                AddDefinition_textBox.ForeColor = System.Drawing.Color.Gray;
+                AddConcept_button.Enabled = false;
+            }
         }
 
         private void DeleteConcept_button_Click(object sender, EventArgs e)
@@ -75,15 +91,16 @@ namespace Chainword
                 all_concepts_list.Add(item);
             }
             AvailableWords.Items.Clear();
-            UpdateListBox(AvailableWords); // Обновляем листобкс
+            UpdateListBox(AvailableWords, all_concepts_list); // Обновляем листобкс
+            DeleteConcept_button.Enabled = false;
         }
 
-        void UpdateListBox(ListBox listBox)
+        void UpdateListBox(ListBox listBox, List<string> list)
         {
             try
             {
-                for (int i = 0; i < all_concepts_list.Count; i++)
-                    listBox.Items.Add(all_concepts_list[i]);
+                for (int i = 0; i < list.Count; i++)
+                    listBox.Items.Add(list[i]);
             }
             catch
             {
@@ -148,7 +165,24 @@ namespace Chainword
 
         private void search_button_Click(object sender, EventArgs e)
         {
-            AvailableWords.Items.Clear();
+            if (WordSearch.ForeColor == System.Drawing.Color.Gray || WordSearch.Text == "")
+            {
+                AvailableWords.Items.Clear();
+                UpdateListBox(AvailableWords, all_concepts_list); // Обновляем листобкс
+            }
+            else
+            {
+                AvailableWords.Items.Clear();
+                List<string> suitable_concepts_list = new List<string>();
+                foreach (var item in all_concepts_list)
+                {
+                    string[] words = ((string)item).Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+                    if (words[0].Contains(WordSearch.Text.ToUpper()))
+                        suitable_concepts_list.Add(item);
+                }
+                AvailableWords.Items.Clear();
+                UpdateListBox(AvailableWords, suitable_concepts_list); // Обновляем листобкс
+            }
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -209,6 +243,29 @@ namespace Chainword
                 }
             }
             this.Close();
+        }
+
+        private void AddWord_textBox_TextChanged(object sender, EventArgs e)
+        {
+            if (AddWord_textBox.ForeColor != System.Drawing.Color.Gray &&
+                AddDefinition_textBox.ForeColor != System.Drawing.Color.Gray)
+            {
+                AddConcept_button.Enabled = true;
+            }
+        }
+
+        private void AvailableWords_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DeleteConcept_button.Enabled = true;
+        }
+
+        private void AddDefinition_textBox_TextChanged(object sender, EventArgs e)
+        {
+            if (AddWord_textBox.ForeColor != System.Drawing.Color.Gray &&
+                AddDefinition_textBox.ForeColor != System.Drawing.Color.Gray)
+            {
+                AddConcept_button.Enabled = true;
+            }
         }
     }
 }

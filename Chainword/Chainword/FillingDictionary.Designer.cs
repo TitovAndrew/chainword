@@ -68,6 +68,7 @@
             this.AddDefinition_textBox.TabIndex = 1;
             this.AddDefinition_textBox.Text = "Определение";
             this.AddDefinition_textBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.AddDefinition_textBox_MouseClick);
+            this.AddDefinition_textBox.TextChanged += new System.EventHandler(this.AddDefinition_textBox_TextChanged);
             this.AddDefinition_textBox.Leave += new System.EventHandler(this.AddDefinition_textBox_Leave);
             // 
             // AddWord_textBox
@@ -81,6 +82,7 @@
             this.AddWord_textBox.TabIndex = 0;
             this.AddWord_textBox.Text = "Слово";
             this.AddWord_textBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.AddWord_textBox_MouseClick);
+            this.AddWord_textBox.TextChanged += new System.EventHandler(this.AddWord_textBox_TextChanged);
             this.AddWord_textBox.Leave += new System.EventHandler(this.AddWord_textBox_Leave);
             // 
             // AddConcept_button
@@ -104,6 +106,7 @@
             this.AvailableWords.Name = "AvailableWords";
             this.AvailableWords.Size = new System.Drawing.Size(432, 290);
             this.AvailableWords.TabIndex = 67;
+            this.AvailableWords.SelectedIndexChanged += new System.EventHandler(this.AvailableWords_SelectedIndexChanged);
             // 
             // comboBox1
             // 

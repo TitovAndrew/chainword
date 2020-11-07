@@ -241,6 +241,7 @@ namespace Chainword
                 File_Reader();
             }
         }
+
         private void Search_button_Click(object sender, EventArgs e)
         {
             AvailableWords.Items.Clear();
