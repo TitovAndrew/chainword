@@ -84,7 +84,7 @@
             "По возрастанию",
             "По убыванию"});
             this.comboBox1.Location = new System.Drawing.Point(124, 46);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(145, 21);
             this.comboBox1.TabIndex = 50;
@@ -95,7 +95,7 @@
             this.AvailableWords.FormattingEnabled = true;
             this.AvailableWords.HorizontalScrollbar = true;
             this.AvailableWords.Location = new System.Drawing.Point(9, 70);
-            this.AvailableWords.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.AvailableWords.Margin = new System.Windows.Forms.Padding(2);
             this.AvailableWords.Name = "AvailableWords";
             this.AvailableWords.Size = new System.Drawing.Size(434, 290);
             this.AvailableWords.TabIndex = 51;
@@ -106,7 +106,7 @@
             this.AddedWords.FormattingEnabled = true;
             this.AddedWords.HorizontalScrollbar = true;
             this.AddedWords.Location = new System.Drawing.Point(447, 71);
-            this.AddedWords.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.AddedWords.Margin = new System.Windows.Forms.Padding(2);
             this.AddedWords.Name = "AddedWords";
             this.AddedWords.Size = new System.Drawing.Size(145, 290);
             this.AddedWords.TabIndex = 52;
@@ -115,18 +115,19 @@
             // 
             this.CreateCross_button.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.CreateCross_button.Location = new System.Drawing.Point(447, 364);
-            this.CreateCross_button.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.CreateCross_button.Margin = new System.Windows.Forms.Padding(2);
             this.CreateCross_button.Name = "CreateCross_button";
             this.CreateCross_button.Size = new System.Drawing.Size(144, 32);
             this.CreateCross_button.TabIndex = 53;
             this.CreateCross_button.Text = "Создать";
             this.CreateCross_button.UseVisualStyleBackColor = true;
+            this.CreateCross_button.Click += new System.EventHandler(this.CreateCross_button_Click);
             // 
             // AddWord
             // 
             this.AddWord.Font = new System.Drawing.Font("Calibri", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.AddWord.Location = new System.Drawing.Point(316, 364);
-            this.AddWord.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.AddWord.Margin = new System.Windows.Forms.Padding(2);
             this.AddWord.Name = "AddWord";
             this.AddWord.Size = new System.Drawing.Size(126, 32);
             this.AddWord.TabIndex = 54;
@@ -138,7 +139,7 @@
             // 
             this.DeleteLastWord.Font = new System.Drawing.Font("Calibri", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.DeleteLastWord.Location = new System.Drawing.Point(174, 363);
-            this.DeleteLastWord.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DeleteLastWord.Margin = new System.Windows.Forms.Padding(2);
             this.DeleteLastWord.Name = "DeleteLastWord";
             this.DeleteLastWord.Size = new System.Drawing.Size(138, 32);
             this.DeleteLastWord.TabIndex = 55;
@@ -160,7 +161,7 @@
             this.Controls.Add(this.search_button);
             this.Controls.Add(this.WordSearch);
             this.Controls.Add(this.label2);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "FillingCross";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

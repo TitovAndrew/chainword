@@ -47,3 +47,6 @@ C:\Программная инженерия\chainword\Chainword\Chainword\obj\D
 C:\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.csproj.CoreCompileInputs.cache
 C:\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.exe
 C:\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.pdb
+D:\Учеба\4 курс\1 семестр\Программная инженерия\Курсач\chainword\Chainword\Chainword\obj\Debug\Chainword.CreateDictionary.resources
+D:\Учеба\4 курс\1 семестр\Программная инженерия\Курсач\chainword\Chainword\Chainword\obj\Debug\Chainword.FillingDictionary.resources
+D:\Учеба\4 курс\1 семестр\Программная инженерия\Курсач\chainword\Chainword\Chainword\obj\Debug\Chainword.SolvingCrossword.resources

@@ -32,5 +32,12 @@ namespace Chainword
         {
 
         }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            Form solving = new SolvingCrossword();
+            solving.Show();
+            this.Close();
+        }
     }
 }

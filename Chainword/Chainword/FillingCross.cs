@@ -374,6 +374,11 @@ namespace Chainword
                 SortingListBox(1);
         }
 
+        private void CreateCross_button_Click(object sender, EventArgs e)
+        {
+
+        }
+
         void SortingListBox(int x)
         {
             List<string[]> concept_definition = new List<string[]>();
