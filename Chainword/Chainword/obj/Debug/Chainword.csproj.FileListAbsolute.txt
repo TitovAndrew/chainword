@@ -50,3 +50,4 @@ C:\Программная инженерия\chainword\Chainword\Chainword\obj\D
 D:\Учеба\4 курс\1 семестр\Программная инженерия\Курсач\chainword\Chainword\Chainword\obj\Debug\Chainword.CreateDictionary.resources
 D:\Учеба\4 курс\1 семестр\Программная инженерия\Курсач\chainword\Chainword\Chainword\obj\Debug\Chainword.FillingDictionary.resources
 D:\Учеба\4 курс\1 семестр\Программная инженерия\Курсач\chainword\Chainword\Chainword\obj\Debug\Chainword.SolvingCrossword.resources
+C:\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.SolvingCrossword.resources

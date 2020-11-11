@@ -20,13 +20,6 @@ namespace Chainword
         public SolvingCrossword()
         {
             InitializeComponent();
-            /*TextBox x = new TextBox
-            {
-                Location = new System.Drawing.Point(10, 10),
-                Size = new System.Drawing.Size(25, 25)
-            };*/
-
-
 
             if (index == 0)
             {
@@ -42,13 +35,15 @@ namespace Chainword
             }
         }
 
+
         //линейное отображение
         public void ShowLinear()
         {
             this.Size = new Size(720, 320);
             this.Controls.Add(new Button() { Name = "PrevButton", Location = new Point(25, 124), Text = "<", Size = new Size(60, 32) });
             this.Controls.Add(new Button() { Name = "NextButton", Location = new Point(625, 124), Text = ">", Size = new Size(60, 32) });
-
+            (Controls["PrevButton"] as Button).Click += new System.EventHandler(PrevButton_Click);
+            (Controls["NextButton"] as Button).Click += new System.EventHandler(NextButton_Click);
             List<char[]> AllSymbols = new List<char[]>();
 
             int k = 1;
@@ -106,17 +101,41 @@ namespace Chainword
                 {
                     if (i == item)
                     {
-                        this.Controls.Add(new TextBox() { Name = ("TextBox" + i.ToString()), Location = new Point(60 + 35 * i, 125), Text = "", Font = new Font("Areal", 16), Size = new Size(30, 30), BackColor = Color.Aqua, Multiline = true, TextAlign = HorizontalAlignment.Center });
+                        this.Controls.Add(new TextBox()
+                        {
+                            Name = ("TextBox" + i.ToString()),
+                            Location = new Point(60 + 35 * i, 125),
+                            Text = "",
+                            Font = new Font("Areal", 16),
+                            Size = new Size(30, 30),
+                            BackColor = Color.Aqua,
+                            Multiline = true,
+                            TextAlign = HorizontalAlignment.Center,
+                            MaxLength = 1
+                        });
                         kostyl++;
+                        (Controls["TextBox" + i.ToString()] as TextBox).TextChanged += new System.EventHandler(TextBox_TextChanged);
                     }
                 }
                 if (kostyl == 0)
                 {
-                    this.Controls.Add(new TextBox() { Name = ("TextBox" + i.ToString()), Location = new Point(60 + 35 * i, 125), Text = "", Font = new Font("Areal", 16), Size = new Size(30, 30), Multiline = true, TextAlign = HorizontalAlignment.Center });
+                    this.Controls.Add(new TextBox()
+                    {
+                        Name = ("TextBox" + i.ToString()),
+                        Location = new Point(60 + 35 * i, 125),
+                        Text = "",
+                        Font = new Font("Areal", 16),
+                        Size = new Size(30, 30),
+                        Multiline = true,
+                        TextAlign = HorizontalAlignment.Center,
+                        MaxLength = 1
+                    });
+                    (Controls["TextBox" + i.ToString()] as TextBox).TextChanged += new System.EventHandler(TextBox_TextChanged);
                 }
                 kostyl = 0;
             }
         }
+    
 
         //спиральное отображение
         public void ShowSpiral()
@@ -129,18 +148,75 @@ namespace Chainword
         {
 
         }
-        private void SolvingCrossword_KeyUp(object sender, KeyEventArgs e)
+
+        //обрабатываем событие
+        private void PrevButton_Click(object sender, EventArgs e)
         {
-            if (e.KeyCode == Keys.Right)
-            {
-                //TextBox2.Focus();
-                //this.ActiveControl = TextBox2;
-            }
+            MessageBox.Show("Назад");
         }
 
-        private void QWERTY_TextChanged(object sender, EventArgs e)
+        private void NextButton_Click(object sender, EventArgs e)
         {
-            //this.ActiveControl = TextBox2;
+            MessageBox.Show("Далее");
+        }
+
+        private void TextBox_TextChanged(object sender, EventArgs e)
+        {
+            if ((Controls["TextBox" + ("1").ToString()] as TextBox).Focused &&
+                (Controls["TextBox" + ("1").ToString()] as TextBox).Text != "")
+                (Controls["TextBox" + ("2").ToString()] as TextBox).Focus();
+
+            else if ((Controls["TextBox" + ("2").ToString()] as TextBox).Focused &&
+                (Controls["TextBox" + ("2").ToString()] as TextBox).Text != "")
+                (Controls["TextBox" + ("3").ToString()] as TextBox).Focus();
+
+            else if ((Controls["TextBox" + ("3").ToString()] as TextBox).Focused &&
+                (Controls["TextBox" + ("3").ToString()] as TextBox).Text != "")
+                (Controls["TextBox" + ("4").ToString()] as TextBox).Focus();
+
+            else if ((Controls["TextBox" + ("4").ToString()] as TextBox).Focused &&
+                (Controls["TextBox" + ("4").ToString()] as TextBox).Text != "")
+                (Controls["TextBox" + ("5").ToString()] as TextBox).Focus();
+
+            else if ((Controls["TextBox" + ("5").ToString()] as TextBox).Focused &&
+                (Controls["TextBox" + ("5").ToString()] as TextBox).Text != "")
+                (Controls["TextBox" + ("6").ToString()] as TextBox).Focus();
+
+            else if ((Controls["TextBox" + ("6").ToString()] as TextBox).Focused &&
+                (Controls["TextBox" + ("6").ToString()] as TextBox).Text != "")
+                (Controls["TextBox" + ("7").ToString()] as TextBox).Focus();
+
+            else if ((Controls["TextBox" + ("7").ToString()] as TextBox).Focused &&
+                (Controls["TextBox" + ("7").ToString()] as TextBox).Text != "")
+                (Controls["TextBox" + ("8").ToString()] as TextBox).Focus();
+
+            else if ((Controls["TextBox" + ("8").ToString()] as TextBox).Focused &&
+                (Controls["TextBox" + ("8").ToString()] as TextBox).Text != "")
+                (Controls["TextBox" + ("9").ToString()] as TextBox).Focus();
+
+            else if ((Controls["TextBox" + ("9").ToString()] as TextBox).Focused &&
+                (Controls["TextBox" + ("9").ToString()] as TextBox).Text != "")
+                (Controls["TextBox" + ("10").ToString()] as TextBox).Focus();
+
+            else if ((Controls["TextBox" + ("10").ToString()] as TextBox).Focused &&
+                (Controls["TextBox" + ("10").ToString()] as TextBox).Text != "")
+                (Controls["TextBox" + ("11").ToString()] as TextBox).Focus();
+
+            else if ((Controls["TextBox" + ("11").ToString()] as TextBox).Focused &&
+                (Controls["TextBox" + ("11").ToString()] as TextBox).Text != "")
+                (Controls["TextBox" + ("12").ToString()] as TextBox).Focus();
+
+            else if ((Controls["TextBox" + ("12").ToString()] as TextBox).Focused &&
+                (Controls["TextBox" + ("12").ToString()] as TextBox).Text != "")
+                (Controls["TextBox" + ("13").ToString()] as TextBox).Focus();
+
+            else if ((Controls["TextBox" + ("13").ToString()] as TextBox).Focused &&
+                (Controls["TextBox" + ("13").ToString()] as TextBox).Text != "")
+                (Controls["TextBox" + ("14").ToString()] as TextBox).Focus();
+
+            else if ((Controls["TextBox" + ("14").ToString()] as TextBox).Focused &&
+                (Controls["TextBox" + ("14").ToString()] as TextBox).Text != "")
+                (Controls["TextBox" + ("15").ToString()] as TextBox).Focus();
         }
     }
 }

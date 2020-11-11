@@ -28,26 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.QWERTY = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // QWERTY
+            // label1
             // 
-            this.QWERTY.Location = new System.Drawing.Point(337, 194);
-            this.QWERTY.Name = "QWERTY";
-            this.QWERTY.Size = new System.Drawing.Size(100, 20);
-            this.QWERTY.TabIndex = 0;
-            this.QWERTY.TextChanged += new System.EventHandler(this.QWERTY_TextChanged);
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Calibri", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(194, 9);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(313, 33);
+            this.label1.TabIndex = 48;
+            this.label1.Text = "Разгадывание кроссворда";
             // 
             // SolvingCrossword
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(701, 286);
-            this.Controls.Add(this.QWERTY);
+            this.Controls.Add(this.label1);
             this.Name = "SolvingCrossword";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SolvingCrossword";
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.SolvingCrossword_KeyUp);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -55,6 +58,6 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox QWERTY;
+        private System.Windows.Forms.Label label1;
     }
 }
