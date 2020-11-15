@@ -87,7 +87,7 @@ namespace Chainword
             {
                 z += item + " ";
             }
-            MessageBox.Show(z);
+
 
             int x = 0;
             foreach (var Symbol in AllSymbols)
@@ -95,6 +95,7 @@ namespace Chainword
                 x += Symbol.Count();
             }
             AllLetters = new char[x]; // массив букв всех слов
+            MessageBox.Show(z + "!!!" + AllLetters.Length);
             NumberOfParts = 1;
             GenericTextBox(NumberOfParts, true);
         }
@@ -145,46 +146,20 @@ namespace Chainword
         void GenericTextBox(int NumberOfParts, bool FirstTime)
         {
             int kostyl = 0;
-            // в этом форе сделать 16 максимумом, а может и меньше если букв не хвататет
-            /*int left = 0;
-            for (int i = 1; i < 20; i++)
-            {
-                if (NumberOfParts == 1)
-                {
-                    left = 0;
-                }
-                else if(NumberOfParts == i)
-                {
-                    left = 15 * NumberOfParts;
-                }
-            }
-            left = AllLetters.Length - left;
-            if (left > 16) left = 16;
-            if (left < 0) left = 0;
-            for (int i = 1; i < prevLeft; i++)
-            {
-                if (!FirstTime)
-                    this.Controls.Remove(Controls["TextBox" + i.ToString()]);
-            }
-            prevLeft = left;*/
             for (int i = 1; i < 16; i++)
             {
                 foreach (var item in IndexWords)
                 {
-                    if (i + 15 * NumberOfParts - 15 == item)
+                    if (i + 15 * NumberOfParts - 15 == item &&
+                        item != AllLetters.Length &&
+                        item != AllLetters.Length - 1)
                     {
                         if (!FirstTime)
                             this.Controls.Remove(Controls["TextBox" + i.ToString()]);
-                        /*char symbol = '\0';
-                        if (AllLetters[i + 15 * NumberOfParts - 16] != '\0')
-                        {
-                            symbol = AllLetters[i + 15 * NumberOfParts - 16];
-                        }*/
                         this.Controls.Add(new TextBox()
                         {
                             Name = ("TextBox" + i.ToString()),
                             Location = new Point(60 + 35 * i, 125),
-                            //Text = symbol.ToString(),
                             Text = "",
                             Font = new Font("Areal", 16),
                             Size = new Size(30, 30),
@@ -201,17 +176,11 @@ namespace Chainword
                 if (kostyl == 0)
                 {
                     if (!FirstTime)
-                       this.Controls.Remove(Controls["TextBox" + i.ToString()]);
-                    /*char symbol = '\0';
-                    if (AllLetters[i + 15 * NumberOfParts - 16] != '\0')
-                    {
-                        symbol = AllLetters[i + 15 * NumberOfParts - 16];
-                    }*/
+                        this.Controls.Remove(Controls["TextBox" + i.ToString()]);
                     this.Controls.Add(new TextBox()
                     {
                         Name = ("TextBox" + i.ToString()),
                         Location = new Point(60 + 35 * i, 125),
-                        //Text = symbol.ToString(),
                         Text = "",
                         Font = new Font("Areal", 16),
                         Size = new Size(30, 30),
@@ -298,6 +267,6 @@ namespace Chainword
         }
         #endregion
 
-        
+
     }
 }

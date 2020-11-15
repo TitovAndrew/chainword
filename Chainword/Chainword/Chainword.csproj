@@ -105,6 +105,7 @@
     <Compile Include="SolvingCrossword.Designer.cs">
       <DependentUpon>SolvingCrossword.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserData.cs" />
     <EmbeddedResource Include="CreateCross.resx">
       <DependentUpon>CreateCross.cs</DependentUpon>
     </EmbeddedResource>

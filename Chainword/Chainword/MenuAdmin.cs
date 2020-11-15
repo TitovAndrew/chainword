@@ -16,7 +16,6 @@ namespace Chainword
         public MenuAdmin()
         {
             InitializeComponent();
-            Dictionary_listBox.MouseDoubleClick += new MouseEventHandler(Dictionary_listBox_DoubleClick);
             ShowAllFiles(Environment.CurrentDirectory, "*.dict", Dictionary_listBox);
             ShowAllFiles(Environment.CurrentDirectory, "*.cros", CrossWord_listBox);
             Edit_button.Enabled = false;
@@ -27,14 +26,6 @@ namespace Chainword
         {
             Form ifrm = Application.OpenForms[0];
             ifrm.Show();
-        }
-
-        private void Dictionary_listBox_DoubleClick(object sender, EventArgs e)
-        {
-            if (Dictionary_listBox.SelectedItem != null)
-            {
-                MessageBox.Show(Dictionary_listBox.SelectedItem.ToString());
-            }
         }
 
         void ShowAllFiles(string rootDirectory, string fileExtension, ListBox files)

@@ -61,26 +61,21 @@ namespace Chainword
             for (int i = 0; i < f.Length; i++)
             {
                 if (f[i].Contains(AvailableDictionary.Text))
-                { 
+                {
                     result_path = f[i];
                 }
-                
+
             }
             if (!Regex.IsMatch(NameCross_textBox.Text, "^[A-Za-zА-Яа-я0-9_]+$"))
             {
                 MessageBox.Show("Имя кроссворда должно состоять из букв латинского, русского алфавита, цифр и нижнего подчеркивания");
-            } 
+            }
             else if (checkBox1.Checked == false)
             {
                 Form ifrm = new FillingCross(NameCross_textBox.Text, result_path, TypeCross_comboBox.Text, int.Parse(AmountLetters_comboBox.Text), int.Parse(LengthCross_comboBox.Text));
                 ifrm.Show();
                 this.Close();
             }
-            else
-            {
-
-            }
-
         }
         private void NameCross_textBox_TextChanged(object sender, EventArgs e)
         {
