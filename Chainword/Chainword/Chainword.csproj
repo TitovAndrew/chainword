@@ -60,6 +60,7 @@
     <Compile Include="CreateDictionary.Designer.cs">
       <DependentUpon>CreateDictionary.cs</DependentUpon>
     </Compile>
+    <Compile Include="FileWorker.cs" />
     <Compile Include="FillingCross.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -16,7 +16,7 @@ namespace Chainword
     {
         public CreateCross()
         {
-            InitializeComponent();         
+            InitializeComponent();
             NameCross_textBox.TextChanged += NameCross_textBox_TextChanged;
             AvailableDictionary.SelectedIndexChanged += AvailableDictionary_SelectedIndexChanged;
             TypeCross_comboBox.SelectedIndex = 0;
@@ -24,7 +24,6 @@ namespace Chainword
             LengthCross_comboBox.SelectedIndex = 7;
             ShowAllFiles(Environment.CurrentDirectory, "*.dict", AvailableDictionary);
             CreateCross_button.Enabled = false;
-            
         }
 
         void ShowAllFiles(string rootDirectory, string fileExtension, ComboBox files)
@@ -64,7 +63,6 @@ namespace Chainword
                 {
                     result_path = f[i];
                 }
-
             }
             if (!Regex.IsMatch(NameCross_textBox.Text, "^[A-Za-zА-Яа-я0-9_]+$"))
             {
@@ -86,7 +84,7 @@ namespace Chainword
             else
             {
                 CreateCross_button.Enabled = false;
-            }          
+            }
         }
 
         private void AvailableDictionary_SelectedIndexChanged(object sender, EventArgs e)

@@ -8,6 +8,7 @@ namespace Chainword
 {
     public partial class FillingDictionary : Form
     {
+        FileWorker fw;
         string writePath;
         List<string> all_concepts_list = new List<string>(); // Список всех понятий в словаре
 
@@ -19,6 +20,7 @@ namespace Chainword
             FillAvailableWords(); // Добавляем в список все понятия, которые есть в словаре
             AddConcept_button.Enabled = false;
             DeleteConcept_button.Enabled = false;
+            fw = new FileWorker();
         }
 
         void FillAvailableWords()
@@ -220,13 +222,14 @@ namespace Chainword
 
         private void Save_button_Click(object sender, EventArgs e)
         {
-            using (StreamWriter sw = new StreamWriter(writePath, false, System.Text.Encoding.UTF8))
+            fw.SaveDictionary(writePath, all_concepts_list);
+            /*using (StreamWriter sw = new StreamWriter(writePath, false, System.Text.Encoding.UTF8))
             {
                 foreach (var item in all_concepts_list)
                 {
                     sw.WriteLineAsync(item);
                 }
-            }
+            }*/
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
@@ -237,13 +240,14 @@ namespace Chainword
 
         private void SaveExit_button_Click(object sender, EventArgs e)
         {
-            using (StreamWriter sw = new StreamWriter(writePath, false, System.Text.Encoding.UTF8))
+            fw.SaveDictionary(writePath, all_concepts_list);
+            /*using (StreamWriter sw = new StreamWriter(writePath, false, System.Text.Encoding.UTF8))
             {
                 foreach (var item in all_concepts_list)
                 {
                     sw.WriteLineAsync(item);
                 }
-            }
+            }*/
             this.Close();
         }
 

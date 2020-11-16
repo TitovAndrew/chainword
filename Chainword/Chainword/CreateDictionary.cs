@@ -14,14 +14,15 @@ namespace Chainword
 {
     public partial class CreateDictionary : Form
     {
-
+        FileWorker fw;
 
         public CreateDictionary()
         {
             InitializeComponent();
+            fw = new FileWorker();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void CreateDictionary_Button_Click(object sender, EventArgs e)
         {
             if (!Regex.IsMatch(textBox1.Text, "^[A-Za-z0-9А-Яа-я_]+$"))
             {
@@ -30,7 +31,9 @@ namespace Chainword
             else
             {
                 string writePath = Environment.CurrentDirectory + "\\" + textBox1.Text + ".dict";
-                try
+                CreateDictionary cd = this;
+                fw.CreateDictionary(writePath, cd);
+                /*try
                 {
                     using (StreamReader fs = new StreamReader(writePath))
                     { }
@@ -43,8 +46,7 @@ namespace Chainword
                     Form fd = new FillingDictionary(writePath);
                     fd.Show();
                     this.Close();
-                }
-
+                }*/
             }
         }
     }
