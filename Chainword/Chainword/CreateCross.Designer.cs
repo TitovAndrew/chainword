@@ -70,7 +70,7 @@
             // 
             this.CreateCross_button.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.CreateCross_button.Location = new System.Drawing.Point(266, 251);
-            this.CreateCross_button.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.CreateCross_button.Margin = new System.Windows.Forms.Padding(2);
             this.CreateCross_button.Name = "CreateCross_button";
             this.CreateCross_button.Size = new System.Drawing.Size(126, 32);
             this.CreateCross_button.TabIndex = 42;
@@ -104,7 +104,7 @@
             // 
             this.NameCross_textBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.NameCross_textBox.Location = new System.Drawing.Point(166, 61);
-            this.NameCross_textBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.NameCross_textBox.Margin = new System.Windows.Forms.Padding(2);
             this.NameCross_textBox.Multiline = true;
             this.NameCross_textBox.Name = "NameCross_textBox";
             this.NameCross_textBox.Size = new System.Drawing.Size(226, 25);

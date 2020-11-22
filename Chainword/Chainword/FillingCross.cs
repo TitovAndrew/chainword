@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,8 +15,8 @@ namespace Chainword
     public partial class FillingCross : Form
     {
         string dictionary;
-        string namecross, typecross;
-        int crossletters, lengthcross;
+        string name_cross;
+        int cross_letters, length_cross, type_cross;
 
         int check = 0;
         string last_chars;
@@ -45,7 +46,7 @@ namespace Chainword
         }
 
         // Конструктор для создания кроссворда
-        public FillingCross(string namecross, string dictionary, string typecross, int crossletters, int lengthcross)
+        public FillingCross(string namecross, string dictionary, int typecross, int crossletters, int lengthcross)
         {
             TopMost = true;
             InitializeComponent();
@@ -55,10 +56,10 @@ namespace Chainword
             try
             {
                 this.dictionary = dictionary;
-                this.namecross = namecross;
-                this.typecross = typecross;
-                this.crossletters = crossletters;
-                this.lengthcross = lengthcross;
+                this.name_cross = namecross;
+                this.type_cross = typecross;
+                this.cross_letters = crossletters;
+                this.length_cross = lengthcross;
 
                 File_Reader();
             }
@@ -105,12 +106,12 @@ namespace Chainword
                     if (tmp == null) break;
                     tmp += "\n";
 
-                    if (crossletters == 1)
+                    if (cross_letters == 1)
                     {
                         if (tmp[0].CompareTo(last_chars[2]) == 0)
                             words += tmp;
                     }
-                    else if (crossletters == 2)
+                    else if (cross_letters == 2)
                     {
                         if (tmp[0].CompareTo(last_chars[1]) == 0 && tmp[1].CompareTo(last_chars[2]) == 0)
                             words += tmp;
@@ -148,9 +149,9 @@ namespace Chainword
                 }
                 else
                 {
-                    if (crossletters == 1)
+                    if (cross_letters == 1)
                         MessageBox.Show("В словаре невозможно найти слово, начинающееся с буквы " + last_chars[2]);
-                    else if (crossletters == 2)
+                    else if (cross_letters == 2)
                         MessageBox.Show("В словаре невозможно найти слово, начинающееся с букв " + last_chars[1] + last_chars[2]);
                     else
                         MessageBox.Show("В словаре невозможно найти слово, начинающееся с букв " + last_chars[0] + last_chars[1] + last_chars[2]);
@@ -179,14 +180,14 @@ namespace Chainword
                     tmp += "\n";
                     if (AddedWords.Items.Count < 9)
                     {
-                        if (crossletters == 1)
+                        if (cross_letters == 1)
                         {
                             if (tmp[0].CompareTo(first_chars[k - 1][3]) == 0)
                             {
                                 words += tmp;
                             }
                         }
-                        else if (crossletters == 2)
+                        else if (cross_letters == 2)
                         {
                             if (tmp[0].CompareTo(first_chars[k - 1][3]) == 0 &&
                                 tmp[1].CompareTo(first_chars[k - 1][4]) == 0)
@@ -206,14 +207,14 @@ namespace Chainword
                     }
                     else
                     {
-                        if (crossletters == 1)
+                        if (cross_letters == 1)
                         {
                             if (tmp[0].CompareTo(first_chars[k - 1][4]) == 0)
                             {
                                 words += tmp;
                             }
                         }
-                        else if (crossletters == 2)
+                        else if (cross_letters == 2)
                         {
                             if (tmp[0].CompareTo(first_chars[k - 1][4]) == 0
                                 && tmp[1].CompareTo(first_chars[k - 1][5]) == 0)
@@ -286,12 +287,12 @@ namespace Chainword
                     if (last_word != null)
                     {
                         char[] f = (last_word.Substring(last_word.Length - 3)).ToCharArray();
-                        if (crossletters == 1)
+                        if (cross_letters == 1)
                         {
                             if (tmp[0].CompareTo(f[2]) == 0)
                                 words += tmp;
                         }
-                        else if (crossletters == 2)
+                        else if (cross_letters == 2)
                         {
                             if (tmp[0].CompareTo(f[1]) == 0 && tmp[1].CompareTo(f[2]) == 0)
                                 words += tmp;
@@ -376,7 +377,37 @@ namespace Chainword
 
         private void CreateCross_button_Click(object sender, EventArgs e)
         {
+            string[] words = GetWords();
+            Crossword cross = new Crossword();
+            cross.Name = name_cross;
+            cross.Length = length_cross;
+            cross.DisplayType = type_cross;
+            cross.Dictionary = dictionary;
+            cross.CrossLetters = cross_letters;
+            cross.AddWords(words, words.Length);
 
+            FileStream stream = File.Create(name_cross + ".cros");
+            BinaryFormatter formatter = new BinaryFormatter();
+            formatter.Serialize(stream, cross);
+            stream.Close();
+
+            Form ma = new MenuAdmin();
+            ma.Show();
+            this.Close();
+        }
+
+        private string[] GetWords()
+        {
+            string[] words_to_cross = new string[20];
+            string[] x;
+            int i = 0;
+            foreach (var item in AddedWords.Items)
+            {
+                x = ((string)item).Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+                words_to_cross[i] = x[1];
+                i++;
+            }
+            return words_to_cross;
         }
 
         void SortingListBox(int x)

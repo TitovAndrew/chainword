@@ -70,7 +70,7 @@ namespace Chainword
             }
             else if (checkBox1.Checked == false)
             {
-                Form ifrm = new FillingCross(NameCross_textBox.Text, result_path, TypeCross_comboBox.Text, int.Parse(AmountLetters_comboBox.Text), int.Parse(LengthCross_comboBox.Text));
+                Form ifrm = new FillingCross(NameCross_textBox.Text, result_path, TypeCross_comboBox.SelectedIndex, int.Parse(AmountLetters_comboBox.Text), int.Parse(LengthCross_comboBox.Text));
                 ifrm.Show();
                 this.Close();
             }

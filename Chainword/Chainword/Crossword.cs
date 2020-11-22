@@ -6,12 +6,20 @@ using System.Threading.Tasks;
 
 namespace Chainword
 {
+    [Serializable]
     class Crossword
     {
-        private string name;
-        private int length;
+        // Поля основываются на форме CreateCross
+        private string id; // Первичный ключ - Будем сохранять инфу пользователя о кроссворде по id
+        private string name; // Имя кроссворда
+        private int length; // Длина кроссворда в словах
+
+        //[NonSerialized] - Возможно не нужно сериализировать это поле
         private string[] allwords;
-        private int id;
+        // Добавил своего
+        private int display_type; // Вид отображения
+        private string dictionary; // Словарь
+        private int cross_letters; // Количество букв в пересечении
         public string Name
         {
             get
@@ -43,7 +51,7 @@ namespace Chainword
             }
         }
 
-        public int ID
+        public string ID
         {
             get
             {
@@ -52,6 +60,43 @@ namespace Chainword
             set
             {
                 id = value;
+            }
+        }
+
+        // Добавил своего
+        public int DisplayType
+        {
+            get
+            {
+                return display_type;
+            }
+            set
+            {
+                display_type = value;
+            }
+        }
+
+        public string Dictionary
+        {
+            get
+            {
+                return dictionary;
+            }
+            set
+            {
+                dictionary = value;
+            }
+        }
+
+        public int CrossLetters
+        {
+            get
+            {
+                return cross_letters;
+            }
+            set
+            {
+                cross_letters = value;
             }
         }
 
@@ -64,4 +109,22 @@ namespace Chainword
             }
         }
     }
+
+    /*
+     * Как выглядит сериализация/десериализация
+     * FileStream stream = File.Create("test.dat");
+            BinaryFormatter formatter = new BinaryFormatter();
+            //Сериализация
+            formatter.Serialize(stream, my);
+            stream.Close();
+ 
+            //Десериализация
+            stream = File.OpenRead("test.dat");
+ 
+            my = formatter.Deserialize(stream) as Myclass;
+ 
+            Console.WriteLine("Имя    : " + my.name);
+            Console.WriteLine("Возраст: " + my.age);
+            stream.Close();
+     */
 }
