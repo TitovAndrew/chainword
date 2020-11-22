@@ -70,8 +70,25 @@ namespace Chainword
             }
             else if (checkBox1.Checked == false)
             {
-                Form ifrm = new FillingCross(NameCross_textBox.Text, result_path, TypeCross_comboBox.SelectedIndex, int.Parse(AmountLetters_comboBox.Text), int.Parse(LengthCross_comboBox.Text));
+                Form ifrm = new FillingCross(
+                    NameCross_textBox.Text,
+                    result_path,
+                    TypeCross_comboBox.SelectedIndex,
+                    int.Parse(AmountLetters_comboBox.Text),
+                    int.Parse(LengthCross_comboBox.Text));
                 ifrm.Show();
+                this.Close();
+            }
+            else if (checkBox1.Checked == true)
+            {
+                AutoCreateCross acc = new AutoCreateCross(
+                    NameCross_textBox.Text,
+                    result_path, TypeCross_comboBox.SelectedIndex,
+                    int.Parse(AmountLetters_comboBox.Text),
+                    int.Parse(LengthCross_comboBox.Text));
+                acc.CreateCross();
+                Form ma = new MenuAdmin();
+                ma.Show();
                 this.Close();
             }
         }

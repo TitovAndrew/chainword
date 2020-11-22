@@ -31,35 +31,47 @@ namespace Chainword
             DeleteLastWord.Enabled = false;
             CreateCross_button.Enabled = false;
 
+
             try
             {
-                // Тут надо будет инициализировать поля, взяв данные из файла .cros, который в параметре конструктора
-                /*this.dictionary = dictionary;
-                this.namecross = namecross;
-                this.typecross = typecross;
-                this.crossletters = crossletters;
-                this.lengthcross = lengthcross;*/
+                Crossword cross = new Crossword();
+                FileStream stream = File.OpenRead(PathToFile);
+                BinaryFormatter formatter = new BinaryFormatter();
+                cross = formatter.Deserialize(stream) as Crossword;
+                stream.Close();
 
-                File_Reader();
+                this.dictionary = cross.Dictionary;
+                this.name_cross = cross.Name;
+                this.type_cross = cross.DisplayType;
+                this.cross_letters = cross.CrossLetters;
+                this.length_cross = cross.Length;
+                LoadCrossword(cross.Allwords);
             }
-            catch { }
+            catch
+            {
+                MessageBox.Show("Не удалось загрузить кроссворд!");
+            }
+            if (AddedWords.Items.Count >= cross_letters)
+                AddWord.Enabled = false;
         }
 
         // Конструктор для создания кроссворда
-        public FillingCross(string namecross, string dictionary, int typecross, int crossletters, int lengthcross)
+        public FillingCross(string name_cross, string dictionary, int type_cross, int cross_letters, int length_cross)
         {
             TopMost = true;
             InitializeComponent();
             DeleteLastWord.Enabled = false;
             CreateCross_button.Enabled = false;
+            if (AddedWords.Items.Count >= cross_letters)
+                AddedWords.Enabled = false;
 
             try
             {
                 this.dictionary = dictionary;
-                this.name_cross = namecross;
-                this.type_cross = typecross;
-                this.cross_letters = crossletters;
-                this.length_cross = lengthcross;
+                this.name_cross = name_cross;
+                this.type_cross = type_cross;
+                this.cross_letters = cross_letters;
+                this.length_cross = length_cross;
 
                 File_Reader();
             }
@@ -84,18 +96,27 @@ namespace Chainword
             }
         }
 
-        private void AddWord_Click(object sender, EventArgs e)
+        private void LoadCrossword(string[] words)
         {
-            foreach (var item in AvailableWords.SelectedItems)
+            for (int i = 0; i < words.Length; i++)
             {
-                string str = (string)item;
-                string[] result = { (AddedWords.Items.Count + 1) + ". " + str.Split(' ')[0] };
+                string str = (string)words[i];
+                string[] result = { (AddedWords.Items.Count + 1) + ". " + str };
                 AddedWords.Items.AddRange(result);
                 last_chars = result[0].Substring(result[0].Length - 3);
                 first_chars[k] = result[0];
                 k++;
             }
+            if (words.Length > 0)
+            {
+                DeleteLastWord.Enabled = true;
+                CreateCross_button.Enabled = true;
+            }
+            UpdateAvailableWords();
+        }
 
+        private void UpdateAvailableWords()
+        {
             AvailableWords.Items.Clear();
             using (StreamReader fs = new StreamReader(dictionary))
             {
@@ -156,14 +177,27 @@ namespace Chainword
                     else
                         MessageBox.Show("В словаре невозможно найти слово, начинающееся с букв " + last_chars[0] + last_chars[1] + last_chars[2]);
                 }
-
             }
-            DeleteLastWord.Enabled = true;
+        }
 
-            if (AvailableWords.Items.Count > 2)
+        private void AddWord_Click(object sender, EventArgs e)
+        {
+            foreach (var item in AvailableWords.SelectedItems)
             {
-                CreateCross_button.Enabled = true;
+                string str = (string)item;
+                string[] result = { (AddedWords.Items.Count + 1) + ". " + str.Split(' ')[0] };
+                AddedWords.Items.AddRange(result);
+                last_chars = result[0].Substring(result[0].Length - 3);
+                first_chars[k] = result[0];
+                k++;
             }
+            UpdateAvailableWords();
+
+            DeleteLastWord.Enabled = true;
+            if (AvailableWords.Items.Count > 2)
+                CreateCross_button.Enabled = true;
+            if (AddedWords.Items.Count >= cross_letters)
+                AddWord.Enabled = false;
         }
         private void DeleteLastWord_Click(object sender, EventArgs e)
         {
@@ -262,6 +296,7 @@ namespace Chainword
             if (AddedWords.Items.Count == 0)
             {
                 DeleteLastWord.Enabled = false;
+                CreateCross_button.Enabled = false;
                 File_Reader();
             }
         }
@@ -398,7 +433,7 @@ namespace Chainword
 
         private string[] GetWords()
         {
-            string[] words_to_cross = new string[20];
+            string[] words_to_cross = new string[AddedWords.Items.Count];
             string[] x;
             int i = 0;
             foreach (var item in AddedWords.Items)
