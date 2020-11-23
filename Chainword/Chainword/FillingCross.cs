@@ -31,7 +31,6 @@ namespace Chainword
             DeleteLastWord.Enabled = false;
             CreateCross_button.Enabled = false;
 
-
             try
             {
                 Crossword cross = new Crossword();
@@ -51,7 +50,7 @@ namespace Chainword
             {
                 MessageBox.Show("Не удалось загрузить кроссворд!");
             }
-            if (AddedWords.Items.Count >= cross_letters)
+            if (AddedWords.Items.Count >= length_cross)
                 AddWord.Enabled = false;
         }
 
@@ -194,9 +193,9 @@ namespace Chainword
             UpdateAvailableWords();
 
             DeleteLastWord.Enabled = true;
-            if (AvailableWords.Items.Count > 2)
+            if (AddedWords.Items.Count == length_cross)
                 CreateCross_button.Enabled = true;
-            if (AddedWords.Items.Count >= cross_letters)
+            if (AddedWords.Items.Count >= length_cross)
                 AddWord.Enabled = false;
         }
         private void DeleteLastWord_Click(object sender, EventArgs e)
@@ -296,9 +295,15 @@ namespace Chainword
             if (AddedWords.Items.Count == 0)
             {
                 DeleteLastWord.Enabled = false;
-                CreateCross_button.Enabled = false;
+                //CreateCross_button.Enabled = false;
                 File_Reader();
             }
+
+            //DeleteLastWord.Enabled = true;
+           // if (AddedWords.Items.Count == length_cross)
+                CreateCross_button.Enabled = false;
+            if (AddedWords.Items.Count < length_cross)
+                AddWord.Enabled = true;
         }
 
         private void Search_button_Click(object sender, EventArgs e)

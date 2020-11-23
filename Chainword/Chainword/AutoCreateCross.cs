@@ -77,6 +77,10 @@ namespace Chainword
             }
             #endregion
 
+
+            List<string> words_without_repetitions = new List<string>();
+            List<string> memory_words = new List<string>();
+
             #region Сам процесс получения рандомных слов из arr_only_words в массив result
             try
             {
@@ -87,9 +91,30 @@ namespace Chainword
                     int index = rand.Next(0, arr_only_words.Length);
                     if (i != 0)
                     {
+
+                        bool check = true;
+                        for (int z = 0; z < arr_only_words.Length; z++)
+                        {
+                            foreach (var item in memory_words)
+                            {
+                                if (arr_only_words[z] == item)
+                                    check = false;
+                            }
+                            if(check)
+                                words_without_repetitions.Add(arr_only_words[z]);
+                            check = true;
+                        }
+
+                        string[] arr_wwr = new string[words_without_repetitions.Count];
+                        int x = 0;
+                        foreach (var item in words_without_repetitions)
+                        {
+                            arr_wwr[x] = item;
+                            x++;
+                        }
                         // Вернет список с подходящими словами
                         List<string> sw =
-                                SearchWordsMask(arr_only_words, result[i - 1].Substring(result[i - 1].Length - cross_letters).ToCharArray());
+                                SearchWordsMask(arr_wwr, result[i - 1].Substring(result[i - 1].Length - cross_letters).ToCharArray());
                         if (!sw.Any())
                             i -= 2;
                         else
@@ -103,11 +128,16 @@ namespace Chainword
                             }
                             index = rand.Next(0, arr_sw.Length);
                             result[i] = arr_sw[index];
+                            memory_words.Add(result[i]);
                         }
                     }
                     if (i == 0)
+                    {
                         result[i] = arr_only_words[index];
+                        memory_words.Add(result[i]);
+                    }
                     i++;
+                    words_without_repetitions.Clear();
                 }
             }
             catch
