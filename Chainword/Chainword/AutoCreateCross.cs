@@ -53,10 +53,11 @@ namespace Chainword
 
         public string[] GetWords()
         {
-            int k = length_cross;
-            string[] arr_words, arr_only_words;
+            string[] arr_words, arr_only_words, result = null;
             string only_words = "";
             Random rand = new Random((int)DateTime.Now.Ticks);
+
+            #region получаем в массив arr_only_words все слова, которые есть в словаре
             using (StreamReader fs = new StreamReader(dictionary))
             {
                 string words = null;
@@ -74,26 +75,82 @@ namespace Chainword
                 }
                 arr_only_words = only_words.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
             }
+            #endregion
 
-
-            string[] result = new string[length_cross];
-            int i = 0;
-            while (k > 0)
+            #region Сам процесс получения рандомных слов из arr_only_words в массив result
+            try
             {
-                int index = rand.Next(0, arr_only_words.Length);
-                if (i != 0)
+                result = new string[length_cross];
+                int i = 0;
+                while (i < length_cross)
                 {
-                    char[] f = result[i - 1].Substring(result[i - 1].Length - 1).ToCharArray();
-                    while (arr_only_words[index][0] != f[0])
+                    int index = rand.Next(0, arr_only_words.Length);
+                    if (i != 0)
                     {
-                        index = rand.Next(0, arr_only_words.Length);
+                        // Вернет список с подходящими словами
+                        List<string> sw =
+                                SearchWordsMask(arr_only_words, result[i - 1].Substring(result[i - 1].Length - cross_letters).ToCharArray());
+                        if (!sw.Any())
+                            i -= 2;
+                        else
+                        {
+                            string[] arr_sw = new string[sw.Count];
+                            int k = 0;
+                            foreach (var item in sw)
+                            {
+                                arr_sw[k] = item;
+                                k++;
+                            }
+                            index = rand.Next(0, arr_sw.Length);
+                            result[i] = arr_sw[index];
+                        }
+                    }
+                    if (i == 0)
+                        result[i] = arr_only_words[index];
+                    i++;
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Не удалось составить кроссворд из данного словаря автоматически! Попробуйте составить вручную.");
+            }
+            #endregion
+
+            return result;
+        }
+
+        private List<string> SearchWordsMask(string[] arr_only_words, char[] letters)
+        {
+            List<string> suitable_words = new List<string>();
+            for (int i = 0; i < arr_only_words.Length; i++)
+            {
+                if (cross_letters == 1)
+                {
+                    if (arr_only_words[i][0] == letters[0])
+                    {
+                        suitable_words.Add(arr_only_words[i]);
                     }
                 }
-                result[i] = arr_only_words[index];
-                i++;
-                k--;
+                else if(cross_letters == 2)
+                {
+                    if (arr_only_words[i][0] == letters[0] && 
+                        arr_only_words[i][1] == letters[1])
+                    {
+                        suitable_words.Add(arr_only_words[i]);
+                    }
+                }
+                else
+                {
+                    if (arr_only_words[i][0] == letters[0] && 
+                        arr_only_words[i][1] == letters[1] && 
+                        arr_only_words[i][2] == letters[2])
+                    {
+                        suitable_words.Add(arr_only_words[i]);
+                    }
+                }
             }
-            return result;
+            return suitable_words;
         }
     }
 }
+

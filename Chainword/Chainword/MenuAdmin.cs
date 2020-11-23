@@ -15,6 +15,7 @@ namespace Chainword
     {
         public MenuAdmin()
         {
+            TopMost = true;
             InitializeComponent();
             ShowAllFiles(Environment.CurrentDirectory, "*.dict", Dictionary_listBox);
             ShowAllFiles(Environment.CurrentDirectory, "*.cros", CrossWord_listBox);
