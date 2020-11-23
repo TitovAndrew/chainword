@@ -50,14 +50,20 @@ namespace Chainword
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             Form ifrm = Application.OpenForms[0];
-            ifrm.Show();
+            ifrm.WindowState = FormWindowState.Normal;
         }
 
         private void Open_Button_Click(object sender, EventArgs e)
         {
-            Form solving = new SolvingCrossword();
-            solving.Show();
-            this.Close();
+            foreach (var item in StartedCross_ListBox.SelectedItems)
+            {
+                string file_name = (string)item;
+                string[] f = Directory.GetFiles(Environment.CurrentDirectory, file_name + ".cros");
+                Form solving = new SolvingCrossword(f[0]);
+                solving.Show();
+                this.Close();
+            }
+            
         }
 
         private void NewCross_ListBox_SelectedIndexChanged(object sender, EventArgs e)

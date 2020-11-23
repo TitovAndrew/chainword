@@ -15,7 +15,7 @@ namespace Chainword
     {
         public MenuAdmin()
         {
-            TopMost = true;
+            //TopMost = true;
             InitializeComponent();
             ShowAllFiles(Environment.CurrentDirectory, "*.dict", Dictionary_listBox);
             ShowAllFiles(Environment.CurrentDirectory, "*.cros", CrossWord_listBox);
@@ -26,7 +26,7 @@ namespace Chainword
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             Form ifrm = Application.OpenForms[0];
-            ifrm.Show();
+            ifrm.WindowState = FormWindowState.Normal;
         }
 
         void ShowAllFiles(string rootDirectory, string fileExtension, ListBox files)

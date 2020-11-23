@@ -86,6 +86,7 @@ namespace Chainword
             {
                 result = new string[length_cross];
                 int i = 0;
+                int max_iter = 10000;
                 while (i < length_cross)
                 {
                     int index = rand.Next(0, arr_only_words.Length);
@@ -116,7 +117,11 @@ namespace Chainword
                         List<string> sw =
                                 SearchWordsMask(arr_wwr, result[i - 1].Substring(result[i - 1].Length - cross_letters).ToCharArray());
                         if (!sw.Any())
+                        {
                             i -= 2;
+                            max_iter--;
+                        }
+
                         else
                         {
                             string[] arr_sw = new string[sw.Count];
@@ -138,6 +143,11 @@ namespace Chainword
                     }
                     i++;
                     words_without_repetitions.Clear();
+                    if (max_iter < 0)
+                    {
+                        MessageBox.Show("Не удалось составить кроссворд из данного словаря автоматически! Попробуйте составить вручную.");
+                        break;
+                    }
                 }
             }
             catch

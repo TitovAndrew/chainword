@@ -31,7 +31,7 @@ namespace Chainword
             AuthorizationForm menu = this;
             ud.AuthorizationUser(writePath, log, pas, checkadmin, check, menu);
             password.Text = "";
-            this.Hide();
+            this.WindowState = FormWindowState.Minimized;
         }
 
         private void Register_button_Click(object sender, EventArgs e)

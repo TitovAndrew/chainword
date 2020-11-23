@@ -33,21 +33,13 @@ namespace Chainword
                 string writePath = Environment.CurrentDirectory + "\\" + textBox1.Text + ".dict";
                 CreateDictionary cd = this;
                 fw.CreateDictionary(writePath, cd);
-                /*try
-                {
-                    using (StreamReader fs = new StreamReader(writePath))
-                    { }
-                    MessageBox.Show("Данный файл уже существует!");
-                }
-                catch
-                {
-                    using (StreamWriter sw = new StreamWriter(writePath, true, System.Text.Encoding.UTF8))
-                    { }
-                    Form fd = new FillingDictionary(writePath);
-                    fd.Show();
-                    this.Close();
-                }*/
             }
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            Form ifrm = Application.OpenForms[0];
+            ifrm.WindowState = FormWindowState.Normal;
         }
     }
 }

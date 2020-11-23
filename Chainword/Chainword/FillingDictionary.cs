@@ -223,31 +223,17 @@ namespace Chainword
         private void Save_button_Click(object sender, EventArgs e)
         {
             fw.SaveDictionary(writePath, all_concepts_list);
-            /*using (StreamWriter sw = new StreamWriter(writePath, false, System.Text.Encoding.UTF8))
-            {
-                foreach (var item in all_concepts_list)
-                {
-                    sw.WriteLineAsync(item);
-                }
-            }*/
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             Form ifrm = Application.OpenForms[0];
-            ifrm.Show();
+            ifrm.WindowState = FormWindowState.Normal;
         }
 
         private void SaveExit_button_Click(object sender, EventArgs e)
         {
             fw.SaveDictionary(writePath, all_concepts_list);
-            /*using (StreamWriter sw = new StreamWriter(writePath, false, System.Text.Encoding.UTF8))
-            {
-                foreach (var item in all_concepts_list)
-                {
-                    sw.WriteLineAsync(item);
-                }
-            }*/
             this.Close();
         }
 

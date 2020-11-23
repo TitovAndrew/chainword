@@ -50,7 +50,7 @@ namespace Chainword
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             Form ifrm = Application.OpenForms[0];
-            ifrm.Show();
+            ifrm.WindowState = FormWindowState.Normal;
         }
 
         private void CreateCross_button_Click(object sender, EventArgs e)
