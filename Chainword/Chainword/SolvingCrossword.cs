@@ -41,9 +41,7 @@ namespace Chainword
             this.words = cross.Allwords;
 
             Panel1 = new Panel();
-            Panel1.Location = new Point(9, 126);
-            Panel1.Size = new Size(683, 150);
-            Panel1.BackColor = System.Drawing.Color.Gray;
+            Panel1.Location = new Point(2, 50);
             Panel1.AutoScroll = true;
 
             label1 = new Label();
@@ -180,34 +178,6 @@ namespace Chainword
             NumberOfParts++;
             //GenericTextBox(NumberOfParts, false);
         }*/
-
-        private void TextBox_TextChanged(object sender, EventArgs e)
-        {
-            int amount_textbox = 0;
-            foreach (var textbox in TextBoxExtends.GetAllChildren(Panel1).OfType<TextBox>())
-            {
-                amount_textbox++;
-            }
-            for (int i = 1; i <= amount_textbox; i++)
-            {
-                foreach (var textbox in TextBoxExtends.GetAllChildren(Panel1).OfType<TextBox>())
-                {
-                    if (textbox.Name == ("TextBox" + i) && textbox.Focused && textbox.Text != "")
-                    {
-                        foreach (var textbox1 in TextBoxExtends.GetAllChildren(Panel1).OfType<TextBox>())
-                        {
-                            if (textbox1.Name == ("TextBox" + (i + 1).ToString()))
-                            {
-                                textbox1.Focus();
-                                textbox1.SelectionStart = 0;
-                                textbox1.SelectionLength = textbox1.Text.Length;
-                                return;
-                            }
-                        }
-                    }
-                }
-            }
-        }
         #endregion
 
         #region спиральное отображение
@@ -291,6 +261,7 @@ namespace Chainword
 
         void CreateTB_Linear(int count_symbols)
         {
+            Panel1.Size = new Size(683, 150);
             this.Controls.Add(Panel1);
             MessageBox.Show("" + count_symbols);
             int kostyl = 0;
@@ -345,8 +316,8 @@ namespace Chainword
                 textbox.TextChanged += TextBox_TextChanged;
                 textbox.Click += TextBox_Click;
             }
-                
         }
+
         private void TextBox_Click(object sender, EventArgs e)
         {
             foreach (var textbox in TextBoxExtends.GetAllChildren(Panel1).OfType<TextBox>())
@@ -360,28 +331,61 @@ namespace Chainword
             }
         }
 
+        private void TextBox_TextChanged(object sender, EventArgs e)
+        {
+            int amount_textbox = 0;
+            foreach (var textbox in TextBoxExtends.GetAllChildren(Panel1).OfType<TextBox>())
+            {
+                amount_textbox++;
+            }
+            for (int i = 1; i <= amount_textbox; i++)
+            {
+                foreach (var textbox in TextBoxExtends.GetAllChildren(Panel1).OfType<TextBox>())
+                {
+                    if (textbox.Name == ("TextBox" + i) && textbox.Focused && textbox.Text != "")
+                    {
+                        foreach (var textbox1 in TextBoxExtends.GetAllChildren(Panel1).OfType<TextBox>())
+                        {
+                            if (textbox1.Name == ("TextBox" + (i + 1).ToString()))
+                            {
+                                textbox1.Focus();
+                                textbox1.SelectionStart = 0;
+                                textbox1.SelectionLength = textbox1.Text.Length;
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         void CreateTB_Snake(int count_symbols)
         {
+            this.Controls.Add(Panel1);
             int width_cross = 0;
             if(count_symbols <20)
             {
                 width_cross = 5;
                 this.Size = new Size(210, 500);
+                Panel1.Size = new Size(210, 505);
             }
             else if(count_symbols < 50)
             {
                 width_cross = 15;
                 this.Size = new Size(560, 500);
+                Panel1.Size = new Size(560, 505);
             }
             else if (count_symbols < 100)
             {
                 width_cross = 17;
                 this.Size = new Size(630, 500);
+                Panel1.Size = new Size(630, 505);
             }
             else
             {
                 width_cross = 20;
                 this.Size = new Size(740, 500);
+                Panel1.Size = new Size(740, 505);
             }
 
             int kostyl = 0, turn = width_cross, down = 0, locate_X = 1;
@@ -391,21 +395,21 @@ namespace Chainword
             {
                 if (turn > 0)
                 {
-                    locate = new Point(10 + 35 * (locate_X - 1), 70 + 35 * down);
+                    locate = new Point(10 + 35 * (locate_X - 1), 20 + 35 * down);
                     locate_X++;
                     turn--;
                 }
                 else if (turn == 0)
                 {
                     down++;
-                    locate = new Point(10 + 35 * (locate_X - 2), 70 + 35 * down);
+                    locate = new Point(10 + 35 * (locate_X - 2), 20 + 35 * down);
                     if (down % 2 == 0)
                     {
                         if (left_to_right)
                         {
                             turn = -width_cross + 1;
                             left_to_right = false;
-                        }  
+                        }
                         else if (!left_to_right)
                         {
                             turn = width_cross - 1;
@@ -416,7 +420,7 @@ namespace Chainword
                 else if (turn < 0)
                 {
                     locate_X--;
-                    locate = new Point(10 + 35 * (locate_X - 2), 70 + 35 * down);
+                    locate = new Point(10 + 35 * (locate_X - 2), 20 + 35 * down);
                     turn++;
                 }
 
@@ -424,7 +428,7 @@ namespace Chainword
                 {
                     if (i == item && i != count_symbols)
                     {
-                        this.Controls.Add(new TextBox()
+                        Panel1.Controls.Add(new TextBox()
                         {
                             Name = ("TextBox" + i.ToString()),
                             Location = locate,
@@ -443,7 +447,7 @@ namespace Chainword
                 }
                 if (kostyl == 0)
                 {
-                    this.Controls.Add(new TextBox()
+                    Panel1.Controls.Add(new TextBox()
                     {
                         Name = ("TextBox" + i.ToString()),
                         Location = locate,
@@ -455,11 +459,11 @@ namespace Chainword
                         MaxLength = 1
                     });
                 }
-                foreach (var textbox in TextBoxExtends.GetAllChildren(Panel1).OfType<TextBox>())
-                {
-                    textbox.TextChanged += TextBox_TextChanged;
-                    textbox.Click += TextBox_Click;
-                }
+            }
+            foreach (var textbox in TextBoxExtends.GetAllChildren(Panel1).OfType<TextBox>())
+            {
+                textbox.TextChanged += TextBox_TextChanged;
+                textbox.Click += TextBox_Click;
             }
         }
 
