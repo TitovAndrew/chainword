@@ -29,9 +29,8 @@ namespace Chainword
             string pas = password.Text;
             string writePath = Environment.CurrentDirectory + "\\" + "data_user.usr";
             AuthorizationForm menu = this;
-            ud.AuthorizationUser(writePath, log, pas, checkadmin, check, menu);
+            ud.AuthorizationUser(writePath, log, pas, checkadmin, check, menu, this);
             password.Text = "";
-            this.WindowState = FormWindowState.Minimized;
         }
 
         private void Register_button_Click(object sender, EventArgs e)

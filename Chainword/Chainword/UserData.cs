@@ -18,7 +18,7 @@ namespace Chainword
             return Convert.ToBase64String(hash);
         }
 
-        public void AuthorizationUser(string writePath, string log, string pas, bool checkadmin, bool check, Form Menu)
+        public void AuthorizationUser(string writePath, string log, string pas, bool checkadmin, bool check, Form Menu, Form main)
         {
             try
             {
@@ -60,6 +60,7 @@ namespace Chainword
                     {
                         Form mu = new MenuUser();
                         mu.Show();
+                        main.WindowState = FormWindowState.Minimized;
                     }
                 }
             }

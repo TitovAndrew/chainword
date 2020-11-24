@@ -18,8 +18,8 @@ namespace Chainword
         int index; //индекс вида отображения
         string[] words;
         string name_cross, dictionary;
-        // пересечение букв, количество кликов
-        int cross_letters, NumberOfParts = 0;
+        // пересечение букв
+        int cross_letters;
         Panel Panel1;
         List<int> IndexWords = new List<int>();
 
@@ -47,11 +47,11 @@ namespace Chainword
             Panel1.AutoScroll = true;
 
             label1 = new Label();
-            label1.Font = new Font("Calibri", 20);
-            label1.Text = "Разгадывание кросворда";
-            label1.Size = new Size(313, 33);
-
-
+            label1.Font = new Font("Calibri", 14);
+            label1.Text = cross.Name.ToUpper();
+            label1.AutoSize = true;
+            label1.Location = new Point(10, 10);
+            this.Controls.Add(label1);
 
             if (index == 0)
             {
@@ -139,7 +139,7 @@ namespace Chainword
         }
 
         //кнопки для линейного отображения
-        private void PrevButton_Click(object sender, EventArgs e)
+       /* private void PrevButton_Click(object sender, EventArgs e)
         {
             for (int k = 1; k < 15; k++)
             {
@@ -179,7 +179,7 @@ namespace Chainword
             }
             NumberOfParts++;
             //GenericTextBox(NumberOfParts, false);
-        }
+        }*/
 
         private void TextBox_TextChanged(object sender, EventArgs e)
         {
@@ -188,81 +188,25 @@ namespace Chainword
             {
                 amount_textbox++;
             }
-            MessageBox.Show("" + amount_textbox);
-            foreach (var textbox in TextBoxExtends.GetAllChildren(Panel1).OfType<TextBox>())
+            for (int i = 1; i <= amount_textbox; i++)
             {
-                for (int i = 1; i <= amount_textbox; i++)
+                foreach (var textbox in TextBoxExtends.GetAllChildren(Panel1).OfType<TextBox>())
                 {
-                    if (textbox.Focused && textbox.Text != "")
+                    if (textbox.Name == ("TextBox" + i) && textbox.Focused && textbox.Text != "")
                     {
                         foreach (var textbox1 in TextBoxExtends.GetAllChildren(Panel1).OfType<TextBox>())
                         {
-                            if (textbox1.Name == ("TextBox" + i + 1))
+                            if (textbox1.Name == ("TextBox" + (i + 1).ToString()))
+                            {
                                 textbox1.Focus();
+                                textbox1.SelectionStart = 0;
+                                textbox1.SelectionLength = textbox1.Text.Length;
+                                return;
+                            }
                         }
                     }
                 }
             }
-
-            /*if ((Controls["TextBox" + i.ToString()] as TextBox).Focused &&
-                (Controls["TextBox" + i.ToString()] as TextBox).Text != "")
-                        (Controls["TextBox" + (i + 1).ToString()] as TextBox).Focus();*/
-
-            /* if ((Controls["TextBox" + ("1").ToString()] as TextBox).Focused &&
-             (Controls["TextBox" + ("1").ToString()] as TextBox).Text != "")
-             (Controls["TextBox" + ("2").ToString()] as TextBox).Focus();
-
-         else if ((Controls["TextBox" + ("2").ToString()] as TextBox).Focused &&
-             (Controls["TextBox" + ("2").ToString()] as TextBox).Text != "")
-             (Controls["TextBox" + ("3").ToString()] as TextBox).Focus();
-
-         else if ((Controls["TextBox" + ("3").ToString()] as TextBox).Focused &&
-             (Controls["TextBox" + ("3").ToString()] as TextBox).Text != "")
-             (Controls["TextBox" + ("4").ToString()] as TextBox).Focus();
-
-         else if ((Controls["TextBox" + ("4").ToString()] as TextBox).Focused &&
-             (Controls["TextBox" + ("4").ToString()] as TextBox).Text != "")
-             (Controls["TextBox" + ("5").ToString()] as TextBox).Focus();
-
-         else if ((Controls["TextBox" + ("5").ToString()] as TextBox).Focused &&
-             (Controls["TextBox" + ("5").ToString()] as TextBox).Text != "")
-             (Controls["TextBox" + ("6").ToString()] as TextBox).Focus();
-
-         else if ((Controls["TextBox" + ("6").ToString()] as TextBox).Focused &&
-             (Controls["TextBox" + ("6").ToString()] as TextBox).Text != "")
-             (Controls["TextBox" + ("7").ToString()] as TextBox).Focus();
-
-         else if ((Controls["TextBox" + ("7").ToString()] as TextBox).Focused &&
-             (Controls["TextBox" + ("7").ToString()] as TextBox).Text != "")
-             (Controls["TextBox" + ("8").ToString()] as TextBox).Focus();
-
-         else if ((Controls["TextBox" + ("8").ToString()] as TextBox).Focused &&
-             (Controls["TextBox" + ("8").ToString()] as TextBox).Text != "")
-             (Controls["TextBox" + ("9").ToString()] as TextBox).Focus();
-
-         else if ((Controls["TextBox" + ("9").ToString()] as TextBox).Focused &&
-             (Controls["TextBox" + ("9").ToString()] as TextBox).Text != "")
-             (Controls["TextBox" + ("10").ToString()] as TextBox).Focus();
-
-         else if ((Controls["TextBox" + ("10").ToString()] as TextBox).Focused &&
-             (Controls["TextBox" + ("10").ToString()] as TextBox).Text != "")
-             (Controls["TextBox" + ("11").ToString()] as TextBox).Focus();
-
-         else if ((Controls["TextBox" + ("11").ToString()] as TextBox).Focused &&
-             (Controls["TextBox" + ("11").ToString()] as TextBox).Text != "")
-             (Controls["TextBox" + ("12").ToString()] as TextBox).Focus();
-
-         else if ((Controls["TextBox" + ("12").ToString()] as TextBox).Focused &&
-             (Controls["TextBox" + ("12").ToString()] as TextBox).Text != "")
-             (Controls["TextBox" + ("13").ToString()] as TextBox).Focus();
-
-         else if ((Controls["TextBox" + ("13").ToString()] as TextBox).Focused &&
-             (Controls["TextBox" + ("13").ToString()] as TextBox).Text != "")
-             (Controls["TextBox" + ("14").ToString()] as TextBox).Focus();
-
-         else if ((Controls["TextBox" + ("14").ToString()] as TextBox).Focused &&
-             (Controls["TextBox" + ("14").ToString()] as TextBox).Text != "")
-             (Controls["TextBox" + ("15").ToString()] as TextBox).Focus();*/
         }
         #endregion
 
@@ -276,7 +220,6 @@ namespace Chainword
         #region отображение змейка
         public void ShowSnake()
         {
-            this.Size = new Size(1000, 500);
             GenericTextBox();
         }
         #endregion
@@ -335,17 +278,13 @@ namespace Chainword
             }
 
             // Создаем текстбоксы
-            if (cross_letters == 1)
-            {
+            if (index == 0)
+                CreateTB_Snake(count_symbols);
+            else if (index == 1)
                 CreateTB_Linear(count_symbols);
-            }
-            else if (cross_letters == 2)
-            {
-
-            }
             else
             {
-
+                // спираль
             }
 
         }
@@ -353,8 +292,6 @@ namespace Chainword
         void CreateTB_Linear(int count_symbols)
         {
             this.Controls.Add(Panel1);
-            label1.Location = new Point(196, 9);
-            this.Controls.Add(label1);
             MessageBox.Show("" + count_symbols);
             int kostyl = 0;
             for (int i = 1; i <= count_symbols; i++)
@@ -376,6 +313,7 @@ namespace Chainword
                             MaxLength = 1
                         });
                         kostyl++;
+                        break;
                     }
                     else kostyl = 0;
                 }
@@ -403,10 +341,127 @@ namespace Chainword
                 }
             }*/
             foreach (var textbox in TextBoxExtends.GetAllChildren(Panel1).OfType<TextBox>())
+            {
                 textbox.TextChanged += TextBox_TextChanged;
+                textbox.Click += TextBox_Click;
+            }
+                
+        }
+        private void TextBox_Click(object sender, EventArgs e)
+        {
+            foreach (var textbox in TextBoxExtends.GetAllChildren(Panel1).OfType<TextBox>())
+            {
+                if (textbox.Focused)
+                {
+                    textbox.SelectionStart = 0;
+                    textbox.SelectionLength = textbox.Text.Length;
+                    return;
+                }
+            }
         }
 
+        void CreateTB_Snake(int count_symbols)
+        {
+            int width_cross = 0;
+            if(count_symbols <20)
+            {
+                width_cross = 5;
+                this.Size = new Size(210, 500);
+            }
+            else if(count_symbols < 50)
+            {
+                width_cross = 15;
+                this.Size = new Size(560, 500);
+            }
+            else if (count_symbols < 100)
+            {
+                width_cross = 17;
+                this.Size = new Size(630, 500);
+            }
+            else
+            {
+                width_cross = 20;
+                this.Size = new Size(740, 500);
+            }
 
+            int kostyl = 0, turn = width_cross, down = 0, locate_X = 1;
+            bool left_to_right = true;
+            Point locate = new Point(0, 0);
+            for (int i = 1; i <= count_symbols; i++)
+            {
+                if (turn > 0)
+                {
+                    locate = new Point(10 + 35 * (locate_X - 1), 70 + 35 * down);
+                    locate_X++;
+                    turn--;
+                }
+                else if (turn == 0)
+                {
+                    down++;
+                    locate = new Point(10 + 35 * (locate_X - 2), 70 + 35 * down);
+                    if (down % 2 == 0)
+                    {
+                        if (left_to_right)
+                        {
+                            turn = -width_cross + 1;
+                            left_to_right = false;
+                        }  
+                        else if (!left_to_right)
+                        {
+                            turn = width_cross - 1;
+                            left_to_right = true;
+                        }
+                    }
+                }
+                else if (turn < 0)
+                {
+                    locate_X--;
+                    locate = new Point(10 + 35 * (locate_X - 2), 70 + 35 * down);
+                    turn++;
+                }
+
+                foreach (var item in IndexWords)
+                {
+                    if (i == item && i != count_symbols)
+                    {
+                        this.Controls.Add(new TextBox()
+                        {
+                            Name = ("TextBox" + i.ToString()),
+                            Location = locate,
+                            Text = "",
+                            Font = new Font("Areal", 16),
+                            Size = new Size(30, 30),
+                            BackColor = Color.Aqua,
+                            Multiline = true,
+                            TextAlign = HorizontalAlignment.Center,
+                            MaxLength = 1
+                        });
+                        kostyl++;
+                        break;
+                    }
+                    else kostyl = 0;
+                }
+                if (kostyl == 0)
+                {
+                    this.Controls.Add(new TextBox()
+                    {
+                        Name = ("TextBox" + i.ToString()),
+                        Location = locate,
+                        Text = "",
+                        Font = new Font("Areal", 16),
+                        Size = new Size(30, 30),
+                        Multiline = true,
+                        TextAlign = HorizontalAlignment.Center,
+                        MaxLength = 1
+                    });
+                }
+                foreach (var textbox in TextBoxExtends.GetAllChildren(Panel1).OfType<TextBox>())
+                {
+                    textbox.TextChanged += TextBox_TextChanged;
+                    textbox.Click += TextBox_Click;
+                }
+            }
+        }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
