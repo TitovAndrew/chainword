@@ -14,12 +14,12 @@ namespace Chainword
         private string name; // Имя кроссворда
         private int length; // Длина кроссворда в словах
 
-        //[NonSerialized] - Возможно не нужно сериализировать это поле
-        private string[] allwords;
+        private string[] allwords; // Массив всех слов
         // Добавил своего
         private int display_type; // Вид отображения
         private string dictionary; // Словарь
         private int cross_letters; // Количество букв в пересечении
+        private char[] all_symbols;
         public string Name
         {
             get
@@ -97,6 +97,18 @@ namespace Chainword
             set
             {
                 cross_letters = value;
+            }
+        }
+
+        public char[] AllSymbols
+        {
+            get
+            {
+                return all_symbols;
+            }
+            set
+            {
+                all_symbols = value;
             }
         }
 

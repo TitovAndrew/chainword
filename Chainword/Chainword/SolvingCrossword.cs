@@ -20,6 +20,7 @@ namespace Chainword
         string name_cross, dictionary;
         // пересечение букв, количество кликов
         int cross_letters, NumberOfParts = 0;
+        Panel Panel1;
         List<int> IndexWords = new List<int>();
 
         public SolvingCrossword(string PathToFile)
@@ -38,6 +39,19 @@ namespace Chainword
             this.index = cross.DisplayType;
             this.cross_letters = cross.CrossLetters;
             this.words = cross.Allwords;
+
+            Panel1 = new Panel();
+            Panel1.Location = new Point(9, 126);
+            Panel1.Size = new Size(683, 150);
+            Panel1.BackColor = System.Drawing.Color.Gray;
+            Panel1.AutoScroll = true;
+
+            label1 = new Label();
+            label1.Font = new Font("Calibri", 20);
+            label1.Text = "Разгадывание кросворда";
+            label1.Size = new Size(313, 33);
+
+
 
             if (index == 0)
             {
@@ -177,10 +191,9 @@ namespace Chainword
             MessageBox.Show("" + amount_textbox);
             foreach (var textbox in TextBoxExtends.GetAllChildren(Panel1).OfType<TextBox>())
             {
-
-                for (int i = 0; i < amount_textbox; i++)
+                for (int i = 1; i <= amount_textbox; i++)
                 {
-                    if (textbox.Name == ("TextBox" + i) && textbox.Focused && textbox.Text != "")
+                    if (textbox.Focused && textbox.Text != "")
                     {
                         foreach (var textbox1 in TextBoxExtends.GetAllChildren(Panel1).OfType<TextBox>())
                         {
@@ -190,66 +203,66 @@ namespace Chainword
                     }
                 }
             }
-            
-        /*if ((Controls["TextBox" + i.ToString()] as TextBox).Focused &&
-            (Controls["TextBox" + i.ToString()] as TextBox).Text != "")
-                    (Controls["TextBox" + (i + 1).ToString()] as TextBox).Focus();*/
 
-               /* if ((Controls["TextBox" + ("1").ToString()] as TextBox).Focused &&
-                (Controls["TextBox" + ("1").ToString()] as TextBox).Text != "")
-                (Controls["TextBox" + ("2").ToString()] as TextBox).Focus();
+            /*if ((Controls["TextBox" + i.ToString()] as TextBox).Focused &&
+                (Controls["TextBox" + i.ToString()] as TextBox).Text != "")
+                        (Controls["TextBox" + (i + 1).ToString()] as TextBox).Focus();*/
 
-            else if ((Controls["TextBox" + ("2").ToString()] as TextBox).Focused &&
-                (Controls["TextBox" + ("2").ToString()] as TextBox).Text != "")
-                (Controls["TextBox" + ("3").ToString()] as TextBox).Focus();
+            /* if ((Controls["TextBox" + ("1").ToString()] as TextBox).Focused &&
+             (Controls["TextBox" + ("1").ToString()] as TextBox).Text != "")
+             (Controls["TextBox" + ("2").ToString()] as TextBox).Focus();
 
-            else if ((Controls["TextBox" + ("3").ToString()] as TextBox).Focused &&
-                (Controls["TextBox" + ("3").ToString()] as TextBox).Text != "")
-                (Controls["TextBox" + ("4").ToString()] as TextBox).Focus();
+         else if ((Controls["TextBox" + ("2").ToString()] as TextBox).Focused &&
+             (Controls["TextBox" + ("2").ToString()] as TextBox).Text != "")
+             (Controls["TextBox" + ("3").ToString()] as TextBox).Focus();
 
-            else if ((Controls["TextBox" + ("4").ToString()] as TextBox).Focused &&
-                (Controls["TextBox" + ("4").ToString()] as TextBox).Text != "")
-                (Controls["TextBox" + ("5").ToString()] as TextBox).Focus();
+         else if ((Controls["TextBox" + ("3").ToString()] as TextBox).Focused &&
+             (Controls["TextBox" + ("3").ToString()] as TextBox).Text != "")
+             (Controls["TextBox" + ("4").ToString()] as TextBox).Focus();
 
-            else if ((Controls["TextBox" + ("5").ToString()] as TextBox).Focused &&
-                (Controls["TextBox" + ("5").ToString()] as TextBox).Text != "")
-                (Controls["TextBox" + ("6").ToString()] as TextBox).Focus();
+         else if ((Controls["TextBox" + ("4").ToString()] as TextBox).Focused &&
+             (Controls["TextBox" + ("4").ToString()] as TextBox).Text != "")
+             (Controls["TextBox" + ("5").ToString()] as TextBox).Focus();
 
-            else if ((Controls["TextBox" + ("6").ToString()] as TextBox).Focused &&
-                (Controls["TextBox" + ("6").ToString()] as TextBox).Text != "")
-                (Controls["TextBox" + ("7").ToString()] as TextBox).Focus();
+         else if ((Controls["TextBox" + ("5").ToString()] as TextBox).Focused &&
+             (Controls["TextBox" + ("5").ToString()] as TextBox).Text != "")
+             (Controls["TextBox" + ("6").ToString()] as TextBox).Focus();
 
-            else if ((Controls["TextBox" + ("7").ToString()] as TextBox).Focused &&
-                (Controls["TextBox" + ("7").ToString()] as TextBox).Text != "")
-                (Controls["TextBox" + ("8").ToString()] as TextBox).Focus();
+         else if ((Controls["TextBox" + ("6").ToString()] as TextBox).Focused &&
+             (Controls["TextBox" + ("6").ToString()] as TextBox).Text != "")
+             (Controls["TextBox" + ("7").ToString()] as TextBox).Focus();
 
-            else if ((Controls["TextBox" + ("8").ToString()] as TextBox).Focused &&
-                (Controls["TextBox" + ("8").ToString()] as TextBox).Text != "")
-                (Controls["TextBox" + ("9").ToString()] as TextBox).Focus();
+         else if ((Controls["TextBox" + ("7").ToString()] as TextBox).Focused &&
+             (Controls["TextBox" + ("7").ToString()] as TextBox).Text != "")
+             (Controls["TextBox" + ("8").ToString()] as TextBox).Focus();
 
-            else if ((Controls["TextBox" + ("9").ToString()] as TextBox).Focused &&
-                (Controls["TextBox" + ("9").ToString()] as TextBox).Text != "")
-                (Controls["TextBox" + ("10").ToString()] as TextBox).Focus();
+         else if ((Controls["TextBox" + ("8").ToString()] as TextBox).Focused &&
+             (Controls["TextBox" + ("8").ToString()] as TextBox).Text != "")
+             (Controls["TextBox" + ("9").ToString()] as TextBox).Focus();
 
-            else if ((Controls["TextBox" + ("10").ToString()] as TextBox).Focused &&
-                (Controls["TextBox" + ("10").ToString()] as TextBox).Text != "")
-                (Controls["TextBox" + ("11").ToString()] as TextBox).Focus();
+         else if ((Controls["TextBox" + ("9").ToString()] as TextBox).Focused &&
+             (Controls["TextBox" + ("9").ToString()] as TextBox).Text != "")
+             (Controls["TextBox" + ("10").ToString()] as TextBox).Focus();
 
-            else if ((Controls["TextBox" + ("11").ToString()] as TextBox).Focused &&
-                (Controls["TextBox" + ("11").ToString()] as TextBox).Text != "")
-                (Controls["TextBox" + ("12").ToString()] as TextBox).Focus();
+         else if ((Controls["TextBox" + ("10").ToString()] as TextBox).Focused &&
+             (Controls["TextBox" + ("10").ToString()] as TextBox).Text != "")
+             (Controls["TextBox" + ("11").ToString()] as TextBox).Focus();
 
-            else if ((Controls["TextBox" + ("12").ToString()] as TextBox).Focused &&
-                (Controls["TextBox" + ("12").ToString()] as TextBox).Text != "")
-                (Controls["TextBox" + ("13").ToString()] as TextBox).Focus();
+         else if ((Controls["TextBox" + ("11").ToString()] as TextBox).Focused &&
+             (Controls["TextBox" + ("11").ToString()] as TextBox).Text != "")
+             (Controls["TextBox" + ("12").ToString()] as TextBox).Focus();
 
-            else if ((Controls["TextBox" + ("13").ToString()] as TextBox).Focused &&
-                (Controls["TextBox" + ("13").ToString()] as TextBox).Text != "")
-                (Controls["TextBox" + ("14").ToString()] as TextBox).Focus();
+         else if ((Controls["TextBox" + ("12").ToString()] as TextBox).Focused &&
+             (Controls["TextBox" + ("12").ToString()] as TextBox).Text != "")
+             (Controls["TextBox" + ("13").ToString()] as TextBox).Focus();
 
-            else if ((Controls["TextBox" + ("14").ToString()] as TextBox).Focused &&
-                (Controls["TextBox" + ("14").ToString()] as TextBox).Text != "")
-                (Controls["TextBox" + ("15").ToString()] as TextBox).Focus();*/
+         else if ((Controls["TextBox" + ("13").ToString()] as TextBox).Focused &&
+             (Controls["TextBox" + ("13").ToString()] as TextBox).Text != "")
+             (Controls["TextBox" + ("14").ToString()] as TextBox).Focus();
+
+         else if ((Controls["TextBox" + ("14").ToString()] as TextBox).Focused &&
+             (Controls["TextBox" + ("14").ToString()] as TextBox).Text != "")
+             (Controls["TextBox" + ("15").ToString()] as TextBox).Focus();*/
         }
         #endregion
 
@@ -339,6 +352,9 @@ namespace Chainword
 
         void CreateTB_Linear(int count_symbols)
         {
+            this.Controls.Add(Panel1);
+            label1.Location = new Point(196, 9);
+            this.Controls.Add(label1);
             MessageBox.Show("" + count_symbols);
             int kostyl = 0;
             for (int i = 1; i <= count_symbols; i++)
@@ -347,10 +363,10 @@ namespace Chainword
                 {
                     if (i == item && i != count_symbols)
                     {
-                        (Controls["Panel1"] as Panel).Controls.Add(new TextBox()
+                        Panel1.Controls.Add(new TextBox()
                         {
                             Name = ("TextBox" + i.ToString()),
-                            Location = new Point(60 + 35 * i, 125),
+                            Location = new Point(35 * (i - 1), 50),
                             Text = "",
                             Font = new Font("Areal", 16),
                             Size = new Size(30, 30),
@@ -365,10 +381,10 @@ namespace Chainword
                 }
                 if (kostyl == 0)
                 {
-                    (Controls["Panel1"] as Panel).Controls.Add(new TextBox()
+                    Panel1.Controls.Add(new TextBox()
                     {
                         Name = ("TextBox" + i.ToString()),
-                        Location = new Point(60 + 35 * i, 125),
+                        Location = new Point(35 * (i - 1), 50),
                         Text = "",
                         Font = new Font("Areal", 16),
                         Size = new Size(30, 30),
@@ -390,7 +406,7 @@ namespace Chainword
                 textbox.TextChanged += TextBox_TextChanged;
         }
 
-        
+
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {

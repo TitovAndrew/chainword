@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -24,7 +25,7 @@ namespace Chainword
         void ShowAllFiles(string rootDirectory, string fileExtension, ListBox files)
         {
             string test = null;
-            string[] f = Directory.GetFiles(rootDirectory, fileExtension); // массив путей до файлов dict/cross
+            string[] f = Directory.GetFiles(rootDirectory, fileExtension); // массив путей до файлов cross
             for (int i = 0; i < f.Length; i++)
             {
                 //разбиваем наш путь на части
@@ -33,15 +34,24 @@ namespace Chainword
                 for (int j = 0; j < path.Length; j++)
                 {
                     test += path[j] + "\n";
-                    if (path[j].Contains("dict"))// выбираем тот кусок раздробленного пути, где содержится dict
-                    {
-                        string[] result = { path[j].Split('.')[0] };//удаляем все после точки у файла и выводим лишь название
-                        files.Items.AddRange(result);
-                    }
                     if (path[j].Contains("cros"))// выбираем тот кусок раздробленного пути, где содержится cros
                     {
-                        string[] result = { path[j].Split('.')[0] };//удаляем все после точки у файла и выводим лишь название
-                        files.Items.AddRange(result);
+                        string[] result = { path[j].Split('.')[0] }; //удаляем все после точки у файла и выводим лишь название
+
+                        Crossword cross = new Crossword();
+                        FileStream stream = File.OpenRead(f[i]);
+                        BinaryFormatter formatter = new BinaryFormatter();
+                        cross = formatter.Deserialize(stream) as Crossword;
+                        stream.Close();
+
+                        if (cross.AllSymbols == null && files.Name == "NewCross_ListBox") // Если кроссворд новый
+                        {
+                            files.Items.AddRange(result);
+                        }
+                        if (cross.AllSymbols != null && files.Name == "StartedCross_ListBox") // Если кроссворд начатый
+                        {
+                            files.Items.AddRange(result);
+                        }
                     }
                 }
             }
