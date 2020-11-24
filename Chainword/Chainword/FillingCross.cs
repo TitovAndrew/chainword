@@ -71,7 +71,7 @@ namespace Chainword
                 this.type_cross = type_cross;
                 this.cross_letters = cross_letters;
                 this.length_cross = length_cross;
-
+                
                 File_Reader();
             }
             catch { }
@@ -88,7 +88,18 @@ namespace Chainword
                     string tmp = fs.ReadLine();
                     if (tmp == null) break;
                     tmp += "\n";
-                    words += tmp;
+                    if(cross_letters == 1)
+                    {
+                        words += tmp;
+                    }
+                    else if(cross_letters == 2 && tmp.Split(' ')[0].Length > 4)
+                    {
+                        words += tmp;
+                    }
+                    else if (cross_letters == 3 && tmp.Split(' ')[0].Length > 6)
+                    {
+                        words += tmp;
+                    }
                 }
                 string[] arr_words = words.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
                 AvailableWords.Items.AddRange(arr_words);
@@ -123,6 +134,11 @@ namespace Chainword
                 while (true)
                 {
                     string tmp = fs.ReadLine();
+                    string min_length = "";
+                    if (tmp != null)
+                        min_length = tmp.Split(' ')[0];
+
+                
                     if (tmp == null) break;
                     tmp += "\n";
 
@@ -133,12 +149,17 @@ namespace Chainword
                     }
                     else if (cross_letters == 2)
                     {
-                        if (tmp[0].CompareTo(last_chars[1]) == 0 && tmp[1].CompareTo(last_chars[2]) == 0)
+                        if (tmp[0].CompareTo(last_chars[1]) == 0 &&
+                            tmp[1].CompareTo(last_chars[2]) == 0 &&
+                            min_length.Length > 4)
                             words += tmp;
                     }
                     else
                     {
-                        if (tmp[0].CompareTo(last_chars[0]) == 0 && tmp[1].CompareTo(last_chars[1]) == 0 && tmp[2].CompareTo(last_chars[2]) == 0)
+                        if (tmp[0].CompareTo(last_chars[0]) == 0 && 
+                            tmp[1].CompareTo(last_chars[1]) == 0 && 
+                            tmp[2].CompareTo(last_chars[2]) == 0 &&
+                            min_length.Length > 6)
                             words += tmp;
                     }
                 }
@@ -211,6 +232,7 @@ namespace Chainword
                     string tmp = fs.ReadLine();
                     if (tmp == null) break;
                     tmp += "\n";
+
                     if (AddedWords.Items.Count < 9)
                     {
                         if (cross_letters == 1)
@@ -223,7 +245,8 @@ namespace Chainword
                         else if (cross_letters == 2)
                         {
                             if (tmp[0].CompareTo(first_chars[k - 1][3]) == 0 &&
-                                tmp[1].CompareTo(first_chars[k - 1][4]) == 0)
+                                tmp[1].CompareTo(first_chars[k - 1][4]) == 0 &&
+                                tmp.Split(' ')[0].Length > 4)
                             {
                                 words += tmp;
                             }
@@ -232,7 +255,8 @@ namespace Chainword
                         {
                             if (tmp[0].CompareTo(first_chars[k - 1][3]) == 0 &&
                                 tmp[1].CompareTo(first_chars[k - 1][4]) == 0 &&
-                                tmp[2].CompareTo(first_chars[k - 1][5]) == 0)
+                                tmp[2].CompareTo(first_chars[k - 1][5]) == 0 &&
+                                tmp.Split(' ')[0].Length > 6)
                             {
                                 words += tmp;
                             }
@@ -295,12 +319,8 @@ namespace Chainword
             if (AddedWords.Items.Count == 0)
             {
                 DeleteLastWord.Enabled = false;
-                //CreateCross_button.Enabled = false;
                 File_Reader();
             }
-
-            //DeleteLastWord.Enabled = true;
-           // if (AddedWords.Items.Count == length_cross)
                 CreateCross_button.Enabled = false;
             if (AddedWords.Items.Count < length_cross)
                 AddWord.Enabled = true;
