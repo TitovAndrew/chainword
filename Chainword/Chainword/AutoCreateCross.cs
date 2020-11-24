@@ -174,7 +174,8 @@ namespace Chainword
                 else if(cross_letters == 2)
                 {
                     if (arr_only_words[i][0] == letters[0] && 
-                        arr_only_words[i][1] == letters[1])
+                        arr_only_words[i][1] == letters[1] &&
+                        arr_only_words[i].Length > 4)
                     {
                         suitable_words.Add(arr_only_words[i]);
                     }
@@ -183,7 +184,8 @@ namespace Chainword
                 {
                     if (arr_only_words[i][0] == letters[0] && 
                         arr_only_words[i][1] == letters[1] && 
-                        arr_only_words[i][2] == letters[2])
+                        arr_only_words[i][2] == letters[2] &&
+                        arr_only_words[i].Length > 6)
                     {
                         suitable_words.Add(arr_only_words[i]);
                     }

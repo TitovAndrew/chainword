@@ -21,7 +21,11 @@ namespace Chainword
         // пересечение букв
         int cross_letters;
         Panel Panel1;
+        Panel PanelQuestion;
         List<int> IndexWords = new List<int>();
+        Label Question;
+
+
 
         public SolvingCrossword(string PathToFile)
         {
@@ -44,12 +48,22 @@ namespace Chainword
             Panel1.Location = new Point(2, 50);
             Panel1.AutoScroll = true;
 
+            PanelQuestion = new Panel();
+            PanelQuestion.AutoScroll = true;
+            this.Controls.Add(PanelQuestion);
+
             label1 = new Label();
             label1.Font = new Font("Calibri", 14);
             label1.Text = cross.Name.ToUpper();
             label1.AutoSize = true;
             label1.Location = new Point(10, 10);
             this.Controls.Add(label1);
+
+            Question = new Label();
+            Question.Font = new Font("Calibri", 12);
+            Question.AutoSize = true;
+            PanelQuestion.Controls.Add(Question);
+            Question.Location = new Point(1, 1);
 
             if (index == 0)
             {
@@ -68,13 +82,14 @@ namespace Chainword
         #region линейное отображение
         public void ShowLinear()
         {
-            this.Size = new Size(720, 320);
+            this.Size = new Size(720, 380);
             GenericTextBox();
         }
 
         void CreateTB_Linear(int count_symbols)
         {
-            Panel1.Size = new Size(683, 150);
+            bool ls = false;
+            Panel1.Size = new Size(690, 150);
             this.Controls.Add(Panel1);
             MessageBox.Show("" + count_symbols);
             int kostyl = 0;
@@ -82,7 +97,26 @@ namespace Chainword
             {
                 foreach (var item in IndexWords)
                 {
-                    if (i == item && i != count_symbols)
+                    if (cross_letters == 1)
+                    {
+                        if (i != count_symbols)
+                            ls = true;
+                        else ls = false;
+                    }
+                    else if (cross_letters == 2)
+                    {
+                        if (i != count_symbols - 1 && i != count_symbols)
+                            ls = true;
+                        else ls = false;
+                    }
+                    else 
+                    {
+                        if (i != count_symbols - 2 && i != count_symbols - 1 && i != count_symbols)
+                            ls = true;
+                        else ls = false;
+                    }
+
+                    if (i == item && ls == true)
                     {
                         Panel1.Controls.Add(new TextBox()
                         {
@@ -120,7 +154,7 @@ namespace Chainword
             {
                 textbox.TextChanged += TextBox_TextChanged;
                 textbox.Click += TextBox_Click;
-                //textbox.Click += TextBox_InfoClick;
+                textbox.MouseDown += TextBox_InfoClick;
             }
         }
         #endregion
@@ -243,7 +277,7 @@ namespace Chainword
             {
                 textbox.TextChanged += TextBox_TextChanged;
                 textbox.Click += TextBox_Click;
-                //textbox.Click += TextBox_InfoClick;
+                textbox.MouseDown += TextBox_InfoClick;
             }
         }
         #endregion
@@ -310,6 +344,11 @@ namespace Chainword
             }
         }
 
+        private string GetDefinition()
+        {
+            return "";
+        }
+
         private void TextBox_Click(object sender, EventArgs e)
         {
             foreach (var textbox in TextBoxExtends.GetAllChildren(Panel1).OfType<TextBox>())
@@ -355,10 +394,23 @@ namespace Chainword
         {
             foreach (var textbox in TextBoxExtends.GetAllChildren(Panel1).OfType<TextBox>())
             {
-                if (textbox.BackColor == System.Drawing.Color.Aqua)
+                if (textbox.BackColor == System.Drawing.Color.Aqua && textbox.Focused)
                 {
-                    textbox.Text = "F";
-                    return;
+                    if (index == 0)
+                    {
+
+                    }
+                    else if (index == 1)
+                    {
+                        PanelQuestion.Size = new Size(690, 50);
+                        PanelQuestion.Location = new Point(2, 200);
+                        //Question.Text = 
+                    }
+                    else
+                    {
+
+                    }
+                    break;
                 }
             }
         }
@@ -369,6 +421,8 @@ namespace Chainword
             ifrm.WindowState = FormWindowState.Normal;
         }
     }
+
+
 
     static class TextBoxExtends
     {
