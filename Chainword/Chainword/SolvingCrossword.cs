@@ -70,193 +70,6 @@ namespace Chainword
         {
             this.Size = new Size(720, 320);
             GenericTextBox();
-            /*this.Controls.Add(new Panel()
-            {
-                Name = "Panel1",
-                AutoScroll = true,
-                Location = new Point(625, 124),
-                Size = new Size(500, 300)
-            });*/
-
-            /*this.Controls.Add(new Button() { Name = "PrevButton", Location = new Point(25, 124), Text = "<", Size = new Size(60, 32) });
-            this.Controls.Add(new Button() { Name = "NextButton", Location = new Point(625, 124), Text = ">", Size = new Size(60, 32) });
-            (Controls["PrevButton"] as Button).Click += new System.EventHandler(PrevButton_Click);
-            (Controls["NextButton"] as Button).Click += new System.EventHandler(NextButton_Click);
-            List<char[]> AllSymbols = new List<char[]>();
-
-            int k = 1;
-            for (int i = 0; i < words.Length; i++)
-            {
-                if (k == 1)
-                {
-                    IndexWords.Add(k);
-                }
-
-                k += words[i].Substring(CrossLetters).Length;
-
-                if (k != 1)
-                {
-                    if (CrossLetters == 1)
-                    {
-                        IndexWords.Add(k);
-                    }
-                    else if (CrossLetters == 2)
-                    {
-                        IndexWords.Add(k);
-                        IndexWords.Add(k + 1);
-                    }
-                    else
-                    {
-                        IndexWords.Add(k);
-                        IndexWords.Add(k + 1);
-                        IndexWords.Add(k + 2);
-                    }
-                }
-
-                if (i == 0)
-                    AllSymbols.Add(words[i].ToCharArray());
-                else
-                    AllSymbols.Add(words[i].Substring(CrossLetters).ToCharArray());
-            }
-            string z = "";
-            foreach (var item in IndexWords)
-            {
-                z += item + " ";
-            }
-
-
-            int x = 0;
-            foreach (var Symbol in AllSymbols)
-            {
-                x += Symbol.Count();
-            }
-            AllLetters = new char[x]; // массив букв всех слов
-            MessageBox.Show(z + "!!!" + AllLetters.Length);
-            NumberOfParts = 1;
-            GenericTextBox(NumberOfParts, true);*/
-        }
-
-        //кнопки для линейного отображения
-       /* private void PrevButton_Click(object sender, EventArgs e)
-        {
-            for (int k = 1; k < 15; k++)
-            {
-                if (NumberOfParts == k)
-                {
-                    //добавляем в массив букв те буквы, которые ввел пользователь в текстбоксы
-                    for (int i = 1; i < 16; i++)
-                    {
-                        foreach (var tmp in (Controls["TextBox" + i.ToString()] as TextBox).Text)
-                        {
-                            //AllLetters[i + 15 * k - 16] = tmp;
-                            break;
-                        }
-                    }
-                }
-            }
-            NumberOfParts--;
-            //GenericTextBox(NumberOfParts, false);
-        }
-
-        private void NextButton_Click(object sender, EventArgs e)
-        {
-            for (int k = 1; k < 15; k++)
-            {
-                if (NumberOfParts == k)
-                {
-                    //добавляем в массив букв те буквы, которые ввел пользователь в текстбоксы
-                    for (int i = 1; i < 16; i++)
-                    {
-                        foreach (var tmp in (Controls["TextBox" + i.ToString()] as TextBox).Text)
-                        {
-                            //AllLetters[i + 15 * k - 16] = tmp;
-                            break;
-                        }
-                    }
-                }
-            }
-            NumberOfParts++;
-            //GenericTextBox(NumberOfParts, false);
-        }*/
-        #endregion
-
-        #region спиральное отображение
-        public void ShowSpiral()
-        {
-
-        }
-        #endregion
-
-        #region отображение змейка
-        public void ShowSnake()
-        {
-            GenericTextBox();
-        }
-        #endregion
-
-        private List<char[]> GetArrayCharAllSymbols()
-        {
-            List<char[]> AllSymbols = new List<char[]>();
-            int k = 1;
-            for (int i = 0; i < words.Length; i++)
-            {
-                if (k == 1)
-                {
-                    IndexWords.Add(k);
-                }
-
-                k += words[i].Substring(cross_letters).Length;
-
-                if (k != 1)
-                {
-                    if (cross_letters == 1)
-                    {
-                        IndexWords.Add(k);
-                    }
-                    else if (cross_letters == 2)
-                    {
-                        IndexWords.Add(k);
-                        IndexWords.Add(k + 1);
-                    }
-                    else
-                    {
-                        IndexWords.Add(k);
-                        IndexWords.Add(k + 1);
-                        IndexWords.Add(k + 2);
-                    }
-                }
-
-                if (i == 0)
-                    AllSymbols.Add(words[i].ToCharArray());
-                else
-                    AllSymbols.Add(words[i].Substring(cross_letters).ToCharArray());
-            }
-
-            return AllSymbols;
-        }
-
-        void GenericTextBox()
-        {
-            // Записываем в список all_symbols слова в виде массивов символов + указываем в IndexWords индексы начала слов
-            List<char[]> all_symbols = GetArrayCharAllSymbols();
-
-            // Записываем в count_symbols количество всех символов исходных слов
-            int count_symbols = 0;
-            foreach (var cs in all_symbols)
-            {
-                count_symbols += cs.Length;
-            }
-
-            // Создаем текстбоксы
-            if (index == 0)
-                CreateTB_Snake(count_symbols);
-            else if (index == 1)
-                CreateTB_Linear(count_symbols);
-            else
-            {
-                // спираль
-            }
-
         }
 
         void CreateTB_Linear(int count_symbols)
@@ -302,74 +115,40 @@ namespace Chainword
                         MaxLength = 1
                     });
                 }
-                //(Controls["TextBox" + i.ToString()] as TextBox).TextChanged += new System.EventHandler(TextBox_TextChanged);
             }
-            /*foreach (Control c in this.Controls)
-            {
-                if (c.GetType() == typeof(System.Windows.Forms.TextBox))
-                {
-                    c.TextChanged += new System.EventHandler(TextBox_TextChanged);
-                }
-            }*/
             foreach (var textbox in TextBoxExtends.GetAllChildren(Panel1).OfType<TextBox>())
             {
                 textbox.TextChanged += TextBox_TextChanged;
                 textbox.Click += TextBox_Click;
+                //textbox.Click += TextBox_InfoClick;
             }
         }
+        #endregion
 
-        private void TextBox_Click(object sender, EventArgs e)
+        #region спиральное отображение
+        public void ShowSpiral()
         {
-            foreach (var textbox in TextBoxExtends.GetAllChildren(Panel1).OfType<TextBox>())
-            {
-                if (textbox.Focused)
-                {
-                    textbox.SelectionStart = 0;
-                    textbox.SelectionLength = textbox.Text.Length;
-                    return;
-                }
-            }
+
         }
+        #endregion
 
-        private void TextBox_TextChanged(object sender, EventArgs e)
+        #region отображение змейка
+        public void ShowSnake()
         {
-            int amount_textbox = 0;
-            foreach (var textbox in TextBoxExtends.GetAllChildren(Panel1).OfType<TextBox>())
-            {
-                amount_textbox++;
-            }
-            for (int i = 1; i <= amount_textbox; i++)
-            {
-                foreach (var textbox in TextBoxExtends.GetAllChildren(Panel1).OfType<TextBox>())
-                {
-                    if (textbox.Name == ("TextBox" + i) && textbox.Focused && textbox.Text != "")
-                    {
-                        foreach (var textbox1 in TextBoxExtends.GetAllChildren(Panel1).OfType<TextBox>())
-                        {
-                            if (textbox1.Name == ("TextBox" + (i + 1).ToString()))
-                            {
-                                textbox1.Focus();
-                                textbox1.SelectionStart = 0;
-                                textbox1.SelectionLength = textbox1.Text.Length;
-                                return;
-                            }
-                        }
-                    }
-                }
-            }
+            GenericTextBox();
         }
 
         void CreateTB_Snake(int count_symbols)
         {
             this.Controls.Add(Panel1);
             int width_cross = 0;
-            if(count_symbols <20)
+            if (count_symbols < 20)
             {
                 width_cross = 5;
                 this.Size = new Size(210, 500);
                 Panel1.Size = new Size(210, 505);
             }
-            else if(count_symbols < 50)
+            else if (count_symbols < 50)
             {
                 width_cross = 15;
                 this.Size = new Size(560, 500);
@@ -464,6 +243,123 @@ namespace Chainword
             {
                 textbox.TextChanged += TextBox_TextChanged;
                 textbox.Click += TextBox_Click;
+                //textbox.Click += TextBox_InfoClick;
+            }
+        }
+        #endregion
+
+        private List<char[]> GetArrayCharAllSymbols()
+        {
+            List<char[]> AllSymbols = new List<char[]>();
+            int k = 1;
+            for (int i = 0; i < words.Length; i++)
+            {
+                if (k == 1)
+                {
+                    IndexWords.Add(k);
+                }
+
+                k += words[i].Substring(cross_letters).Length;
+
+                if (k != 1)
+                {
+                    if (cross_letters == 1)
+                    {
+                        IndexWords.Add(k);
+                    }
+                    else if (cross_letters == 2)
+                    {
+                        IndexWords.Add(k);
+                        IndexWords.Add(k + 1);
+                    }
+                    else
+                    {
+                        IndexWords.Add(k);
+                        IndexWords.Add(k + 1);
+                        IndexWords.Add(k + 2);
+                    }
+                }
+
+                if (i == 0)
+                    AllSymbols.Add(words[i].ToCharArray());
+                else
+                    AllSymbols.Add(words[i].Substring(cross_letters).ToCharArray());
+            }
+
+            return AllSymbols;
+        }
+
+        void GenericTextBox()
+        {
+            // Записываем в список all_symbols слова в виде массивов символов + указываем в IndexWords индексы начала слов
+            List<char[]> all_symbols = GetArrayCharAllSymbols();
+
+            // Записываем в count_symbols количество всех символов исходных слов
+            int count_symbols = 0;
+            foreach (var cs in all_symbols)
+                count_symbols += cs.Length;
+
+            // Создаем текстбоксы
+            if (index == 0)
+                CreateTB_Snake(count_symbols);
+            else if (index == 1)
+                CreateTB_Linear(count_symbols);
+            else
+            {
+                // спираль
+            }
+        }
+
+        private void TextBox_Click(object sender, EventArgs e)
+        {
+            foreach (var textbox in TextBoxExtends.GetAllChildren(Panel1).OfType<TextBox>())
+            {
+                if (textbox.Focused)
+                {
+                    textbox.SelectionStart = 0;
+                    textbox.SelectionLength = textbox.Text.Length;
+                    return;
+                }
+            }
+        }
+
+        private void TextBox_TextChanged(object sender, EventArgs e)
+        {
+            int amount_textbox = 0;
+            foreach (var textbox in TextBoxExtends.GetAllChildren(Panel1).OfType<TextBox>())
+            {
+                amount_textbox++;
+            }
+            for (int i = 1; i <= amount_textbox; i++)
+            {
+                foreach (var textbox in TextBoxExtends.GetAllChildren(Panel1).OfType<TextBox>())
+                {
+                    if (textbox.Name == ("TextBox" + i) && textbox.Focused && textbox.Text != "")
+                    {
+                        foreach (var textbox1 in TextBoxExtends.GetAllChildren(Panel1).OfType<TextBox>())
+                        {
+                            if (textbox1.Name == ("TextBox" + (i + 1).ToString()))
+                            {
+                                textbox1.Focus();
+                                textbox1.SelectionStart = 0;
+                                textbox1.SelectionLength = textbox1.Text.Length;
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void TextBox_InfoClick(object sender, EventArgs e)
+        {
+            foreach (var textbox in TextBoxExtends.GetAllChildren(Panel1).OfType<TextBox>())
+            {
+                if (textbox.BackColor == System.Drawing.Color.Aqua)
+                {
+                    textbox.Text = "F";
+                    return;
+                }
             }
         }
 
