@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -17,7 +18,7 @@ namespace Chainword
     {
         int index; //индекс вида отображения
         string[] words;
-        string name_cross, dictionary;     
+        string name_cross, dictionary;
         int cross_letters; // пересечение букв
         Panel Panel1;
         Panel PanelQuestion;
@@ -60,20 +61,14 @@ namespace Chainword
             Question.Font = new Font("Calibri", 12);
             Question.AutoSize = true;
             PanelQuestion.Controls.Add(Question);
-            Question.Location = new Point(1, 1);
+            PanelQuestion.Visible = false;
 
             if (index == 0)
-            {
                 ShowSnake();
-            }
             else if (index == 1)
-            {
                 ShowLinear();
-            }
             else
-            {
                 ShowSpiral();
-            }
         }
 
         #region линейное отображение
@@ -89,7 +84,7 @@ namespace Chainword
         {
             bool ls = false;
             Panel1.Size = new Size(690, 150);
-            this.Controls.Add(Panel1);          
+            this.Controls.Add(Panel1);
             int kostyl = 0;
             for (int i = 1; i <= count_symbols; i++)
             {
@@ -107,7 +102,7 @@ namespace Chainword
                             ls = true;
                         else ls = false;
                     }
-                    else 
+                    else
                     {
                         if (i != count_symbols - 2 && i != count_symbols - 1 && i != count_symbols)
                             ls = true;
@@ -158,7 +153,7 @@ namespace Chainword
         #endregion
 
         #region спиральное отображение
-      
+
         public void ShowSpiral()
         {
             GenericTextBox();
@@ -169,7 +164,7 @@ namespace Chainword
             bool ls = false;
             int prevX = 0, prevY = 0;
             this.Controls.Add(Panel1);
-         
+
 
 
 
@@ -203,11 +198,11 @@ namespace Chainword
             }
 
             int kostyl = 0;
-  
+
             int kp = 0; //длина стороны
             int kn = 0;
             int direction = 1;
-            
+
             Point locate = new Point(0, 0);
 
 
@@ -529,9 +524,33 @@ namespace Chainword
                 CreateTB_Spiral(count_symbols);
         }
 
-        private string GetDefinition()
+        private string GetDefinition(int id_TextBox)
         {
-            return "";
+            PanelQuestion.Visible = true;
+            int id = 0;
+            string definition = "";
+            foreach (var item in IndexWords)
+            {
+                if (item == id_TextBox)
+                    break;
+                else id++;
+            }
+            string suitable_word = words[id].ToUpper();
+
+            using (StreamReader fs = new StreamReader(dictionary))
+            {
+                while (true)
+                {
+                    string temp = fs.ReadLine();
+                    if (temp == null) break;
+                    if (temp.Split(' ')[0] == suitable_word)
+                    {
+                        temp = temp.Remove(0, temp.IndexOf(' ') + 1);
+                        definition += temp;
+                    }
+                }
+            }
+            return definition;
         }
 
         private void TextBox_Click(object sender, EventArgs e)
@@ -589,7 +608,10 @@ namespace Chainword
                     {
                         PanelQuestion.Size = new Size(690, 50);
                         PanelQuestion.Location = new Point(2, 200);
-                        //Question.Text = 
+
+                        int id_TextBox;
+                        int.TryParse(string.Join("", textbox.Name.ToString().Where(c => char.IsDigit(c))), out id_TextBox);
+                        Question.Text = GetDefinition(id_TextBox);
                     }
                     else
                     {
