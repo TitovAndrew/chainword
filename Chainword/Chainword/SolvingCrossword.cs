@@ -529,51 +529,44 @@ namespace Chainword
             PanelQuestion.Visible = true;
             int id = 0;
             string definition = "";
-            /*foreach (var item in IndexWords)
-            {
-                if (item == id_TextBox)
-                    break;
-            }
             int counter = 0;
-            foreach (var item in IndexWords)
+            int step = 0;
+
+            foreach (var item in IndexWords) //IndexWords = 1-6-7-8-11-12-13
             {
-                if (item == id_TextBox)
-                    break;
-                else if (counter == 3)
+                if (item == id_TextBox && id_TextBox == 1)
                 {
-                    id++;
                     break;
                 }
                 else
                 {
-                    counter++;
+                    foreach (var item1 in IndexWords)
+                    {
+                        if (item1 == id_TextBox)
+                        {
+                            break;
+                        }
+                        else counter++;
+                    }
+                    counter--;
+                    id = (int)(counter / 3 + 1);                 
                 }
-            }*/
+                counter = 0;
+            }       
+
             int[] arr_iw = new int[IndexWords.Count];
+         
             int i = 0;
             foreach(var item in IndexWords)
             {
                 arr_iw[i] = item;
                 i++;
-            }
-            for (int k = 0; k < arr_iw.Length; k++)
-            {
-                if (id_TextBox == arr_iw[k] && k == 0)
-                {
-                    id = 0;
-                }
-                else if (id_TextBox == arr_iw[k] ||
-                    id_TextBox == (arr_iw[k] + 1) ||
-                    id_TextBox == (arr_iw[k] - 1))
-                {
-
-                }
-            }
-
+            } 
 
             string suitable_word = words[id].ToUpper();
-
-            using (StreamReader fs = new StreamReader(dictionary))
+            string[] file = dictionary.Split(new string[] { "\\" }, StringSplitOptions.RemoveEmptyEntries);
+            string dict = Environment.CurrentDirectory + "\\" + file[file.Length - 1];
+            using (StreamReader fs = new StreamReader(dict))
             {
                 while (true)
                 {
