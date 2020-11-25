@@ -529,12 +529,48 @@ namespace Chainword
             PanelQuestion.Visible = true;
             int id = 0;
             string definition = "";
+            /*foreach (var item in IndexWords)
+            {
+                if (item == id_TextBox)
+                    break;
+            }
+            int counter = 0;
             foreach (var item in IndexWords)
             {
                 if (item == id_TextBox)
                     break;
-                else id++;
+                else if (counter == 3)
+                {
+                    id++;
+                    break;
+                }
+                else
+                {
+                    counter++;
+                }
+            }*/
+            int[] arr_iw = new int[IndexWords.Count];
+            int i = 0;
+            foreach(var item in IndexWords)
+            {
+                arr_iw[i] = item;
+                i++;
             }
+            for (int k = 0; k < arr_iw.Length; k++)
+            {
+                if (id_TextBox == arr_iw[k] && k == 0)
+                {
+                    id = 0;
+                }
+                else if (id_TextBox == arr_iw[k] ||
+                    id_TextBox == (arr_iw[k] + 1) ||
+                    id_TextBox == (arr_iw[k] - 1))
+                {
+
+                }
+            }
+
+
             string suitable_word = words[id].ToUpper();
 
             using (StreamReader fs = new StreamReader(dictionary))
@@ -602,7 +638,7 @@ namespace Chainword
                 {
                     if (index == 0)
                     {
-
+                        
                     }
                     else if (index == 1)
                     {
@@ -615,7 +651,7 @@ namespace Chainword
                     }
                     else
                     {
-
+                        
                     }
                     break;
                 }
