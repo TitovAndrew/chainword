@@ -17,15 +17,12 @@ namespace Chainword
     {
         int index; //индекс вида отображения
         string[] words;
-        string name_cross, dictionary;
-        // пересечение букв
-        int cross_letters;
+        string name_cross, dictionary;     
+        int cross_letters; // пересечение букв
         Panel Panel1;
         Panel PanelQuestion;
         List<int> IndexWords = new List<int>();
         Label Question;
-
-
 
         public SolvingCrossword(string PathToFile)
         {
@@ -80,6 +77,8 @@ namespace Chainword
         }
 
         #region линейное отображение
+        //добавить подсказки
+        //добавить вопросы
         public void ShowLinear()
         {
             this.Size = new Size(720, 380);
@@ -90,8 +89,7 @@ namespace Chainword
         {
             bool ls = false;
             Panel1.Size = new Size(690, 150);
-            this.Controls.Add(Panel1);
-            MessageBox.Show("" + count_symbols);
+            this.Controls.Add(Panel1);          
             int kostyl = 0;
             for (int i = 1; i <= count_symbols; i++)
             {
@@ -160,9 +158,179 @@ namespace Chainword
         #endregion
 
         #region спиральное отображение
+      
         public void ShowSpiral()
         {
+            GenericTextBox();
+        }
 
+        void CreateTB_Spiral(int count_symbols)
+        {
+            bool ls = false;
+            int prevX = 0, prevY = 0;
+            this.Controls.Add(Panel1);
+         
+
+
+
+            if (count_symbols < 20)
+            {
+                this.Size = new Size(400, 400);
+                Panel1.Size = new Size(400, 400);
+                prevX = 170;
+                prevY = 100;
+            }
+            else if (count_symbols < 50)
+            {
+                this.Size = new Size(560, 500);
+                Panel1.Size = new Size(560, 500);
+                prevX = 265;
+                prevY = 170;
+            }
+            else if (count_symbols < 100)
+            {
+                this.Size = new Size(630, 600);
+                Panel1.Size = new Size(630, 605);
+                prevX = 285;
+                prevY = 250;
+            }
+            else
+            {
+                this.Size = new Size(700, 750);
+                Panel1.Size = new Size(700, 750);
+                prevX = 350;
+                prevY = 300;
+            }
+
+            int kostyl = 0;
+  
+            int kp = 0; //длина стороны
+            int kn = 0;
+            int direction = 1;
+            
+            Point locate = new Point(0, 0);
+
+
+            for (int i = 1; i <= count_symbols; i++)
+            {
+                if (i == 1)
+                {
+                    locate = new Point(prevX, prevY);
+                    direction = 1;
+                    kp = 1;
+                    kn = 1;
+                }
+                else
+                {
+                    switch (direction)
+                    {
+                        case 1:
+                            locate = new Point(prevX - 35, prevY);
+                            prevX -= 35;
+                            kn++;
+                            if (kn > kp)
+                            {
+                                direction = 2;
+                                kp = kn;
+                                kn = 1;
+                            }
+                            break;
+                        case 2:
+                            locate = new Point(prevX, prevY - 35);
+                            prevY -= 35;
+                            kn++;
+                            if (kn > kp)
+                            {
+                                direction = 3;
+                                kp = kn;
+                                kn = 1;
+                            }
+                            break;
+                        case 3:
+                            locate = new Point(prevX + 35, prevY);
+                            prevX += 35;
+                            kn++;
+                            if (kn > kp)
+                            {
+                                direction = 4;
+                                kp = kn;
+                                kn = 1;
+                            }
+                            break;
+                        case 4:
+                            locate = new Point(prevX, prevY + 35);
+                            prevY += 35;
+                            kn++;
+                            if (kn > kp)
+                            {
+                                direction = 1;
+                                kp = kn;
+                                kn = 1;
+                            }
+                            break;
+                    }
+                }
+
+                foreach (var item in IndexWords)
+                {
+                    if (cross_letters == 1)
+                    {
+                        if (i != count_symbols)
+                            ls = true;
+                        else ls = false;
+                    }
+                    else if (cross_letters == 2)
+                    {
+                        if (i != count_symbols - 1 && i != count_symbols)
+                            ls = true;
+                        else ls = false;
+                    }
+                    else
+                    {
+                        if (i != count_symbols - 2 && i != count_symbols - 1 && i != count_symbols)
+                            ls = true;
+                        else ls = false;
+                    }
+                    if (i == item && ls == true)
+                    {
+                        Panel1.Controls.Add(new TextBox()
+                        {
+                            Name = ("TextBox" + i.ToString()),
+                            Location = locate,
+                            Text = "" + i,
+                            Font = new Font("Areal", 16),
+                            Size = new Size(30, 30),
+                            BackColor = Color.Aqua,
+                            Multiline = true,
+                            TextAlign = HorizontalAlignment.Center,
+                            MaxLength = 1
+                        });
+                        kostyl++;
+                        break;
+                    }
+                    else kostyl = 0;
+                }
+                if (kostyl == 0)
+                {
+                    Panel1.Controls.Add(new TextBox()
+                    {
+                        Name = ("TextBox" + i.ToString()),
+                        Location = locate,
+                        Text = "" + i,
+                        Font = new Font("Areal", 16),
+                        Size = new Size(30, 30),
+                        Multiline = true,
+                        TextAlign = HorizontalAlignment.Center,
+                        MaxLength = 1
+                    });
+                }
+            }
+            foreach (var textbox in TextBoxExtends.GetAllChildren(Panel1).OfType<TextBox>())
+            {
+                textbox.TextChanged += TextBox_TextChanged;
+                textbox.Click += TextBox_Click;
+                textbox.MouseDown += TextBox_InfoClick;
+            }
         }
         #endregion
 
@@ -174,19 +342,20 @@ namespace Chainword
 
         void CreateTB_Snake(int count_symbols)
         {
+            bool ls = false;
             this.Controls.Add(Panel1);
             int width_cross = 0;
             if (count_symbols < 20)
             {
-                width_cross = 5;
-                this.Size = new Size(210, 500);
-                Panel1.Size = new Size(210, 505);
+                width_cross = 8;
+                this.Size = new Size(315, 400);
+                Panel1.Size = new Size(315, 400);
             }
             else if (count_symbols < 50)
             {
                 width_cross = 15;
-                this.Size = new Size(560, 500);
-                Panel1.Size = new Size(560, 505);
+                this.Size = new Size(560, 400);
+                Panel1.Size = new Size(560, 400);
             }
             else if (count_symbols < 100)
             {
@@ -197,8 +366,8 @@ namespace Chainword
             else
             {
                 width_cross = 20;
-                this.Size = new Size(740, 500);
-                Panel1.Size = new Size(740, 505);
+                this.Size = new Size(740, 600);
+                Panel1.Size = new Size(740, 600);
             }
 
             int kostyl = 0, turn = width_cross, down = 0, locate_X = 1;
@@ -239,7 +408,25 @@ namespace Chainword
 
                 foreach (var item in IndexWords)
                 {
-                    if (i == item && i != count_symbols)
+                    if (cross_letters == 1)
+                    {
+                        if (i != count_symbols)
+                            ls = true;
+                        else ls = false;
+                    }
+                    else if (cross_letters == 2)
+                    {
+                        if (i != count_symbols - 1 && i != count_symbols)
+                            ls = true;
+                        else ls = false;
+                    }
+                    else
+                    {
+                        if (i != count_symbols - 2 && i != count_symbols - 1 && i != count_symbols)
+                            ls = true;
+                        else ls = false;
+                    }
+                    if (i == item && ls == true)
                     {
                         Panel1.Controls.Add(new TextBox()
                         {
@@ -339,9 +526,7 @@ namespace Chainword
             else if (index == 1)
                 CreateTB_Linear(count_symbols);
             else
-            {
-                // спираль
-            }
+                CreateTB_Spiral(count_symbols);
         }
 
         private string GetDefinition()
@@ -421,8 +606,6 @@ namespace Chainword
             ifrm.WindowState = FormWindowState.Normal;
         }
     }
-
-
 
     static class TextBoxExtends
     {
