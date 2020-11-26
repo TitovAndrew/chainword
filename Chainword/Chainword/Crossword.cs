@@ -20,6 +20,8 @@ namespace Chainword
         private string dictionary; // Словарь
         private int cross_letters; // Количество букв в пересечении
         private char[] all_symbols;
+        private int hint; // Подсказки
+        private double progress;
         public string Name
         {
             get
@@ -88,6 +90,18 @@ namespace Chainword
             }
         }
 
+        public double Progress
+        {
+            get
+            {
+                return progress;
+            }
+            set
+            {
+                progress = value;
+            }
+        }
+
         public int CrossLetters
         {
             get
@@ -112,6 +126,18 @@ namespace Chainword
             }
         }
 
+        public int Hint
+        {
+            get
+            {
+                return hint;
+            }
+            set
+            {
+                hint = value;
+            }
+        }
+
         public void AddWords(string[] words, int length)
         {
             allwords = new string[length];
@@ -121,22 +147,4 @@ namespace Chainword
             }
         }
     }
-
-    /*
-     * Как выглядит сериализация/десериализация
-     * FileStream stream = File.Create("test.dat");
-            BinaryFormatter formatter = new BinaryFormatter();
-            //Сериализация
-            formatter.Serialize(stream, my);
-            stream.Close();
- 
-            //Десериализация
-            stream = File.OpenRead("test.dat");
- 
-            my = formatter.Deserialize(stream) as Myclass;
- 
-            Console.WriteLine("Имя    : " + my.name);
-            Console.WriteLine("Возраст: " + my.age);
-            stream.Close();
-     */
 }

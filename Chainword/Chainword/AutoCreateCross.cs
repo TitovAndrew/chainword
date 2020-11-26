@@ -44,6 +44,14 @@ namespace Chainword
             cross.Dictionary = dictionary;
             cross.CrossLetters = cross_letters;
             cross.AddWords(words, words.Length);
+            decimal counter = 0;
+            for(int i = 0; i < words.Length; i++)
+            {
+                char[] temp = words[i].ToCharArray();
+                for(int k = 0; k < temp.Length; k++)
+                    counter++;
+            }
+            cross.Hint = (int)Math.Ceiling(counter / 10);
 
             FileStream stream = File.Create(Environment.CurrentDirectory + "\\" + name_cross + ".cros");
 

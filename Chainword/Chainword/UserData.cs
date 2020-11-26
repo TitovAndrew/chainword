@@ -44,6 +44,7 @@ namespace Chainword
                                 checkadmin = true;
                                 Form ma = new MenuAdmin();
                                 ma.Show();
+                                check = false;
                                 break;
                             }
                             check = true;

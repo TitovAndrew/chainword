@@ -22,17 +22,18 @@ namespace Chainword
         int cross_letters; // пересечение букв
         Panel Panel1, PanelQuestion;
         List<int> IndexWords = new List<int>();
-        Label Question;
-        int locateY_TB = 0;
+        Label Question, HintLabel;
+        int locateY_TB = 0, id_TB_hint;
         Crossword cross;
         bool isNew = true;
         List<char[]> all_symbols;
+        Button GetHintButton, SaveButton;
+        double progress;
 
         public SolvingCrossword(string PathToFile, string login_name)
         {
             TopMost = true;
             InitializeComponent();
-
 
             if (!Directory.Exists(Environment.CurrentDirectory + "\\" + login_name))
                 Directory.CreateDirectory(Environment.CurrentDirectory + "\\" + login_name);
@@ -46,13 +47,6 @@ namespace Chainword
                 BinaryFormatter formatter = new BinaryFormatter();
                 cross = formatter.Deserialize(stream) as Crossword;
                 stream.Close();
-
-                this.dictionary = cross.Dictionary;
-                this.name_cross = cross.Name;
-                this.index = cross.DisplayType;
-                this.cross_letters = cross.CrossLetters;
-                this.words = cross.Allwords;
-                this.login_name = login_name;
                 isNew = false;
             }
             catch
@@ -62,16 +56,15 @@ namespace Chainword
                 BinaryFormatter formatter = new BinaryFormatter();
                 cross = formatter.Deserialize(stream) as Crossword;
                 stream.Close();
-
-                this.dictionary = cross.Dictionary;
-                this.name_cross = cross.Name;
-                this.index = cross.DisplayType;
-                this.cross_letters = cross.CrossLetters;
-                this.words = cross.Allwords;
-                this.login_name = login_name;
                 isNew = true;
             }
 
+            this.dictionary = cross.Dictionary;
+            this.name_cross = cross.Name;
+            this.index = cross.DisplayType;
+            this.cross_letters = cross.CrossLetters;
+            this.words = cross.Allwords;
+            this.login_name = login_name;
 
             Panel1 = new Panel();
             Panel1.Location = new Point(2, 50);
@@ -88,11 +81,26 @@ namespace Chainword
             label1.Location = new Point(10, 10);
             this.Controls.Add(label1);
 
+            HintLabel = new Label();
+            HintLabel.Font = new Font("Calibri", 14);
+            HintLabel.Text = "Осталось подсказок: " + cross.Hint;
+            HintLabel.AutoSize = true;
+            this.Controls.Add(HintLabel);
+
             Question = new Label();
             Question.Font = new Font("Calibri", 12);
             Question.AutoSize = true;
             PanelQuestion.Controls.Add(Question);
             PanelQuestion.Visible = false;
+
+            GetHintButton = new Button();
+            GetHintButton.Size = new Size(30, 30);
+            GetHintButton.Font = new Font("Calibri", 14);
+            GetHintButton.Text = "?";
+            GetHintButton.Click += Click_GetHintButton;
+            if (cross.Hint <= 0)
+                GetHintButton.Enabled = false;
+            this.Controls.Add(GetHintButton);
 
             Button CheckButton = new Button();
             CheckButton.Size = new Size(140, 32);
@@ -100,7 +108,7 @@ namespace Chainword
             CheckButton.Click += Click_CheckButton;
             this.Controls.Add(CheckButton);
 
-            Button SaveButton = new Button();
+            SaveButton = new Button();
             SaveButton.Size = new Size(140, 32);
             SaveButton.Text = "Сохранить";
             SaveButton.Click += Click_SaveButton;
@@ -154,6 +162,19 @@ namespace Chainword
                 CheckButton.Location = new Point(5, locateY_TB + 60);
                 SaveButton.Location = new Point(CheckButton.Location.X + CheckButton.Size.Width + 5, PanelQuestion.Location.Y + 60);
                 SaveExitButton.Location = new Point(SaveButton.Location.X + SaveButton.Size.Width + 5, PanelQuestion.Location.Y + 60);
+
+                int lx = SaveButton.Location.Y;
+                if (count_symbols < 20)
+                {
+                    HintLabel.Text = "Подсказки: " + cross.Hint;
+                    this.Size = new Size(350, lx + 80);
+                }
+                else if (count_symbols < 50)
+                    this.Size = new Size(595, lx + 80);
+                else if (count_symbols < 100)
+                    this.Size = new Size(630, lx + 80);
+                else
+                    this.Size = new Size(740, lx + 80);
             }
             else if (index == 1)
             {
@@ -195,9 +216,68 @@ namespace Chainword
                 SaveButton.Location = new Point(CheckButton.Location.X + CheckButton.Size.Width + 5, PanelQuestion.Location.Y + 60);
                 SaveExitButton.Location = new Point(SaveButton.Location.X + SaveButton.Size.Width + 5, PanelQuestion.Location.Y + 60);
             }
+            id_TB_hint = -1;
+        }
+
+        #region События для кнопок
+        void Click_GetHintButton(object sender, EventArgs e)
+        {
+            if (id_TB_hint != -1)
+            {
+                foreach (var textbox in TextBoxExtends.GetAllChildren(Panel1).OfType<TextBox>())
+                {
+                    int current_id;
+                    int.TryParse(string.Join("", textbox.Name.ToString().Where(c => char.IsDigit(c))), out current_id);
+                    if (current_id == id_TB_hint)
+                    {
+                        string tmp = "";
+                        foreach (var item in all_symbols)
+                        {
+                            for (int z = 0; z < item.Length; z++)
+                            {
+                                tmp += item[z];
+                            }
+                        }
+                        char[] original_chars = tmp.ToCharArray();
+                        textbox.Text = original_chars[current_id - 1].ToString();
+                        id_TB_hint = -1;
+                    }
+                }
+
+                cross.Hint--;
+                if (count_symbols < 20)
+                    HintLabel.Text = "Подсказки: " + cross.Hint;
+                else
+                    HintLabel.Text = "Осталось подсказок: " + cross.Hint;
+                if (cross.Hint == 0)
+                    GetHintButton.Enabled = false;
+                UpdateProgress();
+                SaveCrossword();
+            }
         }
 
         void Click_CheckButton(object sender, EventArgs e)
+        {
+            UpdateProgress();
+
+            MessageBox.Show("Прогресс: " + String.Format("{0:0.00}", progress) + "%");
+        }
+
+        void Click_SaveButton(object sender, EventArgs e)
+        {
+            UpdateProgress();
+            SaveCrossword();
+        }
+
+        void Click_SaveExitButton(object sender, EventArgs e)
+        {
+            UpdateProgress();
+            SaveCrossword();
+            this.Close();
+        }
+        #endregion
+
+        void UpdateProgress()
         {
             char[] current_chars = new char[count_symbols];
             char[] original_chars;
@@ -232,33 +312,11 @@ namespace Chainword
                     k += 1;
                 }
             }
-            double progress = 100 * (k / count_symbols);
-
-            MessageBox.Show("Прогресс: " + String.Format("{0:0.00}", progress) + "%");
-        } 
-
-        void Click_SaveButton(object sender, EventArgs e)
-        {
-            char[] current_chars = new char[count_symbols];
-            int i = 0;
-            foreach (var textbox in TextBoxExtends.GetAllChildren(Panel1).OfType<TextBox>())
-            {
-                if (textbox.Text != "")
-                    current_chars[i] = textbox.Text[0];
-                else current_chars[i] = '\0';
-                i++;
-            }
-
-            cross.AllSymbols = current_chars;
-
-            Directory.CreateDirectory(Environment.CurrentDirectory + "\\" + login_name);
-            FileStream stream = File.Create(Environment.CurrentDirectory + "\\" + login_name + "\\" + name_cross + ".cros");
-            BinaryFormatter formatter = new BinaryFormatter();
-            formatter.Serialize(stream, cross);
-            stream.Close();
+            progress = 100 * (k / count_symbols);
+            cross.Progress = progress;
         }
 
-        void Click_SaveExitButton(object sender, EventArgs e)
+        void SaveCrossword()
         {
             char[] current_chars = new char[count_symbols];
             int i = 0;
@@ -277,14 +335,15 @@ namespace Chainword
             BinaryFormatter formatter = new BinaryFormatter();
             formatter.Serialize(stream, cross);
             stream.Close();
-            this.Close();
         }
 
         #region линейное отображение
         //добавить подсказки
         public void ShowLinear()
         {
-            this.Size = new Size(720, 340);
+            this.Size = new Size(710, 340);
+            GetHintButton.Location = new Point(660, 7);
+            HintLabel.Location = new Point(450, 10);
             GenericTextBox();
         }
 
@@ -328,6 +387,7 @@ namespace Chainword
                             Size = new Size(30, 30),
                             BackColor = Color.Aqua,
                             Multiline = true,
+                            CharacterCasing = CharacterCasing.Upper,
                             TextAlign = HorizontalAlignment.Center,
                             MaxLength = 1
                         });
@@ -346,6 +406,7 @@ namespace Chainword
                         Font = new Font("Areal", 16),
                         Size = new Size(30, 30),
                         Multiline = true,
+                        CharacterCasing = CharacterCasing.Upper,
                         TextAlign = HorizontalAlignment.Center,
                         MaxLength = 1
                     });
@@ -356,6 +417,7 @@ namespace Chainword
                 textbox.TextChanged += TextBox_TextChanged;
                 textbox.Click += TextBox_Click;
                 textbox.MouseDown += TextBox_InfoClick;
+                textbox.GotFocus += TextBox_Focus;
             }
             FillingTextBox();
         }
@@ -378,6 +440,8 @@ namespace Chainword
             {
                 this.Size = new Size(385, 400);
                 Panel1.Size = new Size(385, 400);
+                GetHintButton.Location = new Point(335, 7);
+                HintLabel.Location = new Point(125, 10);
                 prevX = 170;
                 prevY = 100;
             }
@@ -385,6 +449,8 @@ namespace Chainword
             {
                 this.Size = new Size(560, 540);
                 Panel1.Size = new Size(560, 540);
+                GetHintButton.Location = new Point(510, 7);
+                HintLabel.Location = new Point(300, 10);
                 prevX = 250;
                 prevY = 170;
             }
@@ -392,6 +458,8 @@ namespace Chainword
             {
                 this.Size = new Size(630, 670);
                 Panel1.Size = new Size(630, 670);
+                GetHintButton.Location = new Point(580, 7);
+                HintLabel.Location = new Point(370, 10);
                 prevX = 285;
                 prevY = 250;
             }
@@ -399,6 +467,8 @@ namespace Chainword
             {
                 this.Size = new Size(700, 750);
                 Panel1.Size = new Size(700, 750);
+                GetHintButton.Location = new Point(650, 7);
+                HintLabel.Location = new Point(440, 10);
                 prevX = 350;
                 prevY = 300;
             }
@@ -503,6 +573,7 @@ namespace Chainword
                             Size = new Size(30, 30),
                             BackColor = Color.Aqua,
                             Multiline = true,
+                            CharacterCasing = CharacterCasing.Upper,
                             TextAlign = HorizontalAlignment.Center,
                             MaxLength = 1
                         });
@@ -521,6 +592,7 @@ namespace Chainword
                         Font = new Font("Areal", 16),
                         Size = new Size(30, 30),
                         Multiline = true,
+                        CharacterCasing = CharacterCasing.Upper,
                         TextAlign = HorizontalAlignment.Center,
                         MaxLength = 1
                     });
@@ -531,6 +603,7 @@ namespace Chainword
                 textbox.TextChanged += TextBox_TextChanged;
                 textbox.Click += TextBox_Click;
                 textbox.MouseDown += TextBox_InfoClick;
+                textbox.GotFocus += TextBox_Focus;
             }
             FillingTextBox();
         }
@@ -552,26 +625,34 @@ namespace Chainword
                 width_cross = 9;
                 this.Size = new Size(350, 330);
                 Panel1.Size = new Size(350, 330);
+                GetHintButton.Location = new Point(300, 7);
+                HintLabel.Location = new Point(140, 10);
             }
             else if (count_symbols < 50)
             {
                 width_cross = 16;
                 this.Size = new Size(595, 330);
                 Panel1.Size = new Size(595, 330);
+                GetHintButton.Location = new Point(545, 7);
+                HintLabel.Location = new Point(335, 10);
             }
             else if (count_symbols < 100)
             {
                 width_cross = 17;
                 this.Size = new Size(630, 470);
                 Panel1.Size = new Size(630, 470);
+                GetHintButton.Location = new Point(580, 7);
+                HintLabel.Location = new Point(370, 10);
             }
             else
             {
                 width_cross = 20;
                 this.Size = new Size(740, 610);
                 Panel1.Size = new Size(740, 610);
+                GetHintButton.Location = new Point(690, 7);
+                HintLabel.Location = new Point(480, 10);
             }
-
+            
             int kostyl = 0, turn = width_cross, down = 0, locate_X = 1;
             bool left_to_right = true;
             Point locate = new Point(0, 0);
@@ -639,6 +720,7 @@ namespace Chainword
                             Size = new Size(30, 30),
                             BackColor = Color.Aqua,
                             Multiline = true,
+                            CharacterCasing = CharacterCasing.Upper,
                             TextAlign = HorizontalAlignment.Center,
                             MaxLength = 1
                         });
@@ -657,6 +739,7 @@ namespace Chainword
                         Font = new Font("Areal", 16),
                         Size = new Size(30, 30),
                         Multiline = true,
+                        CharacterCasing = CharacterCasing.Upper,
                         TextAlign = HorizontalAlignment.Center,
                         MaxLength = 1
                     });
@@ -667,6 +750,7 @@ namespace Chainword
                 textbox.TextChanged += TextBox_TextChanged;
                 textbox.Click += TextBox_Click;
                 textbox.MouseDown += TextBox_InfoClick;
+                textbox.GotFocus += TextBox_Focus;
             }
             FillingTextBox();
         }
@@ -730,7 +814,7 @@ namespace Chainword
         void GenericTextBox()
         {
             // Записываем в список all_symbols слова в виде массивов символов + указываем в IndexWords индексы начала слов
-           all_symbols = GetArrayCharAllSymbols();
+            all_symbols = GetArrayCharAllSymbols();
 
             // Записываем в count_symbols количество всех символов исходных слов
             count_symbols = 0;
@@ -804,6 +888,17 @@ namespace Chainword
         }
 
         #region События для текстбоксов
+        private void TextBox_Focus(object sender, EventArgs e)
+        {
+            foreach (var textbox in TextBoxExtends.GetAllChildren(Panel1).OfType<TextBox>())
+            {
+                if (textbox.Focused)
+                {
+                    int.TryParse(string.Join("", textbox.Name.ToString().Where(c => char.IsDigit(c))), out id_TB_hint);
+                }
+            }
+        }
+
         private void TextBox_Click(object sender, EventArgs e)
         {
             foreach (var textbox in TextBoxExtends.GetAllChildren(Panel1).OfType<TextBox>())

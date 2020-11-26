@@ -42,10 +42,25 @@ namespace Chainword
             List<string> started_cross = new List<string>(); // начатые
             bool check = true;
             DirectoryInfo dir = new DirectoryInfo(Environment.CurrentDirectory + "\\" + login_name);
+            bool isStarted = false;
             foreach (var item in dir.GetFiles())
             {
-                if (item.ToString().Contains("cros"))
+                foreach (var lns in list_new_cross)
+                {
+                    if (item.ToString().Contains("cros") && item.Name.ToString() == lns)
+                    {
+                        isStarted = true;
+                        break;
+                    }
+                    else isStarted = false;
+                }
+                if (isStarted)
                     started_cross.Add(item.Name.ToString());
+                else
+                {
+                    string[] f = Directory.GetFiles(Environment.CurrentDirectory + "\\" + login_name, item.Name.ToString());
+                    File.Delete(f[0]);
+                }
             }
             foreach (var lns in list_new_cross)
             {
@@ -75,7 +90,13 @@ namespace Chainword
             int z = 0;
             foreach (var item in started_cross)
             {
-                arr_started_cross[z] = item.Split('.')[0];
+                Crossword cross = new Crossword();
+                FileStream stream = File.OpenRead(Environment.CurrentDirectory + "\\" + login_name + "\\" + item);
+                BinaryFormatter formatter = new BinaryFormatter();
+                cross = formatter.Deserialize(stream) as Crossword;
+                stream.Close();
+
+                arr_started_cross[z] = item.Split('.')[0] + " (" + String.Format("{0:0.00}", cross.Progress) + "%)";
                 z++;
             }
 
@@ -99,8 +120,9 @@ namespace Chainword
         {
             foreach (var item in StartedCross_ListBox.SelectedItems)
             {
-                string file_name = (string)item;
-                string[] f = Directory.GetFiles(Environment.CurrentDirectory, file_name + ".cros");
+                string[] file_name = ((string)item).Split(' ');
+                //string file_name = (string)item;
+                string[] f = Directory.GetFiles(Environment.CurrentDirectory, file_name[0] + ".cros");
                 Form solving = new SolvingCrossword(f[0], login_name);
                 solving.Show();
                 this.Close();
