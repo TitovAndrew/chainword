@@ -45,7 +45,8 @@ namespace Chainword
             cross.CrossLetters = cross_letters;
             cross.AddWords(words, words.Length);
 
-            FileStream stream = File.Create(name_cross + ".cros");
+            FileStream stream = File.Create(Environment.CurrentDirectory + "\\" + name_cross + ".cros");
+
             BinaryFormatter formatter = new BinaryFormatter();
             formatter.Serialize(stream, cross);
             stream.Close();

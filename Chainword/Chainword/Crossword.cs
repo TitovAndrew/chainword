@@ -10,7 +10,7 @@ namespace Chainword
     class Crossword
     {
         // Поля основываются на форме CreateCross
-        private string id; // Первичный ключ - Будем сохранять инфу пользователя о кроссворде по id
+        private string login_user; // Первичный ключ - Будем сохранять инфу пользователя о кроссворде по login_user
         private string name; // Имя кроссворда
         private int length; // Длина кроссворда в словах
 
@@ -51,15 +51,15 @@ namespace Chainword
             }
         }
 
-        public string ID
+        public string LoginUser
         {
             get
             {
-                return id;
+                return login_user;
             }
             set
             {
-                id = value;
+                login_user = value;
             }
         }
 

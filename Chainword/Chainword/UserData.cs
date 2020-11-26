@@ -58,7 +58,7 @@ namespace Chainword
                     }
                     if (check)
                     {
-                        Form mu = new MenuUser();
+                        Form mu = new MenuUser(log);
                         mu.Show();
                         main.WindowState = FormWindowState.Minimized;
                     }

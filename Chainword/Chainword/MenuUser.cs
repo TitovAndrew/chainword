@@ -14,46 +14,78 @@ namespace Chainword
 {
     public partial class MenuUser : Form
     {
-        public MenuUser()
+        string login_name;
+
+        public MenuUser(string log)
         {
             InitializeComponent();
             Open_Button.Enabled = false;
+            this.login_name = log;
+            if (!Directory.Exists(Environment.CurrentDirectory + "\\" + login_name)) 
+                Directory.CreateDirectory(Environment.CurrentDirectory + "\\" + login_name);
+
             ShowAllFiles(Environment.CurrentDirectory, "*.cros", StartedCross_ListBox);
             ShowAllFiles(Environment.CurrentDirectory, "*.cros", NewCross_ListBox);
         }
 
         void ShowAllFiles(string rootDirectory, string fileExtension, ListBox files)
         {
-            string test = null;
-            string[] f = Directory.GetFiles(rootDirectory, fileExtension); // массив путей до файлов cross
-            for (int i = 0; i < f.Length; i++)
+            List<string> list_new_cross = new List<string>(); // все
+            DirectoryInfo new_cross = new DirectoryInfo(Environment.CurrentDirectory);
+            foreach (var item in new_cross.GetFiles())
             {
-                //разбиваем наш путь на части
-                string[] path = f[i].Split(new string[] { "\\" }, StringSplitOptions.RemoveEmptyEntries);
+                if (item.Name.ToString().Contains("cros"))
+                    list_new_cross.Add(item.Name.ToString());
+            }
 
-                for (int j = 0; j < path.Length; j++)
+            List<string> suitable_list_new_cross = new List<string>(); // реально новые
+            List<string> started_cross = new List<string>(); // начатые
+            bool check = true;
+            DirectoryInfo dir = new DirectoryInfo(Environment.CurrentDirectory + "\\" + login_name);
+            foreach (var item in dir.GetFiles())
+            {
+                if (item.ToString().Contains("cros"))
+                    started_cross.Add(item.Name.ToString());
+            }
+            foreach (var lns in list_new_cross)
+            {
+                foreach (var item in started_cross)
                 {
-                    test += path[j] + "\n";
-                    if (path[j].Contains("cros"))// выбираем тот кусок раздробленного пути, где содержится cros
+                    if (item != lns)
                     {
-                        string[] result = { path[j].Split('.')[0] }; //удаляем все после точки у файла и выводим лишь название
-
-                        Crossword cross = new Crossword();
-                        FileStream stream = File.OpenRead(f[i]);
-                        BinaryFormatter formatter = new BinaryFormatter();
-                        cross = formatter.Deserialize(stream) as Crossword;
-                        stream.Close();
-
-                        if (cross.AllSymbols == null && files.Name == "NewCross_ListBox") // Если кроссворд новый
-                        {
-                            files.Items.AddRange(result);
-                        }
-                        if (cross.AllSymbols != null && files.Name == "StartedCross_ListBox") // Если кроссворд начатый
-                        {
-                            files.Items.AddRange(result);
-                        }
+                        check = true;
+                    }
+                    else if(item == lns)
+                    {
+                        check = false;
+                        break;
                     }
                 }
+                if (check)
+                    suitable_list_new_cross.Add(lns);
+            }
+            string[] suitable_arr_new_cross = new string[suitable_list_new_cross.Count];
+            string[] arr_started_cross = new string[started_cross.Count];
+            int k = 0;
+            foreach (var item in suitable_list_new_cross)
+            {
+                suitable_arr_new_cross[k] = item.Split('.')[0];
+                k++;
+            }
+            int z = 0;
+            foreach (var item in started_cross)
+            {
+                arr_started_cross[z] = item.Split('.')[0];
+                z++;
+            }
+
+            if (files.Name == "NewCross_ListBox") // Если кроссворд новый
+            {
+                files.Items.AddRange(suitable_arr_new_cross);
+            }
+            if (files.Name == "StartedCross_ListBox") // Если кроссворд начатый
+            {
+                files.Items.AddRange(arr_started_cross);
             }
         }
 
@@ -69,7 +101,7 @@ namespace Chainword
             {
                 string file_name = (string)item;
                 string[] f = Directory.GetFiles(Environment.CurrentDirectory, file_name + ".cros");
-                Form solving = new SolvingCrossword(f[0]);
+                Form solving = new SolvingCrossword(f[0], login_name);
                 solving.Show();
                 this.Close();
             }
@@ -77,7 +109,7 @@ namespace Chainword
             {
                 string file_name = (string)item;
                 string[] f = Directory.GetFiles(Environment.CurrentDirectory, file_name + ".cros");
-                Form solving = new SolvingCrossword(f[0]);
+                Form solving = new SolvingCrossword(f[0], login_name);
                 solving.Show();
                 this.Close();
             }

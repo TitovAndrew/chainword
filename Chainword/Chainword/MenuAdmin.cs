@@ -48,7 +48,7 @@ namespace Chainword
                     }
                     if (path[j].Contains("cros"))// выбираем тот кусок раздробленного пути, где содержится cros
                     {
-                        string[] result = { path[j].Split('.')[0] };//удаляем все после точки у файла и выводим лишь название
+                        string[] result = { (path[j]).Split('.')[0] };//удаляем все после точки у файла и выводим лишь название
                         files.Items.AddRange(result);
                     }
                 }
