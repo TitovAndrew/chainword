@@ -26,6 +26,7 @@ namespace Chainword
         int locateY_TB = 0;
         Crossword cross;
         bool isNew = true;
+        List<char[]> all_symbols;
 
         public SolvingCrossword(string PathToFile, string login_name)
         {
@@ -198,8 +199,43 @@ namespace Chainword
 
         void Click_CheckButton(object sender, EventArgs e)
         {
-            MessageBox.Show("Проверить");
-        }
+            char[] current_chars = new char[count_symbols];
+            char[] original_chars;
+            int i = 0;
+            double k = 0;
+            foreach (var textbox in TextBoxExtends.GetAllChildren(Panel1).OfType<TextBox>())
+            {
+                if (textbox.Text != "")
+                {
+                    current_chars[i] = textbox.Text[0];
+                    current_chars[i] = Char.ToUpper(current_chars[i]);
+                }
+
+                else current_chars[i] = '\0';
+                i++;
+            }
+
+            string tmp = "";
+            foreach (var item in all_symbols)
+            {
+                for (int z = 0; z < item.Length; z++)
+                {
+                    tmp += item[z];
+                }
+            }
+            original_chars = tmp.ToCharArray();
+
+            for (int j = 0; j < count_symbols; j++)
+            {
+                if (current_chars[current_chars.Length - j - 1] == original_chars[j])
+                {
+                    k += 1;
+                }
+            }
+            double progress = 100 * (k / count_symbols);
+
+            MessageBox.Show("Прогресс: " + String.Format("{0:0.00}", progress) + "%");
+        } 
 
         void Click_SaveButton(object sender, EventArgs e)
         {
@@ -246,7 +282,6 @@ namespace Chainword
 
         #region линейное отображение
         //добавить подсказки
-        //добавить вопросы
         public void ShowLinear()
         {
             this.Size = new Size(720, 340);
@@ -689,14 +724,13 @@ namespace Chainword
                 else
                     AllSymbols.Add(words[i].Substring(cross_letters).ToCharArray());
             }
-
             return AllSymbols;
         }
 
         void GenericTextBox()
         {
             // Записываем в список all_symbols слова в виде массивов символов + указываем в IndexWords индексы начала слов
-            List<char[]> all_symbols = GetArrayCharAllSymbols();
+           all_symbols = GetArrayCharAllSymbols();
 
             // Записываем в count_symbols количество всех символов исходных слов
             count_symbols = 0;
