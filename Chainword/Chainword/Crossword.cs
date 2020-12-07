@@ -65,7 +65,6 @@ namespace Chainword
             }
         }
 
-        // Добавил своего
         public int DisplayType
         {
             get

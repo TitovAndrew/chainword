@@ -17,12 +17,13 @@ namespace Chainword
             TopMost = true;
             this.writePath = writePath;
             InitializeComponent();
-            FillAvailableWords(); // Добавляем в список все понятия, которые есть в словаре
+            FillAvailableWords();
             AddConcept_button.Enabled = false;
             DeleteConcept_button.Enabled = false;
             fw = new FileWorker();
         }
 
+        // Добавляем в список все понятия, которые есть в словаре
         void FillAvailableWords()
         {
             using (StreamReader fs = new StreamReader(writePath))
@@ -48,6 +49,7 @@ namespace Chainword
             }
         }
 
+        // Добавить определение
         private void AddConcept_button_Click(object sender, EventArgs e)
         {
             if (!Regex.IsMatch(AddWord_textBox.Text, "^[А-Яа-я]+$"))
@@ -72,6 +74,7 @@ namespace Chainword
             }
         }
 
+        // Удалить определение
         private void DeleteConcept_button_Click(object sender, EventArgs e)
         {
             List<string> tmp_list = new List<string>();
@@ -113,6 +116,7 @@ namespace Chainword
 
         }
 
+        // Поиск слова
         private void WordSearch_MouseClick(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             if (WordSearch.ForeColor == System.Drawing.Color.Gray)
@@ -201,6 +205,7 @@ namespace Chainword
                 SortingListBox(1);
         }
 
+        // Сортировка слов
         void SortingListBox(int x)
         {
             List<string[]> concept_definition = new List<string[]>();

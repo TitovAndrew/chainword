@@ -18,6 +18,7 @@ namespace Chainword
             return Convert.ToBase64String(hash);
         }
 
+        // Авторизация
         public void AuthorizationUser(string writePath, string log, string pas, bool checkadmin, bool check, Form Menu, Form main)
         {
             try
@@ -75,6 +76,7 @@ namespace Chainword
             }
         }
 
+        // Создание нового пользователя
         public void CreateUser(string writePath, string login, string log, bool check, string data_user, Form Menu)
         {
             try

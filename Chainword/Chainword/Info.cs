@@ -18,6 +18,7 @@ namespace Chainword
             InitializeComponent();
         }
 
+        // Отобразить справку
         private void InfoSystem_button_Click(object sender, EventArgs e)
         {
             Process.Start(Environment.CurrentDirectory + "\\" + "userguide.html");

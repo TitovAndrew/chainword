@@ -106,6 +106,7 @@ namespace Chainword
             }
         }
 
+        // Загрузить кроссворд
         private void LoadCrossword(string[] words)
         {
             for (int i = 0; i < words.Length; i++)
@@ -125,6 +126,7 @@ namespace Chainword
             UpdateAvailableWords();
         }
 
+        // Обновить доступные слова
         private void UpdateAvailableWords()
         {
             AvailableWords.Items.Clear();
@@ -200,6 +202,7 @@ namespace Chainword
             }
         }
 
+        // Добавить слово в список 
         private void AddWord_Click(object sender, EventArgs e)
         {
             foreach (var item in AvailableWords.SelectedItems)
@@ -219,6 +222,8 @@ namespace Chainword
             if (AddedWords.Items.Count >= length_cross)
                 AddWord.Enabled = false;
         }
+
+        // Удалить последнее слово
         private void DeleteLastWord_Click(object sender, EventArgs e)
         {
             AvailableWords.Items.Clear();
@@ -326,6 +331,7 @@ namespace Chainword
                 AddWord.Enabled = true;
         }
 
+        // Поиск слова
         private void Search_button_Click(object sender, EventArgs e)
         {
             AvailableWords.Items.Clear();
@@ -479,6 +485,7 @@ namespace Chainword
             return words_to_cross;
         }
 
+        // Сортировка слов
         void SortingListBox(int x)
         {
             List<string[]> concept_definition = new List<string[]>();

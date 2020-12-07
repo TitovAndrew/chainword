@@ -28,7 +28,8 @@ namespace Chainword
             ShowAllFiles(Environment.CurrentDirectory, "*.cros", NewCross_ListBox);
         }
 
-        void ShowAllFiles(string rootDirectory, string fileExtension, ListBox files)
+        // Отобразить список новых и начатых кроссвордов
+        private void ShowAllFiles(string rootDirectory, string fileExtension, ListBox files)
         {
             List<string> list_new_cross = new List<string>(); // все
             DirectoryInfo new_cross = new DirectoryInfo(Environment.CurrentDirectory);

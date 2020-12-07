@@ -14,7 +14,7 @@ namespace Chainword
         string dictionary;
         string name_cross;
         int cross_letters, length_cross, type_cross;
-        private Crossword cross;
+        Crossword cross;
 
         public AutoCreateCross(string name_cross, string dictionary, int type_cross, int cross_letters, int length_cross)
         {
@@ -34,6 +34,7 @@ namespace Chainword
 
         }
 
+        // Создать кроссовд
         public void CreateCross()
         {
             string[] words = GetWords();
@@ -60,7 +61,8 @@ namespace Chainword
             stream.Close();
         }
 
-        public string[] GetWords()
+        // Получить все слова
+        private string[] GetWords()
         {
             string[] arr_words, arr_only_words, result = null;
             string only_words = "";
@@ -168,6 +170,7 @@ namespace Chainword
             return result;
         }
 
+        // Поиск слов по маске
         private List<string> SearchWordsMask(string[] arr_only_words, char[] letters)
         {
             List<string> suitable_words = new List<string>();

@@ -26,6 +26,7 @@ namespace Chainword
             CreateCross_button.Enabled = false;
         }
 
+        // Вывести список словарей
         void ShowAllFiles(string rootDirectory, string fileExtension, ComboBox files)
         {
             string test = null;
@@ -53,6 +54,7 @@ namespace Chainword
             ifrm.WindowState = FormWindowState.Normal;
         }
 
+        // Создать кроссворд
         private void CreateCross_button_Click(object sender, EventArgs e)
         {
             string result_path = null; // Путь к выбранному словарю

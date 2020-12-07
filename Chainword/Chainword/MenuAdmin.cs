@@ -29,7 +29,8 @@ namespace Chainword
             ifrm.WindowState = FormWindowState.Normal;
         }
 
-        void ShowAllFiles(string rootDirectory, string fileExtension, ListBox files)
+        // Отобразить список кроссвордов и словарей
+        private void ShowAllFiles(string rootDirectory, string fileExtension, ListBox files)
         {
             string test = null;
             string[] f = Directory.GetFiles(rootDirectory, fileExtension); // массив путей до файлов dict/cross
@@ -62,6 +63,7 @@ namespace Chainword
             this.Hide();
         }
 
+        // Перейти к созданию кроссворда
         private void Createcross_button_Click_1(object sender, EventArgs e)
         {
             Form cc = new CreateCross();
@@ -69,6 +71,7 @@ namespace Chainword
             this.Hide();
         }
 
+        // Перейти к редактированию кроссворда или словаря
         private void Edit_button_Click(object sender, EventArgs e)
         {
             foreach (var item in Dictionary_listBox.SelectedItems)
@@ -91,6 +94,7 @@ namespace Chainword
             Delete_button.Enabled = false;
         }
 
+        // Удалить кроссворд или словарь
         private void Delete_button_Click(object sender, EventArgs e)
         {
             foreach (var item in Dictionary_listBox.SelectedItems)

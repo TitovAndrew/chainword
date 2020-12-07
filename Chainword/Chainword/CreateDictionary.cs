@@ -22,6 +22,7 @@ namespace Chainword
             fw = new FileWorker();
         }
 
+        // Создать словарь
         private void CreateDictionary_Button_Click(object sender, EventArgs e)
         {
             if (!Regex.IsMatch(textBox1.Text, "^[A-Za-z0-9А-Яа-я_]+$"))
