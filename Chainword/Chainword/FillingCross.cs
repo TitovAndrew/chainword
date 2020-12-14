@@ -338,20 +338,18 @@ namespace Chainword
                 AddWord.Enabled = true;
         }
 
-        void Thread1()
+        static void Thread1()
         {
-            progressBar1.Visible = true;
+            ProgressBar pb = new ProgressBar();
+            pb.Show();
         }
 
         // Поиск слова
         private void Search_button_Click(object sender, EventArgs e)
         {
-            Thread thread1 = new Thread(new ThreadStart(Thread1));
-            thread1.Start();
-
-            //progressBar1.Visible = true;
-
-            Thread.Sleep(1000);
+            /*var thread1 = new Thread(Thread1);
+            thread1.IsBackground = true;
+            thread1.Start();*/
 
             AvailableWords.Items.Clear();
             using (StreamReader fs = new StreamReader(dictionary))
@@ -422,7 +420,6 @@ namespace Chainword
                     {
                         MessageBox.Show("Нет подходящих вхождений");
                     }
-                    progressBar1.Visible = false;
                 }
                 else
                 {

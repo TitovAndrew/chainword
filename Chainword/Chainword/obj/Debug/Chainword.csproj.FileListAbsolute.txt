@@ -52,3 +52,4 @@ D:\Учеба\4 курс\1 семестр\Программная инженер�
 C:\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.SolvingCrossword.resources
 D:\4 курс\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.SolvingCrossword.resources
 C:\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.csprojAssemblyReference.cache
+C:\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.ProgressBar.resources

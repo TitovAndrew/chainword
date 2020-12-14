@@ -146,7 +146,6 @@
             this.progressBar1.Size = new System.Drawing.Size(157, 23);
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.progressBar1.TabIndex = 66;
-            this.progressBar1.Visible = false;
             // 
             // FillingCross
             // 
