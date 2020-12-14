@@ -221,7 +221,10 @@ namespace Chainword
                 first_chars[k] = result[0];
                 k++;
             }
+            Thread thread = new Thread(SampleThreadMethod);
+            thread.Start();
             UpdateAvailableWords();
+            thread.Abort();
 
             DeleteLastWord.Enabled = true;
             if (AddedWords.Items.Count == length_cross)
@@ -233,6 +236,9 @@ namespace Chainword
         // Удалить последнее слово
         private void DeleteLastWord_Click(object sender, EventArgs e)
         {
+            Thread thread = new Thread(SampleThreadMethod);
+            if (AvailableWords.Items.Count > 500)
+                thread.Start();
             AvailableWords.Items.Clear();
             AddedWords.Items.RemoveAt(AddedWords.SelectedIndex = AddedWords.Items.Count - 1); // удаляем последнее слово
             using (StreamReader fs = new StreamReader(dictionary))
@@ -336,21 +342,22 @@ namespace Chainword
             CreateCross_button.Enabled = false;
             if (AddedWords.Items.Count < length_cross)
                 AddWord.Enabled = true;
+            if (AvailableWords.Items.Count > 500)
+                thread.Abort();
         }
 
-        static void Thread1()
+        static void SampleThreadMethod()
         {
             ProgressBar pb = new ProgressBar();
-            pb.Show();
+            pb.ShowDialog();
+            pb.BringToFront();
         }
 
         // Поиск слова
         private void Search_button_Click(object sender, EventArgs e)
         {
-            /*var thread1 = new Thread(Thread1);
-            thread1.IsBackground = true;
-            thread1.Start();*/
-
+            Thread thread = new Thread(SampleThreadMethod);
+            thread.Start();
             AvailableWords.Items.Clear();
             using (StreamReader fs = new StreamReader(dictionary))
             {
@@ -424,8 +431,8 @@ namespace Chainword
                 else
                 {
                     MessageBox.Show("Ошибка");
-                    progressBar1.Visible = false;
                 }
+                thread.Abort();
             }
         }
 
@@ -461,31 +468,40 @@ namespace Chainword
 
         private void CreateCross_button_Click(object sender, EventArgs e)
         {
-            string[] words = GetWords();
-            Crossword cross = new Crossword();
-            cross.Name = name_cross;
-            cross.Length = length_cross;
-            cross.DisplayType = type_cross;
-            cross.Dictionary = dictionary;
-            cross.CrossLetters = cross_letters;
-            cross.AddWords(words, words.Length);
-            decimal counter = 0;
-            for (int i = 0; i < words.Length; i++)
+            try
             {
-                char[] temp = words[i].ToCharArray();
-                for (int k = 0; k < temp.Length; k++)
-                    counter++;
+                Thread thread = new Thread(SampleThreadMethod);
+                thread.Start();
+                string[] words = GetWords();
+                Crossword cross = new Crossword();
+                cross.Name = name_cross;
+                cross.Length = length_cross;
+                cross.DisplayType = type_cross;
+                cross.Dictionary = dictionary;
+                cross.CrossLetters = cross_letters;
+                cross.AddWords(words, words.Length);
+                decimal counter = 0;
+                for (int i = 0; i < words.Length; i++)
+                {
+                    char[] temp = words[i].ToCharArray();
+                    for (int k = 0; k < temp.Length; k++)
+                        counter++;
+                }
+                cross.Hint = (int)Math.Ceiling(counter / 10);
+
+                FileStream stream = File.Create(Environment.CurrentDirectory + "\\" + name_cross + ".cros");
+
+                BinaryFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(stream, cross);
+                stream.Close();
+
+                thread.Abort();
+                Form ma = new MenuAdmin();
+                ma.Show();
+
             }
-            cross.Hint = (int)Math.Ceiling(counter / 10);
-
-            FileStream stream = File.Create(Environment.CurrentDirectory + "\\" + name_cross + ".cros");
-
-            BinaryFormatter formatter = new BinaryFormatter();
-            formatter.Serialize(stream, cross);
-            stream.Close();
-
-            Form ma = new MenuAdmin();
-            ma.Show();
+            catch
+            { }
             this.Close();
         }
 
@@ -514,6 +530,8 @@ namespace Chainword
         // Сортировка слов
         void SortingListBox(int x)
         {
+            Thread thread = new Thread(SampleThreadMethod);
+            thread.Start();
             List<string[]> concept_definition = new List<string[]>();
 
             foreach (var item in AvailableWords.Items)
@@ -529,6 +547,7 @@ namespace Chainword
 
             for (int i = 0; i < concept_definition.Count; i++)
                 AvailableWords.Items.Add(concept_definition[i][0] + " " + concept_definition[i][1]);
+            thread.Abort();
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)

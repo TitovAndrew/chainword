@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Chainword
@@ -88,6 +89,13 @@ namespace Chainword
             }
         }
 
+        static void SampleThreadMethod()
+        {
+            ProgressBar pb = new ProgressBar();
+            pb.ShowDialog();
+            pb.BringToFront();
+        }
+
         // Удалить определение
         private void DeleteConcept_button_Click(object sender, EventArgs e)
         {
@@ -114,10 +122,13 @@ namespace Chainword
             AvailableWords.Items.Clear();
             UpdateListBox(AvailableWords, all_concepts_list); // Обновляем листобкс
             DeleteConcept_button.Enabled = false;
+            
         }
 
         void UpdateListBox(ListBox listBox, List<string> list)
         {
+            Thread thread = new Thread(SampleThreadMethod);
+            thread.Start();
             try
             {
                 for (int i = 0; i < list.Count; i++)
@@ -127,7 +138,7 @@ namespace Chainword
             {
                 MessageBox.Show("Не удалось обновить список понятий");
             }
-
+            thread.Abort();
         }
 
         // Поиск слова
@@ -200,6 +211,10 @@ namespace Chainword
         // Сортировка слов
         void SortingListBox(int x)
         {
+            Thread thread = new Thread(SampleThreadMethod);
+            if (AvailableWords.Items.Count > 500)
+                thread.Start();
+
             List<string[]> concept_definition = new List<string[]>();
 
             foreach (var item in AvailableWords.Items)
@@ -209,12 +224,15 @@ namespace Chainword
             }
             AvailableWords.Items.Clear();
 
+
             NameComparer nc = new NameComparer(x);
 
             concept_definition.Sort(nc);
 
             for (int i = 0; i < concept_definition.Count; i++)
                 AvailableWords.Items.Add(concept_definition[i][0] + " " + concept_definition[i][1]);
+            if (AvailableWords.Items.Count > 500)
+                thread.Abort();
         }
 
         private void Save_button_Click(object sender, EventArgs e)
@@ -273,6 +291,8 @@ namespace Chainword
 
         private void search_button_Click_1(object sender, EventArgs e)
         {
+            Thread thread = new Thread(SampleThreadMethod);
+            thread.Start();
             if (WordSearch.ForeColor == System.Drawing.Color.Gray || WordSearch.Text == "")
             {
                 AvailableWords.Items.Clear();
@@ -291,6 +311,7 @@ namespace Chainword
                 AvailableWords.Items.Clear();
                 UpdateListBox(AvailableWords, suitable_concepts_list); // Обновляем листобкс
             }
+            thread.Abort();
         }
     }
 }

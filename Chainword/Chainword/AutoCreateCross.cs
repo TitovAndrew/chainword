@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -37,6 +38,8 @@ namespace Chainword
         // Создать кроссовд
         public void CreateCross()
         {
+            Thread thread = new Thread(SampleThreadMethod);
+            thread.Start();
             string[] words = GetWords();
             Crossword cross = new Crossword();
             cross.Name = name_cross;
@@ -59,11 +62,23 @@ namespace Chainword
             BinaryFormatter formatter = new BinaryFormatter();
             formatter.Serialize(stream, cross);
             stream.Close();
+            thread.Abort();
+
+        }
+
+        static void SampleThreadMethod()
+        {
+            ProgressBar pb = new ProgressBar();
+            pb.ShowDialog();
+            pb.BringToFront();
         }
 
         // Получить все слова
         private string[] GetWords()
         {
+            Thread thread = new Thread(SampleThreadMethod);
+            thread.Start();
+
             string[] arr_words, arr_only_words, result = null;
             string only_words = "";
             Random rand = new Random((int)DateTime.Now.Ticks);
@@ -167,6 +182,7 @@ namespace Chainword
             }
             #endregion
 
+            thread.Abort();
             return result;
         }
 

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -74,6 +75,8 @@ namespace Chainword
         // Перейти к редактированию кроссворда или словаря
         private void Edit_button_Click(object sender, EventArgs e)
         {
+            Thread thread = new Thread(SampleThreadMethod);
+            thread.Start();
             foreach (var item in Dictionary_listBox.SelectedItems)
             {
                 string file_name = (string)item;
@@ -92,6 +95,14 @@ namespace Chainword
             }
             Edit_button.Enabled = false;
             Delete_button.Enabled = false;
+            thread.Abort();
+        }
+
+        static void SampleThreadMethod()
+        {
+            ProgressBar pb = new ProgressBar();
+            pb.ShowDialog();
+            pb.BringToFront();
         }
 
         // Удалить кроссворд или словарь

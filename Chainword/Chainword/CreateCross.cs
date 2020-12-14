@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -57,6 +58,9 @@ namespace Chainword
         // Создать кроссворд
         private void CreateCross_button_Click(object sender, EventArgs e)
         {
+            Thread thread = new Thread(SampleThreadMethod);
+            thread.Start();
+
             string result_path = null; // Путь к выбранному словарю
             string[] f = Directory.GetFiles(Environment.CurrentDirectory, "*.dict"); // массив путей до файлов dict
             for (int i = 0; i < f.Length; i++)
@@ -93,7 +97,17 @@ namespace Chainword
                 ma.Show();
                 this.Close();
             }
+
+            thread.Abort();
         }
+
+        static void SampleThreadMethod()
+        {
+            ProgressBar pb = new ProgressBar();
+            pb.ShowDialog();
+            pb.BringToFront();
+        }
+
         private void NameCross_textBox_TextChanged(object sender, EventArgs e)
         {
             if (AvailableDictionary.Text != "" && NameCross_textBox.Text != "")
