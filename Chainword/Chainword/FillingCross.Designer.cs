@@ -36,6 +36,7 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.search_button = new System.Windows.Forms.Button();
             this.WordSearch = new System.Windows.Forms.TextBox();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // DeleteLastWord
@@ -136,11 +137,23 @@
             this.WordSearch.TextChanged += new System.EventHandler(this.WordSearch_TextChanged);
             this.WordSearch.Leave += new System.EventHandler(this.WordSearch_Leave);
             // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(12, 341);
+            this.progressBar1.MarqueeAnimationSpeed = 50;
+            this.progressBar1.Maximum = 10;
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(157, 23);
+            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBar1.TabIndex = 66;
+            this.progressBar1.Visible = false;
+            // 
             // FillingCross
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 369);
+            this.ClientSize = new System.Drawing.Size(597, 369);
+            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.DeleteLastWord);
             this.Controls.Add(this.AddWord);
             this.Controls.Add(this.CreateCross_button);
@@ -169,5 +182,6 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button search_button;
         private System.Windows.Forms.TextBox WordSearch;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }
