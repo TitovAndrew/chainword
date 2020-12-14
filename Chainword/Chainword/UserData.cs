@@ -72,7 +72,7 @@ namespace Chainword
             }
             if (!check && !checkadmin)
             {
-                MessageBox.Show("Неправильно введен логин или пароль");
+                MessageBox.Show("Не удалось авторизоваться. \nДанного пользователя не существует");
             }
         }
 

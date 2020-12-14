@@ -48,7 +48,10 @@ namespace Chainword
             }
             catch
             {
-                MessageBox.Show("Не удалось загрузить кроссворд!");
+                if (this.Visible)
+                {
+                    MessageBox.Show("Не удалось загрузить кроссворд!");
+                }
             }
             if (AddedWords.Items.Count >= length_cross)
                 AddWord.Enabled = false;
@@ -71,7 +74,7 @@ namespace Chainword
                 this.type_cross = type_cross;
                 this.cross_letters = cross_letters;
                 this.length_cross = length_cross;
-                
+
                 File_Reader();
             }
             catch { }
@@ -88,11 +91,11 @@ namespace Chainword
                     string tmp = fs.ReadLine();
                     if (tmp == null) break;
                     tmp += "\n";
-                    if(cross_letters == 1)
+                    if (cross_letters == 1)
                     {
                         words += tmp;
                     }
-                    else if(cross_letters == 2 && tmp.Split(' ')[0].Length > 4)
+                    else if (cross_letters == 2 && tmp.Split(' ')[0].Length > 4)
                     {
                         words += tmp;
                     }
@@ -140,7 +143,7 @@ namespace Chainword
                     if (tmp != null)
                         min_length = tmp.Split(' ')[0];
 
-                
+
                     if (tmp == null) break;
                     tmp += "\n";
 
@@ -158,8 +161,8 @@ namespace Chainword
                     }
                     else
                     {
-                        if (tmp[0].CompareTo(last_chars[0]) == 0 && 
-                            tmp[1].CompareTo(last_chars[1]) == 0 && 
+                        if (tmp[0].CompareTo(last_chars[0]) == 0 &&
+                            tmp[1].CompareTo(last_chars[1]) == 0 &&
                             tmp[2].CompareTo(last_chars[2]) == 0 &&
                             min_length.Length > 6)
                             words += tmp;
@@ -192,12 +195,15 @@ namespace Chainword
                 }
                 else
                 {
-                    if (cross_letters == 1)
-                        MessageBox.Show("В словаре невозможно найти слово, начинающееся с буквы " + last_chars[2]);
-                    else if (cross_letters == 2)
-                        MessageBox.Show("В словаре невозможно найти слово, начинающееся с букв " + last_chars[1] + last_chars[2]);
-                    else
-                        MessageBox.Show("В словаре невозможно найти слово, начинающееся с букв " + last_chars[0] + last_chars[1] + last_chars[2]);
+                    if (this.Visible)
+                    {
+                        if (cross_letters == 1)
+                            MessageBox.Show("В словаре невозможно найти слово, начинающееся с буквы " + last_chars[2]);
+                        else if (cross_letters == 2)
+                            MessageBox.Show("В словаре невозможно найти слово, начинающееся с букв " + last_chars[1] + last_chars[2]);
+                        else
+                            MessageBox.Show("В словаре невозможно найти слово, начинающееся с букв " + last_chars[0] + last_chars[1] + last_chars[2]);
+                    }
                 }
             }
         }
@@ -326,7 +332,7 @@ namespace Chainword
                 DeleteLastWord.Enabled = false;
                 File_Reader();
             }
-                CreateCross_button.Enabled = false;
+            CreateCross_button.Enabled = false;
             if (AddedWords.Items.Count < length_cross)
                 AddWord.Enabled = true;
         }
@@ -399,7 +405,7 @@ namespace Chainword
                     for (int i = 0; i < arr_words_list.Count; i++)
                         AvailableWords.Items.Add(arr_words_list[i]);
 
-                    if (arr_words_list.Count == 0)
+                    if (AvailableWords.Items.Count == 0)
                     {
                         MessageBox.Show("Нет подходящих вхождений");
                     }
@@ -483,6 +489,14 @@ namespace Chainword
                 i++;
             }
             return words_to_cross;
+        }
+
+        private void WordSearch_TextChanged(object sender, EventArgs e)
+        {
+            if(WordSearch.Text.Length == 0 && WordSearch.ForeColor == System.Drawing.Color.Black)
+            {
+                Search_button_Click(sender, e);
+            }
         }
 
         // Сортировка слов

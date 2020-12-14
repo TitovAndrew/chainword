@@ -33,7 +33,6 @@ D:\4 курс\Программная инженерия\chainword\Chainword\Chai
 C:\Программная инженерия\chainword\Chainword\Chainword\bin\Debug\Chainword.exe.config
 C:\Программная инженерия\chainword\Chainword\Chainword\bin\Debug\Chainword.exe
 C:\Программная инженерия\chainword\Chainword\Chainword\bin\Debug\Chainword.pdb
-C:\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.csprojAssemblyReference.cache
 C:\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.CreateCross.resources
 C:\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.CreateDictionary.resources
 C:\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.FillingCross.resources
@@ -52,3 +51,4 @@ D:\Учеба\4 курс\1 семестр\Программная инженер�
 D:\Учеба\4 курс\1 семестр\Программная инженерия\Курсач\chainword\Chainword\Chainword\obj\Debug\Chainword.SolvingCrossword.resources
 C:\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.SolvingCrossword.resources
 D:\4 курс\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.SolvingCrossword.resources
+C:\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.csprojAssemblyReference.cache

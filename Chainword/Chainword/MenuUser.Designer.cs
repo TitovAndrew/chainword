@@ -44,7 +44,7 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Location = new System.Drawing.Point(0, 2);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(638, 357);
@@ -54,9 +54,9 @@
             // 
             this.tabPage2.Controls.Add(this.StartedCross_ListBox);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(2);
             this.tabPage2.Size = new System.Drawing.Size(630, 331);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Начатые";
@@ -68,7 +68,7 @@
             this.StartedCross_ListBox.FormattingEnabled = true;
             this.StartedCross_ListBox.ItemHeight = 20;
             this.StartedCross_ListBox.Location = new System.Drawing.Point(3, 4);
-            this.StartedCross_ListBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.StartedCross_ListBox.Margin = new System.Windows.Forms.Padding(2);
             this.StartedCross_ListBox.Name = "StartedCross_ListBox";
             this.StartedCross_ListBox.Size = new System.Drawing.Size(623, 324);
             this.StartedCross_ListBox.TabIndex = 25;
@@ -78,9 +78,9 @@
             // 
             this.tabPage1.Controls.Add(this.NewCross_ListBox);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(2);
             this.tabPage1.Size = new System.Drawing.Size(630, 331);
             this.tabPage1.TabIndex = 2;
             this.tabPage1.Text = "Новые";
@@ -92,7 +92,7 @@
             this.NewCross_ListBox.FormattingEnabled = true;
             this.NewCross_ListBox.ItemHeight = 20;
             this.NewCross_ListBox.Location = new System.Drawing.Point(3, 4);
-            this.NewCross_ListBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.NewCross_ListBox.Margin = new System.Windows.Forms.Padding(2);
             this.NewCross_ListBox.Name = "NewCross_ListBox";
             this.NewCross_ListBox.Size = new System.Drawing.Size(623, 324);
             this.NewCross_ListBox.TabIndex = 26;
@@ -100,7 +100,7 @@
             // 
             // Open_Button
             // 
-            this.Open_Button.Location = new System.Drawing.Point(528, 357);
+            this.Open_Button.Location = new System.Drawing.Point(524, 357);
             this.Open_Button.Name = "Open_Button";
             this.Open_Button.Size = new System.Drawing.Size(110, 30);
             this.Open_Button.TabIndex = 26;
@@ -112,11 +112,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(643, 391);
+            this.ClientSize = new System.Drawing.Size(639, 391);
             this.Controls.Add(this.Open_Button);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "MenuUser";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

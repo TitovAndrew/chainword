@@ -62,7 +62,21 @@ namespace Chainword
             }
             else
             {
-                // Добавляем понятия в листбокс и в список понятий
+                // Добавляем в список слова из листбокса и проверяем на совпдение
+                List<string> added_words = new List<string>();
+                foreach(var item in AvailableWords.Items)
+                {
+                    if (item.ToString().Split(' ')[0] == AddWord_textBox.Text.ToUpper())
+                    {
+                        MessageBox.Show("Такое понятие уже существует");
+                        AddWord_textBox.Text = "Слово";
+                        AddWord_textBox.ForeColor = System.Drawing.Color.Gray;
+                        AddDefinition_textBox.Text = "Определение";
+                        AddDefinition_textBox.ForeColor = System.Drawing.Color.Gray;
+                        AddConcept_button.Enabled = false;
+                        return;
+                    }    
+                }
                 string new_concept = AddWord_textBox.Text.ToUpper() + " " + AddDefinition_textBox.Text;
                 AvailableWords.Items.Add(new_concept);
                 all_concepts_list.Add(new_concept);
@@ -171,28 +185,6 @@ namespace Chainword
             }
         }
 
-        private void search_button_Click(object sender, EventArgs e)
-        {
-            if (WordSearch.ForeColor == System.Drawing.Color.Gray || WordSearch.Text == "")
-            {
-                AvailableWords.Items.Clear();
-                UpdateListBox(AvailableWords, all_concepts_list); // Обновляем листобкс
-            }
-            else
-            {
-                AvailableWords.Items.Clear();
-                List<string> suitable_concepts_list = new List<string>();
-                foreach (var item in all_concepts_list)
-                {
-                    string[] words = ((string)item).Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
-                    if (words[0].Contains(WordSearch.Text.ToUpper()))
-                        suitable_concepts_list.Add(item);
-                }
-                AvailableWords.Items.Clear();
-                UpdateListBox(AvailableWords, suitable_concepts_list); // Обновляем листобкс
-            }
-        }
-
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBox1.SelectedIndex == 0)
@@ -245,10 +237,13 @@ namespace Chainword
         private void AddWord_textBox_TextChanged(object sender, EventArgs e)
         {
             if (AddWord_textBox.ForeColor != System.Drawing.Color.Gray &&
-                AddDefinition_textBox.ForeColor != System.Drawing.Color.Gray)
+                AddDefinition_textBox.ForeColor != System.Drawing.Color.Gray &&
+                AddWord_textBox.Text.Length != 0 &&
+                AddDefinition_textBox.Text.Length != 0)
             {
                 AddConcept_button.Enabled = true;
             }
+            else AddConcept_button.Enabled = false;
         }
 
         private void AvailableWords_SelectedIndexChanged(object sender, EventArgs e)
@@ -259,9 +254,42 @@ namespace Chainword
         private void AddDefinition_textBox_TextChanged(object sender, EventArgs e)
         {
             if (AddWord_textBox.ForeColor != System.Drawing.Color.Gray &&
-                AddDefinition_textBox.ForeColor != System.Drawing.Color.Gray)
+                AddDefinition_textBox.ForeColor != System.Drawing.Color.Gray &&
+                AddWord_textBox.Text.Length != 0 &&
+                AddDefinition_textBox.Text.Length != 0)
             {
                 AddConcept_button.Enabled = true;
+            }
+            else AddConcept_button.Enabled = false;
+        }
+
+        private void WordSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (WordSearch.Text.Length == 0 && WordSearch.ForeColor == System.Drawing.Color.Black)
+            {
+                search_button_Click_1(sender, e);
+            }
+        }
+
+        private void search_button_Click_1(object sender, EventArgs e)
+        {
+            if (WordSearch.ForeColor == System.Drawing.Color.Gray || WordSearch.Text == "")
+            {
+                AvailableWords.Items.Clear();
+                UpdateListBox(AvailableWords, all_concepts_list); // Обновляем листобкс
+            }
+            else
+            {
+                AvailableWords.Items.Clear();
+                List<string> suitable_concepts_list = new List<string>();
+                foreach (var item in all_concepts_list)
+                {
+                    string[] words = ((string)item).Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+                    if (words[0].Contains(WordSearch.Text.ToUpper()))
+                        suitable_concepts_list.Add(item);
+                }
+                AvailableWords.Items.Clear();
+                UpdateListBox(AvailableWords, suitable_concepts_list); // Обновляем листобкс
             }
         }
     }

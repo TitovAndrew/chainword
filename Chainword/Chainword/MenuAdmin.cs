@@ -119,14 +119,22 @@ namespace Chainword
 
         private void CrossWord_listBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Edit_button.Enabled = true;
-            Delete_button.Enabled = true;
+            if (CrossWord_listBox.SelectedIndex != -1)
+            {
+                Edit_button.Enabled = true;
+                Delete_button.Enabled = true;
+                Dictionary_listBox.SelectedIndex = -1;
+            }
         }
 
         private void Dictionary_listBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Edit_button.Enabled = true;
-            Delete_button.Enabled = true;
+            if (Dictionary_listBox.SelectedIndex != -1)
+            {
+                Edit_button.Enabled = true;
+                Delete_button.Enabled = true;
+                CrossWord_listBox.SelectedIndex = -1;
+            }
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Chainword
             InitializeComponent();
             Open_Button.Enabled = false;
             this.login_name = log;
-            if (!Directory.Exists(Environment.CurrentDirectory + "\\" + login_name)) 
+            if (!Directory.Exists(Environment.CurrentDirectory + "\\" + login_name))
                 Directory.CreateDirectory(Environment.CurrentDirectory + "\\" + login_name);
 
             ShowAllFiles(Environment.CurrentDirectory, "*.cros", StartedCross_ListBox);
@@ -71,7 +71,7 @@ namespace Chainword
                     {
                         check = true;
                     }
-                    else if(item == lns)
+                    else if (item == lns)
                     {
                         check = false;
                         break;
@@ -140,12 +140,20 @@ namespace Chainword
 
         private void NewCross_ListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Open_Button.Enabled = true;
+            if (NewCross_ListBox.SelectedIndex != -1)
+            {
+                Open_Button.Enabled = true;
+                StartedCross_ListBox.SelectedIndex = -1;
+            }
         }
 
         private void StartedCross_ListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Open_Button.Enabled = true;
+            if (StartedCross_ListBox.SelectedIndex != -1)
+            {
+                Open_Button.Enabled = true;
+                NewCross_ListBox.SelectedIndex = -1;
+            }
         }
     }
 }

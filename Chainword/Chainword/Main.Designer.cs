@@ -42,7 +42,7 @@
             // 
             this.register_button.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.register_button.Location = new System.Drawing.Point(106, 167);
-            this.register_button.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.register_button.Margin = new System.Windows.Forms.Padding(2);
             this.register_button.Name = "register_button";
             this.register_button.Size = new System.Drawing.Size(126, 32);
             this.register_button.TabIndex = 55;
@@ -54,7 +54,7 @@
             // 
             this.info_button.Font = new System.Drawing.Font("Cambria", 18F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.info_button.Location = new System.Drawing.Point(237, 128);
-            this.info_button.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.info_button.Margin = new System.Windows.Forms.Padding(2);
             this.info_button.Name = "info_button";
             this.info_button.Size = new System.Drawing.Size(30, 32);
             this.info_button.TabIndex = 54;
@@ -66,7 +66,7 @@
             // 
             this.entry_button.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.entry_button.Location = new System.Drawing.Point(106, 128);
-            this.entry_button.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.entry_button.Margin = new System.Windows.Forms.Padding(2);
             this.entry_button.Name = "entry_button";
             this.entry_button.Size = new System.Drawing.Size(126, 32);
             this.entry_button.TabIndex = 53;
@@ -100,9 +100,10 @@
             // 
             this.password.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.password.Location = new System.Drawing.Point(100, 95);
-            this.password.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.password.Margin = new System.Windows.Forms.Padding(2);
             this.password.Multiline = true;
             this.password.Name = "password";
+            this.password.PasswordChar = '*';
             this.password.Size = new System.Drawing.Size(226, 25);
             this.password.TabIndex = 50;
             // 
@@ -110,7 +111,7 @@
             // 
             this.login.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.login.Location = new System.Drawing.Point(100, 49);
-            this.login.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.login.Margin = new System.Windows.Forms.Padding(2);
             this.login.Multiline = true;
             this.login.Name = "login";
             this.login.Size = new System.Drawing.Size(226, 25);
@@ -141,7 +142,7 @@
             this.Controls.Add(this.login);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AuthorizationForm";
