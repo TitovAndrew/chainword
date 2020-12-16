@@ -16,11 +16,13 @@ namespace Chainword
     public partial class AuthorizationForm : Form
     {
         UserData ud;
+
         public AuthorizationForm()
         {
             InitializeComponent();
             ud = new UserData();
         }
+
         private void Entry_button_Click(object sender, EventArgs e)
         {
             bool check = true;
@@ -36,6 +38,7 @@ namespace Chainword
             AuthorizationForm menu = this;
             ud.AuthorizationUser(writePath, log, pas, checkadmin, check, menu, this);
             password.Text = "";
+            
         }
 
         private void Register_button_Click(object sender, EventArgs e)
@@ -80,6 +83,7 @@ namespace Chainword
         {
             Form inf = new Info();
             inf.Show();
+            inf.BringToFront();
         }
     }
 }

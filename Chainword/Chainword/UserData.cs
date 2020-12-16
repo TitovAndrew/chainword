@@ -46,6 +46,8 @@ namespace Chainword
                                 checkadmin = true;
                                 Form ma = new MenuAdmin();
                                 ma.Show();
+                                ma.BringToFront();
+                                
                                 check = false;
                                 break;
                             }
@@ -63,6 +65,7 @@ namespace Chainword
                     {
                         Form mu = new MenuUser(log);
                         mu.Show();
+                        mu.BringToFront();
                         main.WindowState = FormWindowState.Minimized;
                     }
                 }

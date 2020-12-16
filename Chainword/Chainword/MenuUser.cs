@@ -126,6 +126,7 @@ namespace Chainword
                 string[] f = Directory.GetFiles(Environment.CurrentDirectory, file_name[0] + ".cros");
                 Form solving = new SolvingCrossword(f[0], login_name);
                 solving.Show();
+                solving.BringToFront();
                 this.Close();
             }
             foreach (var item in NewCross_ListBox.SelectedItems)
@@ -134,6 +135,7 @@ namespace Chainword
                 string[] f = Directory.GetFiles(Environment.CurrentDirectory, file_name + ".cros");
                 Form solving = new SolvingCrossword(f[0], login_name);
                 solving.Show();
+                solving.BringToFront();
                 this.Close();
             }
         }

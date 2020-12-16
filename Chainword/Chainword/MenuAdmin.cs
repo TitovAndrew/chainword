@@ -16,7 +16,6 @@ namespace Chainword
     {
         public MenuAdmin()
         {
-            TopMost = true;
             InitializeComponent();
             ShowAllFiles(Environment.CurrentDirectory, "*.dict", Dictionary_listBox);
             ShowAllFiles(Environment.CurrentDirectory, "*.cros", CrossWord_listBox);
@@ -61,6 +60,7 @@ namespace Chainword
         {
             Form cd = new CreateDictionary();
             cd.Show();
+            cd.BringToFront();
             this.Hide();
         }
 
@@ -69,6 +69,7 @@ namespace Chainword
         {
             Form cc = new CreateCross();
             cc.Show();
+            cc.BringToFront();
             this.Hide();
         }
 
@@ -83,6 +84,7 @@ namespace Chainword
                 string[] f = Directory.GetFiles(Environment.CurrentDirectory, file_name + ".dict");
                 Form fd = new FillingDictionary(f[0]);
                 fd.Show();
+                fd.BringToFront();
                 this.Close();
             }
             foreach (var item in CrossWord_listBox.SelectedItems)
@@ -91,6 +93,7 @@ namespace Chainword
                 string[] f = Directory.GetFiles(Environment.CurrentDirectory, file_name + ".cros");
                 Form fc = new FillingCross(f[0]);
                 fc.Show();
+                fc.BringToFront();
                 this.Close();
             }
             Edit_button.Enabled = false;

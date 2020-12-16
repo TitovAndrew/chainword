@@ -15,7 +15,6 @@ namespace Chainword
 
         public FillingDictionary(string writePath)
         {
-            TopMost = true;
             this.writePath = writePath;
             InitializeComponent();
             FillAvailableWords();

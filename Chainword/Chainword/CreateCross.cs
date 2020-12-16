@@ -83,6 +83,7 @@ namespace Chainword
                     int.Parse(AmountLetters_comboBox.Text),
                     int.Parse(LengthCross_comboBox.Text));
                 ifrm.Show();
+                ifrm.BringToFront();
                 this.Close();
             }
             else if (checkBox1.Checked == true)

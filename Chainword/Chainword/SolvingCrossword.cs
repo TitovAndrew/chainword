@@ -32,7 +32,6 @@ namespace Chainword
 
         public SolvingCrossword(string PathToFile, string login_name)
         {
-            TopMost = true;
             InitializeComponent();
 
             if (!Directory.Exists(Environment.CurrentDirectory + "\\" + login_name))

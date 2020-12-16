@@ -27,7 +27,6 @@ namespace Chainword
         // Конструктор для редактирования кроссвордов
         public FillingCross(string PathToFile)
         {
-            TopMost = true;
             InitializeComponent();
             DeleteLastWord.Enabled = false;
             CreateCross_button.Enabled = false;
@@ -56,12 +55,18 @@ namespace Chainword
             }
             if (AddedWords.Items.Count >= length_cross)
                 AddWord.Enabled = false;
+            try
+            {
+                comboBox1.Items.Add("Сортировать");
+                comboBox1.Text = "Сортировать";
+            }
+            catch { }
+            
         }
 
         // Конструктор для создания кроссворда
         public FillingCross(string name_cross, string dictionary, int type_cross, int cross_letters, int length_cross)
         {
-            TopMost = true;
             InitializeComponent();
             DeleteLastWord.Enabled = false;
             CreateCross_button.Enabled = false;
@@ -498,7 +503,7 @@ namespace Chainword
                 thread.Abort();
                 Form ma = new MenuAdmin();
                 ma.Show();
-
+                ma.BringToFront();
             }
             catch
             { }
@@ -525,6 +530,16 @@ namespace Chainword
             {
                 Search_button_Click(sender, e);
             }
+        }
+
+        private void comboBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                if (comboBox1.Items.Contains("Сортировать"))
+                    comboBox1.Items.Remove("Сортировать");
+            }
+            catch { }
         }
 
         // Сортировка слов
