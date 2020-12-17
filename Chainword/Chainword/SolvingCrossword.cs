@@ -968,8 +968,8 @@ namespace Chainword
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            //Form mu = new MenuUser();
-            //mu.ShowDialog();
+            Form mu = new MenuUser(log);
+            mu.ShowDialog();
         }
     }
 
