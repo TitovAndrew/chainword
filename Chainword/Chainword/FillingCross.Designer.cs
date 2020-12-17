@@ -65,13 +65,13 @@
             // 
             // CreateCross_button
             // 
-            this.CreateCross_button.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.CreateCross_button.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.CreateCross_button.Location = new System.Drawing.Point(446, 333);
             this.CreateCross_button.Margin = new System.Windows.Forms.Padding(2);
             this.CreateCross_button.Name = "CreateCross_button";
             this.CreateCross_button.Size = new System.Drawing.Size(146, 32);
             this.CreateCross_button.TabIndex = 61;
-            this.CreateCross_button.Text = "Сохранить";
+            this.CreateCross_button.Text = "Сохранить и выйти";
             this.CreateCross_button.UseVisualStyleBackColor = true;
             this.CreateCross_button.Click += new System.EventHandler(this.CreateCross_button_Click);
             // 

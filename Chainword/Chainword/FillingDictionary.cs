@@ -252,10 +252,16 @@ namespace Chainword
                 Form ifrm = Application.OpenForms[0];
                 ifrm.Show();
             }
+            else
+            {
+                Form ma = new MenuAdmin();
+                ma.Show();
+            }
         }
 
         private void SaveExit_button_Click(object sender, EventArgs e)
         {
+            open_next = true;
             try
             {
                 fw.SaveDictionary(writePath, all_concepts_list);

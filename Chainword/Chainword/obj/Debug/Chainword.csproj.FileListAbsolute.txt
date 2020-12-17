@@ -53,3 +53,22 @@ C:\Программная инженерия\chainword\Chainword\Chainword\obj\D
 D:\4 курс\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.SolvingCrossword.resources
 C:\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.csprojAssemblyReference.cache
 C:\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.ProgressBar.resources
+E:\Программная инженерия\chainword\Chainword\Chainword\bin\Debug\Chainword.exe.config
+E:\Программная инженерия\chainword\Chainword\Chainword\bin\Debug\Chainword.exe
+E:\Программная инженерия\chainword\Chainword\Chainword\bin\Debug\Chainword.pdb
+E:\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.csprojAssemblyReference.cache
+E:\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.CreateCross.resources
+E:\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.CreateDictionary.resources
+E:\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.FillingCross.resources
+E:\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.FillingDictionary.resources
+E:\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.Info.resources
+E:\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.AuthorizationForm.resources
+E:\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.MenuUser.resources
+E:\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.MenuAdmin.resources
+E:\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.ProgressBar.resources
+E:\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.Properties.Resources.resources
+E:\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.SolvingCrossword.resources
+E:\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.csproj.GenerateResource.cache
+E:\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.csproj.CoreCompileInputs.cache
+E:\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.exe
+E:\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.pdb
