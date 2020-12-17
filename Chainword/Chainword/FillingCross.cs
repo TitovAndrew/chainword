@@ -46,6 +46,9 @@ namespace Chainword
                 this.cross_letters = cross.CrossLetters;
                 this.length_cross = cross.Length;
                 LoadCrossword(cross.Allwords);
+
+                string path = this.dictionary.Split('\\')[this.dictionary.Split('\\').Length - 1];
+                this.dictionary = Environment.CurrentDirectory + '\\' + path;
             }
             catch
             {
@@ -74,6 +77,8 @@ namespace Chainword
                 this.type_cross = type_cross;
                 this.cross_letters = cross_letters;
                 this.length_cross = length_cross;
+                string path = this.dictionary.Split('\\')[this.dictionary.Split('\\').Length - 1];
+                this.dictionary = Environment.CurrentDirectory + '\\' + path;
 
                 File_Reader();
             }
