@@ -46,9 +46,6 @@ namespace Chainword
                 this.cross_letters = cross.CrossLetters;
                 this.length_cross = cross.Length;
                 LoadCrossword(cross.Allwords);
-
-                string path = this.dictionary.Split('\\')[this.dictionary.Split('\\').Length - 1];
-                this.dictionary = Environment.CurrentDirectory + '\\' + path;
             }
             catch
             {
@@ -59,6 +56,9 @@ namespace Chainword
             }
             if (AddedWords.Items.Count >= length_cross)
                 AddWord.Enabled = false;
+            string path = this.dictionary.Split('\\')[this.dictionary.Split('\\').Length - 1];
+            this.dictionary = null;
+            this.dictionary = Environment.CurrentDirectory + '\\' + path;
         }
 
         // Конструктор для создания кроссворда
@@ -77,12 +77,13 @@ namespace Chainword
                 this.type_cross = type_cross;
                 this.cross_letters = cross_letters;
                 this.length_cross = length_cross;
-                string path = this.dictionary.Split('\\')[this.dictionary.Split('\\').Length - 1];
-                this.dictionary = Environment.CurrentDirectory + '\\' + path;
-
+                
                 File_Reader();
             }
             catch { }
+            string path = this.dictionary.Split('\\')[this.dictionary.Split('\\').Length - 1];
+            this.dictionary = null;
+            this.dictionary = Environment.CurrentDirectory + '\\' + path;
         }
 
         void File_Reader()
@@ -240,13 +241,6 @@ namespace Chainword
         // Удалить последнее слово
         private void DeleteLastWord_Click(object sender, EventArgs e)
         {
-            Thread thread = null;
-            if (AvailableWords.Items.Count > 500)
-            {
-                thread = new Thread(SampleThreadMethod);
-                thread.Start();
-            }
-                
             AvailableWords.Items.Clear();
             AddedWords.Items.RemoveAt(AddedWords.SelectedIndex = AddedWords.Items.Count - 1); // удаляем последнее слово
             using (StreamReader fs = new StreamReader(dictionary))
@@ -350,8 +344,6 @@ namespace Chainword
             CreateCross_button.Enabled = false;
             if (AddedWords.Items.Count < length_cross)
                 AddWord.Enabled = true;
-            if (AvailableWords.Items.Count > 500)
-                thread.Abort();
         }
 
         static void SampleThreadMethod()
@@ -561,8 +553,8 @@ namespace Chainword
         {
             if (!open_next)
             {
-                Form ifrm = Application.OpenForms[0];
-                ifrm.Show();
+                Form ma = new MenuAdmin();
+                ma.ShowDialog();
             }
         }
     }
