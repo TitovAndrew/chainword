@@ -15,6 +15,7 @@ namespace Chainword
     public partial class MenuUser : Form
     {
         string login_name;
+        bool open_next = false;
 
         public MenuUser(string log)
         {
@@ -113,16 +114,19 @@ namespace Chainword
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            Form ifrm = Application.OpenForms[0];
-            ifrm.WindowState = FormWindowState.Normal;
+            if (!open_next)
+            {
+                Form ifrm = Application.OpenForms[0];
+                ifrm.Show();
+            }
         }
 
         private void Open_Button_Click(object sender, EventArgs e)
         {
+            open_next = true;
             foreach (var item in StartedCross_ListBox.SelectedItems)
             {
                 string[] file_name = ((string)item).Split(' ');
-                //string file_name = (string)item;
                 string[] f = Directory.GetFiles(Environment.CurrentDirectory, file_name[0] + ".cros");
                 Form solving = new SolvingCrossword(f[0], login_name);
                 solving.Show();

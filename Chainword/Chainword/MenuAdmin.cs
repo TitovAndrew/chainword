@@ -14,6 +14,8 @@ namespace Chainword
 {
     public partial class MenuAdmin : Form
     {
+        bool open_next = false;
+
         public MenuAdmin()
         {
             InitializeComponent();
@@ -25,8 +27,11 @@ namespace Chainword
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            Form ifrm = Application.OpenForms[0];
-            ifrm.WindowState = FormWindowState.Normal;
+            if (!open_next)
+            {
+                Form ifrm = Application.OpenForms[0];
+                ifrm.Show();
+            }
         }
 
         // Отобразить список кроссвордов и словарей
@@ -58,6 +63,7 @@ namespace Chainword
 
         private void Create_button_Click_1(object sender, EventArgs e)
         {
+            open_next = true;
             Form cd = new CreateDictionary();
             cd.Show();
             cd.BringToFront();
@@ -67,6 +73,7 @@ namespace Chainword
         // Перейти к созданию кроссворда
         private void Createcross_button_Click_1(object sender, EventArgs e)
         {
+            open_next = true;
             Form cc = new CreateCross();
             cc.Show();
             cc.BringToFront();
@@ -76,6 +83,7 @@ namespace Chainword
         // Перейти к редактированию кроссворда или словаря
         private void Edit_button_Click(object sender, EventArgs e)
         {
+            open_next = true;
             Thread thread = new Thread(SampleThreadMethod);
             thread.Start();
             foreach (var item in Dictionary_listBox.SelectedItems)
@@ -84,8 +92,6 @@ namespace Chainword
                 string[] f = Directory.GetFiles(Environment.CurrentDirectory, file_name + ".dict");
                 Form fd = new FillingDictionary(f[0]);
                 fd.Show();
-                fd.BringToFront();
-                this.Close();
             }
             foreach (var item in CrossWord_listBox.SelectedItems)
             {
@@ -93,12 +99,12 @@ namespace Chainword
                 string[] f = Directory.GetFiles(Environment.CurrentDirectory, file_name + ".cros");
                 Form fc = new FillingCross(f[0]);
                 fc.Show();
-                fc.BringToFront();
-                this.Close();
             }
             Edit_button.Enabled = false;
             Delete_button.Enabled = false;
             thread.Abort();
+            thread.Join();
+            this.Close();
         }
 
         static void SampleThreadMethod()

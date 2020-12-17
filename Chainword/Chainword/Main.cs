@@ -30,7 +30,7 @@ namespace Chainword
             string log = login.Text;
             string pas = password.Text;
             string writePath = Environment.CurrentDirectory + "\\" + "data_user.usr";
-            if(login.Text.Length == 0 || password.Text.Length == 0)
+            if (login.Text.Length == 0 || password.Text.Length == 0)
             {
                 MessageBox.Show("Для авторизации необходимо заполнить оба поля");
                 return;
@@ -38,7 +38,6 @@ namespace Chainword
             AuthorizationForm menu = this;
             ud.AuthorizationUser(writePath, log, pas, checkadmin, check, menu, this);
             password.Text = "";
-            
         }
 
         private void Register_button_Click(object sender, EventArgs e)

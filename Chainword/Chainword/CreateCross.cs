@@ -15,6 +15,8 @@ namespace Chainword
 {
     public partial class CreateCross : Form
     {
+        bool open_next = false;
+
         public CreateCross()
         {
             InitializeComponent();
@@ -48,16 +50,19 @@ namespace Chainword
                 }
             }
         }
-
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            Form ifrm = Application.OpenForms[0];
-            ifrm.WindowState = FormWindowState.Normal;
+            if (!open_next)
+            {
+                Form ifrm = Application.OpenForms[0];
+                ifrm.Show();
+            }
         }
 
         // Создать кроссворд
         private void CreateCross_button_Click(object sender, EventArgs e)
         {
+            open_next = true;
             Thread thread = new Thread(SampleThreadMethod);
             thread.Start();
 

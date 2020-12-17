@@ -39,6 +39,7 @@
             this.WordSearch = new System.Windows.Forms.TextBox();
             this.DeleteConcept_button = new System.Windows.Forms.Button();
             this.SaveExit_button = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -128,7 +129,7 @@
             "По алфавиту (от Я до А)",
             "По возрастанию",
             "По убыванию"});
-            this.comboBox1.Location = new System.Drawing.Point(136, 18);
+            this.comboBox1.Location = new System.Drawing.Point(204, 18);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(145, 21);
@@ -184,11 +185,21 @@
             this.SaveExit_button.UseVisualStyleBackColor = true;
             this.SaveExit_button.Click += new System.EventHandler(this.SaveExit_button_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(129, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(70, 13);
+            this.label1.TabIndex = 86;
+            this.label1.Text = "Сортировка:";
+            // 
             // FillingDictionary
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(598, 348);
+            this.ClientSize = new System.Drawing.Size(598, 339);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.Save_button);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.AvailableWords);
@@ -197,6 +208,7 @@
             this.Controls.Add(this.WordSearch);
             this.Controls.Add(this.DeleteConcept_button);
             this.Controls.Add(this.SaveExit_button);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "FillingDictionary";
@@ -222,5 +234,6 @@
         private System.Windows.Forms.TextBox WordSearch;
         private System.Windows.Forms.Button DeleteConcept_button;
         private System.Windows.Forms.Button SaveExit_button;
+        private System.Windows.Forms.Label label1;
     }
 }

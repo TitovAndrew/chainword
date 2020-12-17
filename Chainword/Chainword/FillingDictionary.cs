@@ -9,6 +9,7 @@ namespace Chainword
 {
     public partial class FillingDictionary : Form
     {
+        bool open_next = false;
         FileWorker fw;
         string writePath;
         List<string> all_concepts_list = new List<string>(); // Список всех понятий в словаре
@@ -21,6 +22,11 @@ namespace Chainword
             AddConcept_button.Enabled = false;
             DeleteConcept_button.Enabled = false;
             fw = new FileWorker();
+            all_concepts_list.Clear();
+            foreach (var item in AvailableWords.Items)
+            {
+                all_concepts_list.Add((string)item);
+            }
         }
 
         // Добавляем в список все понятия, которые есть в словаре
@@ -91,7 +97,7 @@ namespace Chainword
         static void SampleThreadMethod()
         {
             ProgressBar pb = new ProgressBar();
-            pb.ShowDialog();
+            pb.Show();
             pb.BringToFront();
         }
 
@@ -241,13 +247,22 @@ namespace Chainword
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            Form ifrm = Application.OpenForms[0];
-            ifrm.WindowState = FormWindowState.Normal;
+            if (!open_next)
+            {
+                Form ifrm = Application.OpenForms[0];
+                ifrm.Show();
+            }
         }
 
         private void SaveExit_button_Click(object sender, EventArgs e)
         {
-            fw.SaveDictionary(writePath, all_concepts_list);
+            try
+            {
+                fw.SaveDictionary(writePath, all_concepts_list);
+            }
+            catch {
+                MessageBox.Show("Ошибка сохранения");
+            }
             this.Close();
         }
 

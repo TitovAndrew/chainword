@@ -15,6 +15,7 @@ namespace Chainword
 {
     public partial class FillingCross : Form
     {
+        bool open_next = false;
         string dictionary;
         string name_cross;
         int cross_letters, length_cross, type_cross;
@@ -55,13 +56,6 @@ namespace Chainword
             }
             if (AddedWords.Items.Count >= length_cross)
                 AddWord.Enabled = false;
-            try
-            {
-                comboBox1.Items.Add("Сортировать");
-                comboBox1.Text = "Сортировать";
-            }
-            catch { }
-            
         }
 
         // Конструктор для создания кроссворда
@@ -241,9 +235,13 @@ namespace Chainword
         // Удалить последнее слово
         private void DeleteLastWord_Click(object sender, EventArgs e)
         {
-            Thread thread = new Thread(SampleThreadMethod);
+            Thread thread = null;
             if (AvailableWords.Items.Count > 500)
+            {
+                thread = new Thread(SampleThreadMethod);
                 thread.Start();
+            }
+                
             AvailableWords.Items.Clear();
             AddedWords.Items.RemoveAt(AddedWords.SelectedIndex = AddedWords.Items.Count - 1); // удаляем последнее слово
             using (StreamReader fs = new StreamReader(dictionary))
@@ -473,10 +471,9 @@ namespace Chainword
 
         private void CreateCross_button_Click(object sender, EventArgs e)
         {
+            open_next = true;
             try
             {
-                Thread thread = new Thread(SampleThreadMethod);
-                thread.Start();
                 string[] words = GetWords();
                 Crossword cross = new Crossword();
                 cross.Name = name_cross;
@@ -499,14 +496,14 @@ namespace Chainword
                 BinaryFormatter formatter = new BinaryFormatter();
                 formatter.Serialize(stream, cross);
                 stream.Close();
-
-                thread.Abort();
                 Form ma = new MenuAdmin();
                 ma.Show();
                 ma.BringToFront();
             }
             catch
-            { }
+            {
+                MessageBox.Show("Ошибка сохранения кроссворда");
+            }
             this.Close();
         }
 
@@ -526,20 +523,10 @@ namespace Chainword
 
         private void WordSearch_TextChanged(object sender, EventArgs e)
         {
-            if(WordSearch.Text.Length == 0 && WordSearch.ForeColor == System.Drawing.Color.Black)
+            if (WordSearch.Text.Length == 0 && WordSearch.ForeColor == System.Drawing.Color.Black)
             {
                 Search_button_Click(sender, e);
             }
-        }
-
-        private void comboBox1_MouseClick(object sender, MouseEventArgs e)
-        {
-            try
-            {
-                if (comboBox1.Items.Contains("Сортировать"))
-                    comboBox1.Items.Remove("Сортировать");
-            }
-            catch { }
         }
 
         // Сортировка слов
@@ -567,8 +554,11 @@ namespace Chainword
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            Form ifrm = Application.OpenForms[0];
-            ifrm.WindowState = FormWindowState.Normal;
+            if (!open_next)
+            {
+                Form ifrm = Application.OpenForms[0];
+                ifrm.Show();
+            }
         }
     }
 }

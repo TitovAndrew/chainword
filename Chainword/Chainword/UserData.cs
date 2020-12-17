@@ -43,11 +43,10 @@ namespace Chainword
                         {
                             if (log == "admin" && GetHash(pas) == login1[1])
                             {
+                                main.Hide();
                                 checkadmin = true;
                                 Form ma = new MenuAdmin();
-                                ma.Show();
-                                ma.BringToFront();
-                                
+                                ma.ShowDialog();
                                 check = false;
                                 break;
                             }
@@ -63,10 +62,9 @@ namespace Chainword
                     }
                     if (check)
                     {
+                        main.Hide();
                         Form mu = new MenuUser(log);
-                        mu.Show();
-                        mu.BringToFront();
-                        main.WindowState = FormWindowState.Minimized;
+                        mu.ShowDialog();
                     }
                 }
             }
@@ -76,7 +74,7 @@ namespace Chainword
             }
             if (!check && !checkadmin)
             {
-                MessageBox.Show("Не удалось авторизоваться. \nДанного пользователя не существует");
+                MessageBox.Show("Не удалось авторизоваться. \nВведите корректные данные");
             }
         }
 

@@ -23,5 +23,11 @@ namespace Chainword
         {
             Process.Start(Environment.CurrentDirectory + "\\" + "userguide.html");
         }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            Form ifrm = Application.OpenForms[0];
+            ifrm.Show();
+        }
     }
 }

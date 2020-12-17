@@ -32,6 +32,7 @@ namespace Chainword
 
         public SolvingCrossword(string PathToFile, string login_name)
         {
+            
             InitializeComponent();
 
             if (!Directory.Exists(Environment.CurrentDirectory + "\\" + login_name))
@@ -968,7 +969,7 @@ namespace Chainword
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             Form ifrm = Application.OpenForms[0];
-            ifrm.WindowState = FormWindowState.Normal;
+            ifrm.Show();
         }
     }
 

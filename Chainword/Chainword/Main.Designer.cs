@@ -101,10 +101,9 @@
             this.password.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.password.Location = new System.Drawing.Point(100, 95);
             this.password.Margin = new System.Windows.Forms.Padding(2);
-            this.password.Multiline = true;
             this.password.Name = "password";
             this.password.PasswordChar = '*';
-            this.password.Size = new System.Drawing.Size(226, 25);
+            this.password.Size = new System.Drawing.Size(226, 23);
             this.password.TabIndex = 50;
             // 
             // login
@@ -112,9 +111,8 @@
             this.login.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.login.Location = new System.Drawing.Point(100, 49);
             this.login.Margin = new System.Windows.Forms.Padding(2);
-            this.login.Multiline = true;
             this.login.Name = "login";
-            this.login.Size = new System.Drawing.Size(226, 25);
+            this.login.Size = new System.Drawing.Size(226, 23);
             this.login.TabIndex = 49;
             // 
             // label1

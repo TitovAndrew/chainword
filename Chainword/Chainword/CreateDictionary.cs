@@ -14,6 +14,7 @@ namespace Chainword
 {
     public partial class CreateDictionary : Form
     {
+        bool open_next = false;
         FileWorker fw;
 
         public CreateDictionary()
@@ -25,6 +26,7 @@ namespace Chainword
         // Создать словарь
         private void CreateDictionary_Button_Click(object sender, EventArgs e)
         {
+            open_next = true;
             if (!Regex.IsMatch(textBox1.Text, "^[A-Za-z0-9А-Яа-я_]+$"))
             {
                 MessageBox.Show("Пароль должен состоять из латинских букв, цифр и нижнего подчеркивания");
@@ -39,8 +41,11 @@ namespace Chainword
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            Form ifrm = Application.OpenForms[0];
-            ifrm.WindowState = FormWindowState.Normal;
+            if (!open_next)
+            {
+                Form ifrm = Application.OpenForms[0];
+                ifrm.Show();
+            }
         }
     }
 }
