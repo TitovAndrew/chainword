@@ -249,8 +249,8 @@ namespace Chainword
         {
             if (!open_next)
             {
-                Form ifrm = Application.OpenForms[0];
-                ifrm.Show();
+                Form ma = new MenuAdmin();
+                ma.ShowDialog();
             }
             else
             {
