@@ -63,7 +63,6 @@ namespace Chainword
                     }
                     UpdateListBox(AvailableWords, all_concepts_list); // Обновляем листобкс
                 }
-
             }
         }
 
@@ -144,8 +143,11 @@ namespace Chainword
 
         void UpdateListBox(ListBox listBox, List<string> list)
         {
+           
             Thread thread = new Thread(SampleThreadMethod);
+
             thread.Start();
+
             try
             {
                 for (int i = 0; i < list.Count; i++)
@@ -155,6 +157,7 @@ namespace Chainword
             {
                 MessageBox.Show("Не удалось обновить список понятий");
             }
+            //Thread.Sleep(Timeout.Infinite);
             thread.Abort();
         }
 
@@ -228,9 +231,18 @@ namespace Chainword
         // Сортировка слов
         void SortingListBox(int x)
         {
-            Thread thread = new Thread(SampleThreadMethod);
+            Thread thread = new Thread(SampleThreadMethod);    
+            bool e = thread.IsAlive;
+            thread.Start();
+            e = thread.IsAlive;
+            bool r = true;
             if (AvailableWords.Items.Count > 500)
-                thread.Start();
+            {
+                r = false;
+                //thread.Start();
+                e = thread.IsAlive;
+            }
+               
 
             List<string[]> concept_definition = new List<string[]>();
 
@@ -245,11 +257,16 @@ namespace Chainword
             NameComparer nc = new NameComparer(x);
 
             concept_definition.Sort(nc);
-
+            thread.Abort();
             for (int i = 0; i < concept_definition.Count; i++)
                 AvailableWords.Items.Add(concept_definition[i][0] + " " + concept_definition[i][1]);
+            e = thread.IsAlive;
             if (AvailableWords.Items.Count > 500)
-                thread.Abort();
+            {
+                //thread.Abort();
+                e = thread.IsAlive;
+            }
+            e = thread.IsAlive;
         }
 
         private void Save_button_Click(object sender, EventArgs e)

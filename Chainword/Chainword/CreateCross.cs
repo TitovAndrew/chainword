@@ -77,19 +77,35 @@ namespace Chainword
             }
             if (!Regex.IsMatch(NameCross_textBox.Text, "^[A-Za-zА-Яа-я0-9_]+$"))
             {
-                MessageBox.Show("Имя кроссворда должно состоять из букв латинского, русского алфавита, цифр и нижнего подчеркивания");
+                thread.Abort();
+                MessageBox.Show("Имя кроссворда должно состоять из букв латинского, русского алфавита, цифр и нижнего подчеркивания");            
+                open_next = false;
+                return;
             }
             else if (checkBox1.Checked == false)
             {
-                Form ifrm = new FillingCross(
-                    NameCross_textBox.Text,
-                    result_path,
-                    TypeCross_comboBox.SelectedIndex,
-                    int.Parse(AmountLetters_comboBox.Text),
-                    int.Parse(LengthCross_comboBox.Text));
-                ifrm.Show();
-                ifrm.BringToFront();
-                this.Close();
+                string writePath = Environment.CurrentDirectory + "\\" + NameCross_textBox.Text + ".cros";
+                try
+                {
+                    using (StreamReader fs = new StreamReader(writePath))
+                    { }
+                    thread.Abort();
+                    MessageBox.Show("Данный файл уже существует!");                 
+                    open_next = false;
+                    return;
+                }
+                catch
+                {
+                    Form ifrm = new FillingCross(
+                        NameCross_textBox.Text,
+                        result_path,
+                        TypeCross_comboBox.SelectedIndex,
+                        int.Parse(AmountLetters_comboBox.Text),
+                        int.Parse(LengthCross_comboBox.Text));
+                    ifrm.Show();
+                    ifrm.BringToFront();
+                    this.Close();
+                }           
             }
             else if (checkBox1.Checked == true)
             {
