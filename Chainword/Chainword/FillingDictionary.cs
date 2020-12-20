@@ -223,12 +223,12 @@ namespace Chainword
             else if (comboBox1.SelectedIndex == 1)
                 SortingListBox(3);
             else if (comboBox1.SelectedIndex == 2)
-                SortingListBox(0);
+                SortingListBox(0); 
             else
                 SortingListBox(1);
         }
 
-        // Сортировка слов
+        //Сортировка слов
         void SortingListBox(int x)
         {
             Thread thread = new Thread(SampleThreadMethod);    
