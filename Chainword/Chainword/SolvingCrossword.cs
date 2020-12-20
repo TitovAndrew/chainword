@@ -29,10 +29,10 @@ namespace Chainword
         List<char[]> all_symbols;
         Button GetHintButton, SaveButton;
         double progress;
-        bool open_next = false;
 
         public SolvingCrossword(string PathToFile, string login_name)
         {
+            
             InitializeComponent();
 
             if (!Directory.Exists(Environment.CurrentDirectory + "\\" + login_name))
@@ -271,7 +271,6 @@ namespace Chainword
 
         void Click_SaveExitButton(object sender, EventArgs e)
         {
-            open_next = true;
             UpdateProgress();
             SaveCrossword();
             this.Close();
@@ -969,8 +968,8 @@ namespace Chainword
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            Form ifrm = Application.OpenForms[0];
-            ifrm.Show();
+            Form mu = new MenuUser(log);
+            mu.ShowDialog();
         }
     }
 
