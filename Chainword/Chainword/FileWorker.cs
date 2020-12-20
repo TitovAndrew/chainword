@@ -10,6 +10,7 @@ namespace Chainword
 {
     class FileWorker
     {
+        public bool IsNext;
         //Создание словаря
         public void CreateDictionary(string writePath, Form form)
         {
@@ -18,14 +19,17 @@ namespace Chainword
                 using (StreamReader fs = new StreamReader(writePath))
                 { }
                 MessageBox.Show("Данный файл уже существует!");
+                IsNext = false;
+               
             }
             catch
             {
                 using (StreamWriter sw = new StreamWriter(writePath, true, System.Text.Encoding.UTF8))
                 { }
+                IsNext = true;
                 Form fd = new FillingDictionary(writePath);
                 fd.Show();
-                form.Close();
+                form.Close();            
             }
         }
 

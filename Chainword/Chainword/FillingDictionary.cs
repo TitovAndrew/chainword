@@ -50,6 +50,7 @@ namespace Chainword
                             tmp += temp.Split(' ')[i] + " ";
                         }
                     }
+                    tmp  = tmp.Remove(tmp.Length - 1);
                     temp = first_word + tmp + "\n";
                     concept += temp;
                 }
@@ -94,7 +95,7 @@ namespace Chainword
                         return;
                     }    
                 }
-                string new_concept = AddWord_textBox.Text.ToUpper() + " " + AddDefinition_textBox.Text;
+                string new_concept = AddWord_textBox.Text.ToUpper() + " — " + AddDefinition_textBox.Text;
                 AvailableWords.Items.Add(new_concept);
                 all_concepts_list.Add(new_concept);
                 AddWord_textBox.Text = "Слово";
@@ -269,7 +270,7 @@ namespace Chainword
             if (!open_next)
             {
                 Form ma = new MenuAdmin();
-                ma.ShowDialog();
+                ma.Show();
             }
             else
             {
@@ -287,8 +288,7 @@ namespace Chainword
                 foreach (var item in all_concepts_list)
                 {
                     string temp = (string)item;
-                    temp = temp.Split(new string[] { " —" }, StringSplitOptions.RemoveEmptyEntries)[0] +
-                        temp.Split(new string[] { " —" }, StringSplitOptions.RemoveEmptyEntries)[1];
+                    temp = temp.Split(new string[] { " —" }, StringSplitOptions.RemoveEmptyEntries)[0] + temp.Split(new string[] { " —" }, StringSplitOptions.RemoveEmptyEntries)[1];
                     original_view.Add(temp);
                 }
                 fw.SaveDictionary(writePath, original_view);

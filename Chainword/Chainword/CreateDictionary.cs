@@ -29,19 +29,24 @@ namespace Chainword
             open_next = true;
             if (!Regex.IsMatch(textBox1.Text, "^[A-Za-z0-9А-Яа-я_]+$"))
             {
-                MessageBox.Show("Пароль должен состоять из латинских букв, цифр и нижнего подчеркивания");
+                MessageBox.Show("Название словаря должно состоять из латинских букв, цифр и нижнего подчеркивания");
+                open_next = false;
             }
             else
             {
                 string writePath = Environment.CurrentDirectory + "\\" + textBox1.Text + ".dict";
                 CreateDictionary cd = this;
                 fw.CreateDictionary(writePath, cd);
+                if(fw.IsNext == false)
+                {
+                    open_next = false;
+                }
             }
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            if (!open_next)
+            if (open_next == false)
             {
                 Form ifrm = Application.OpenForms[0];
                 ifrm.Show();

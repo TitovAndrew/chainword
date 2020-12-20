@@ -120,7 +120,7 @@
             this.MaximizeBox = false;
             this.Name = "MenuUser";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Меню пользователя";
+            this.Text = "Меню игрока";
             this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
