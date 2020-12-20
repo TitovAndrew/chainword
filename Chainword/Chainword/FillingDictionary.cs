@@ -39,7 +39,18 @@ namespace Chainword
                 {
                     string temp = fs.ReadLine();
                     if (temp == null) break;
-                    temp += "\n";
+                    string first_word = "";
+                    string tmp = "";
+                    for (int i = 0; i < temp.Split(' ').Length; i++)
+                    {
+                        if (i == 0)
+                            first_word = temp.Split(' ')[0] + " — ";
+                        else
+                        {
+                            tmp += temp.Split(' ')[i] + " ";
+                        }
+                    }
+                    temp = first_word + tmp + "\n";
                     concept += temp;
                 }
                 if (concept != null)
@@ -242,7 +253,15 @@ namespace Chainword
 
         private void Save_button_Click(object sender, EventArgs e)
         {
-            fw.SaveDictionary(writePath, all_concepts_list);
+            List<string> original_view = new List<string>();
+            foreach (var item in all_concepts_list)
+            {
+                string temp = (string)item;
+                temp = temp.Split(new string[] { " —" }, StringSplitOptions.RemoveEmptyEntries)[0] + 
+                    temp.Split(new string[] { " —" }, StringSplitOptions.RemoveEmptyEntries)[1]; 
+                original_view.Add(temp);
+            }
+            fw.SaveDictionary(writePath, original_view);
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
@@ -264,7 +283,15 @@ namespace Chainword
             open_next = true;
             try
             {
-                fw.SaveDictionary(writePath, all_concepts_list);
+                List<string> original_view = new List<string>();
+                foreach (var item in all_concepts_list)
+                {
+                    string temp = (string)item;
+                    temp = temp.Split(new string[] { " —" }, StringSplitOptions.RemoveEmptyEntries)[0] +
+                        temp.Split(new string[] { " —" }, StringSplitOptions.RemoveEmptyEntries)[1];
+                    original_view.Add(temp);
+                }
+                fw.SaveDictionary(writePath, original_view);
             }
             catch {
                 MessageBox.Show("Ошибка сохранения");

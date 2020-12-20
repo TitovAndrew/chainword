@@ -83,6 +83,7 @@ namespace Chainword
         // Перейти к редактированию кроссворда или словаря
         private void Edit_button_Click(object sender, EventArgs e)
         {
+            // Edit_button_Click(sender: object, e: EventArgs)
             open_next = true;
             Thread thread = new Thread(SampleThreadMethod);
             thread.Start();

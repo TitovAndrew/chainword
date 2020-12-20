@@ -32,7 +32,6 @@ namespace Chainword
         //Сохранение словаря
         public void SaveDictionary(string writePath, List<string> all_concepts_list)
         {
-
             File.WriteAllLines(writePath, all_concepts_list);
         }
     }

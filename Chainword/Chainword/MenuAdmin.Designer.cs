@@ -28,14 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.CrossWord_listBox = new System.Windows.Forms.ListBox();
             this.Createcross_button = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.Dictionary_listBox = new System.Windows.Forms.ListBox();
             this.Create_button = new System.Windows.Forms.Button();
-            this.CrossWord_listBox = new System.Windows.Forms.ListBox();
             this.Edit_button = new System.Windows.Forms.Button();
             this.Delete_button = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
@@ -66,6 +65,17 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Кроссворды";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // CrossWord_listBox
+            // 
+            this.CrossWord_listBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.CrossWord_listBox.FormattingEnabled = true;
+            this.CrossWord_listBox.ItemHeight = 20;
+            this.CrossWord_listBox.Location = new System.Drawing.Point(0, 34);
+            this.CrossWord_listBox.Name = "CrossWord_listBox";
+            this.CrossWord_listBox.Size = new System.Drawing.Size(630, 304);
+            this.CrossWord_listBox.TabIndex = 27;
+            this.CrossWord_listBox.SelectedIndexChanged += new System.EventHandler(this.CrossWord_listBox_SelectedIndexChanged);
             // 
             // Createcross_button
             // 
@@ -112,17 +122,6 @@
             this.Create_button.UseVisualStyleBackColor = true;
             this.Create_button.Click += new System.EventHandler(this.Create_button_Click_1);
             // 
-            // CrossWord_listBox
-            // 
-            this.CrossWord_listBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.CrossWord_listBox.FormattingEnabled = true;
-            this.CrossWord_listBox.ItemHeight = 20;
-            this.CrossWord_listBox.Location = new System.Drawing.Point(0, 34);
-            this.CrossWord_listBox.Name = "CrossWord_listBox";
-            this.CrossWord_listBox.Size = new System.Drawing.Size(630, 304);
-            this.CrossWord_listBox.TabIndex = 27;
-            this.CrossWord_listBox.SelectedIndexChanged += new System.EventHandler(this.CrossWord_listBox_SelectedIndexChanged);
-            // 
             // Edit_button
             // 
             this.Edit_button.Location = new System.Drawing.Point(412, 373);
@@ -164,7 +163,6 @@
         }
 
         #endregion
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Button Createcross_button;

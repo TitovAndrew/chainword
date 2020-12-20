@@ -21,6 +21,11 @@ namespace Chainword
         // Отобразить справку
         private void InfoSystem_button_Click(object sender, EventArgs e)
         {
+            GetInfo();
+        }
+
+        void GetInfo()
+        {
             Process.Start(Environment.CurrentDirectory + "\\" + "userguide.html");
         }
 
