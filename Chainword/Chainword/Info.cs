@@ -26,7 +26,7 @@ namespace Chainword
 
         void GetInfo()
         {
-            Process.Start(Environment.CurrentDirectory + "\\" + "userguide.html");
+            Process.Start(Environment.CurrentDirectory + "\\userguide\\help.html");
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
