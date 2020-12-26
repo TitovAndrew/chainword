@@ -8,10 +8,11 @@ using System.Windows.Forms;
 
 namespace Chainword
 {
+    // Класс работы с файлами словарей
     class FileWorker
     {
         public bool IsNext;
-        //Создание словаря
+        // Метод создания словаря
         public void CreateDictionary(string writePath, Form form)
         {
             try
@@ -33,7 +34,7 @@ namespace Chainword
             }
         }
 
-        //Сохранение словаря
+        // Метод сохранения словаря
         public void SaveDictionary(string writePath, List<string> all_concepts_list)
         {
             File.WriteAllLines(writePath, all_concepts_list);

@@ -13,17 +13,20 @@ using System.Text.RegularExpressions;
 
 namespace Chainword
 {
+    // Класс авторизации
     public partial class AuthorizationForm : Form
     {
         UserData ud;
         string writePath = Environment.CurrentDirectory + "\\" + "data_user.usr";
 
+        // Конструктор класса
         public AuthorizationForm()
         {
             InitializeComponent();
             ud = new UserData();
         }
 
+        // Кнопка входа в систему
         private void Entry_button_Click(object sender, EventArgs e)
         {
             bool check = true;
@@ -40,6 +43,7 @@ namespace Chainword
             password.Text = "";
         }
 
+        // Кнопка регистрации нового пользователя
         private void Register_button_Click(object sender, EventArgs e)
         {
             bool check = true;
@@ -78,6 +82,7 @@ namespace Chainword
             }
         }
 
+        // Кнопка открытия формы сведений о разработчиках
         private void Info_button_Click(object sender, EventArgs e)
         {
             Form inf = new Info();

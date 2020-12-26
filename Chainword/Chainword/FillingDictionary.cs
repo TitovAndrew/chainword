@@ -7,13 +7,15 @@ using System.Windows.Forms;
 
 namespace Chainword
 {
+    // Класс заполнения словаря
     public partial class FillingDictionary : Form
     {
         bool open_next = false;
         FileWorker fw;
-        string writePath;
+        string writePath; // Путь к файлу
         List<string> all_concepts_list = new List<string>(); // Список всех понятий в словаре
 
+        // Конструктор класса
         public FillingDictionary(string writePath)
         {
             this.writePath = writePath;
@@ -79,7 +81,7 @@ namespace Chainword
             }
             else
             {
-                // Добавляем в список слова из листбокса и проверяем на совпдение
+                // Добавляем в список слова из листбокса и проверяем на совпадение
                 List<string> added_words = new List<string>();
                 foreach(var item in AvailableWords.Items)
                 {
@@ -105,6 +107,7 @@ namespace Chainword
             }
         }
 
+        // Прогрессбар
         static void SampleThreadMethod()
         {
             ProgressBar pb = new ProgressBar();
@@ -141,13 +144,11 @@ namespace Chainword
             
         }
 
+        // Обновление листбокса при поиске слова, сортировке, добавления и удаления слова
         void UpdateListBox(ListBox listBox, List<string> list)
         {
-           
             Thread thread = new Thread(SampleThreadMethod);
-
             thread.Start();
-
             try
             {
                 for (int i = 0; i < list.Count; i++)
@@ -157,11 +158,10 @@ namespace Chainword
             {
                 MessageBox.Show("Не удалось обновить список понятий");
             }
-            //Thread.Sleep(Timeout.Infinite);
             thread.Abort();
         }
 
-        // Поиск слова
+        // Поиск слова в списке добавленных слов
         private void WordSearch_MouseClick(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             if (WordSearch.ForeColor == System.Drawing.Color.Gray)
@@ -171,6 +171,8 @@ namespace Chainword
             }
         }
 
+
+        #region Методы оформления placeholder в полях ввода
         private void WordSearch_Leave(object sender, EventArgs e)
         {
             if (WordSearch.Text == "")
@@ -216,6 +218,19 @@ namespace Chainword
             }
         }
 
+        private void AddWord_textBox_TextChanged(object sender, EventArgs e)
+        {
+            if (AddWord_textBox.ForeColor != System.Drawing.Color.Gray &&
+                AddDefinition_textBox.ForeColor != System.Drawing.Color.Gray &&
+                AddWord_textBox.Text.Length != 0 &&
+                AddDefinition_textBox.Text.Length != 0)
+            {
+                AddConcept_button.Enabled = true;
+            }
+            else AddConcept_button.Enabled = false;
+        }
+        #endregion
+
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBox1.SelectedIndex == 0)
@@ -228,7 +243,7 @@ namespace Chainword
                 SortingListBox(1);
         }
 
-        //Сортировка слов
+        // Метод выбора метода сортировки
         void SortingListBox(int x)
         {
             Thread thread = new Thread(SampleThreadMethod);    
@@ -269,6 +284,7 @@ namespace Chainword
             e = thread.IsAlive;
         }
 
+        // Кнопка сохранения словаря
         private void Save_button_Click(object sender, EventArgs e)
         {
             List<string> original_view = new List<string>();
@@ -282,20 +298,14 @@ namespace Chainword
             fw.SaveDictionary(writePath, original_view);
         }
 
+        // Событийный метод. Срабатывает при закрытии формы. Открывает форму меню администратора
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            if (!open_next)
-            {
-                Form ma = new MenuAdmin();
-                ma.Show();
-            }
-            else
-            {
-                Form ma = new MenuAdmin();
-                ma.Show();
-            }
+            Form ma = new MenuAdmin();
+            ma.Show();
         }
 
+        // Кнопка сохранения словаря и выхода из формы заполнения словаря
         private void SaveExit_button_Click(object sender, EventArgs e)
         {
             open_next = true;
@@ -316,23 +326,13 @@ namespace Chainword
             this.Close();
         }
 
-        private void AddWord_textBox_TextChanged(object sender, EventArgs e)
-        {
-            if (AddWord_textBox.ForeColor != System.Drawing.Color.Gray &&
-                AddDefinition_textBox.ForeColor != System.Drawing.Color.Gray &&
-                AddWord_textBox.Text.Length != 0 &&
-                AddDefinition_textBox.Text.Length != 0)
-            {
-                AddConcept_button.Enabled = true;
-            }
-            else AddConcept_button.Enabled = false;
-        }
-
+        // Метод разблокировки кнопки удаления понятия, в случае, когда пользователь выбирает слова из списка слов
         private void AvailableWords_SelectedIndexChanged(object sender, EventArgs e)
         {
             DeleteConcept_button.Enabled = true;
         }
 
+        // Метод разблокировки кнопки добавления понятие, в случае, когда заполнены поля ввода слова и определения
         private void AddDefinition_textBox_TextChanged(object sender, EventArgs e)
         {
             if (AddWord_textBox.ForeColor != System.Drawing.Color.Gray &&
@@ -345,6 +345,7 @@ namespace Chainword
             else AddConcept_button.Enabled = false;
         }
 
+
         private void WordSearch_TextChanged(object sender, EventArgs e)
         {
             if (WordSearch.Text.Length == 0 && WordSearch.ForeColor == System.Drawing.Color.Black)
@@ -353,6 +354,7 @@ namespace Chainword
             }
         }
 
+        // Метод поиска подстроки
         private void search_button_Click_1(object sender, EventArgs e)
         {
             Thread thread = new Thread(SampleThreadMethod);

@@ -14,6 +14,7 @@ using System.Windows.Forms;
 
 namespace Chainword
 {
+    // Класс разгадывания кроссворда
     public partial class SolvingCrossword : Form
     {
         int index, count_symbols; //индекс вида отображения
@@ -31,6 +32,7 @@ namespace Chainword
         double progress;
         bool open_next = false;
 
+        // Конструктор класса
         public SolvingCrossword(string PathToFile, string login_name)
         {
             InitializeComponent();
@@ -220,6 +222,7 @@ namespace Chainword
         }
 
         #region События для кнопок
+        // Метод получения подсказки
         void Click_GetHintButton(object sender, EventArgs e)
         {
             if (id_TB_hint != -1)
@@ -256,6 +259,7 @@ namespace Chainword
             }
         }
 
+        // Метод проверки решения
         void Click_CheckButton(object sender, EventArgs e)
         {
             UpdateProgress();
@@ -263,12 +267,14 @@ namespace Chainword
             MessageBox.Show("Прогресс: " + String.Format("{0:0.00}", progress) + "%");
         }
 
+        // Метод сохранения прогресса
         void Click_SaveButton(object sender, EventArgs e)
         {
             UpdateProgress();
             SaveCrossword();
         }
 
+        // Метод сохранения прогресса и выхода из формы разгадывания кроссворда
         void Click_SaveExitButton(object sender, EventArgs e)
         {
             open_next = true;
@@ -278,6 +284,7 @@ namespace Chainword
         }
         #endregion
 
+        // Метод обновления прогресса решения
         void UpdateProgress()
         {
             char[] current_chars = new char[count_symbols];
@@ -317,6 +324,7 @@ namespace Chainword
             cross.Progress = progress;
         }
 
+        // Сохранение кроссворда
         void SaveCrossword()
         {
             char[] current_chars = new char[count_symbols];
@@ -339,7 +347,7 @@ namespace Chainword
         }
 
         #region линейное отображение
-        //добавить подсказки
+        // Отображение линейного вида
         public void ShowLinear()
         {
             this.Size = new Size(710, 340);
@@ -348,6 +356,7 @@ namespace Chainword
             GenericTextBox();
         }
 
+        // Создание интерфейса линейного кроссворда
         void CreateTB_Linear(int count_symbols)
         {
             bool ls = false;
@@ -425,12 +434,13 @@ namespace Chainword
         #endregion
 
         #region спиральное отображение
-
+        // Отображение вида "Спираль"
         public void ShowSpiral()
         {
             GenericTextBox();
         }
 
+        // Создание интерфейса спирального кроссворда
         void CreateTB_Spiral(int count_symbols)
         {
             bool ls = false;
@@ -611,11 +621,13 @@ namespace Chainword
         #endregion
 
         #region отображение змейка
+        // Отображение вида "Змейка"
         public void ShowSnake()
         {
             GenericTextBox();
         }
 
+        // Создание интерфейса вида "Змейка"
         void CreateTB_Snake(int count_symbols)
         {
             bool ls = false;
@@ -653,7 +665,7 @@ namespace Chainword
                 GetHintButton.Location = new Point(690, 7);
                 HintLabel.Location = new Point(480, 10);
             }
-            
+
             int kostyl = 0, turn = width_cross, down = 0, locate_X = 1;
             bool left_to_right = true;
             Point locate = new Point(0, 0);
@@ -757,6 +769,7 @@ namespace Chainword
         }
         #endregion
 
+        // Заполнение текстбоксов символами, сохраненными при раннем разгадывании кроссворда
         void FillingTextBox()
         {
             if (!isNew)
@@ -772,6 +785,7 @@ namespace Chainword
             }
         }
 
+        // Заполнения списка AllSymbols символами, составляющими слова из кроссворда
         private List<char[]> GetArrayCharAllSymbols()
         {
             List<char[]> AllSymbols = new List<char[]>();
@@ -812,6 +826,7 @@ namespace Chainword
             return AllSymbols;
         }
 
+        // Генерация текстбоксов
         void GenericTextBox()
         {
             // Записываем в список all_symbols слова в виде массивов символов + указываем в IndexWords индексы начала слов
@@ -831,6 +846,7 @@ namespace Chainword
                 CreateTB_Spiral(count_symbols);
         }
 
+        // Получения определения для определенного слова
         private string GetDefinition(int id_TextBox)
         {
             PanelQuestion.Visible = true;
@@ -959,6 +975,7 @@ namespace Chainword
         }
         #endregion
 
+        // Метод, определяющий, для какого слова необходимо отобразить определение
         void GetDefinitionByIDTextBox(TextBox textbox)
         {
             int id_TextBox;
@@ -966,7 +983,7 @@ namespace Chainword
             Question.Text = GetDefinition(id_TextBox);
         }
 
-
+        // Событийный метод. Срабатывает при закрытии формы. Открывает форму авторизации
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             Form ifrm = Application.OpenForms[0];
@@ -974,6 +991,7 @@ namespace Chainword
         }
     }
 
+    // Класс работы с текстбоксами
     static class TextBoxExtends
     {
         public static IEnumerable<Control> GetAllChildren(this Control root)

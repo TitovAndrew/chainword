@@ -6,15 +6,19 @@ using System.Threading.Tasks;
 
 namespace Chainword
 {
+    // Класс сравнивания между собой последних букв последнего добавленого слова
+    // и первых букв слова, который потенциально будет добавлен в конец списка добавленных слов
     class NameComparer : IComparer<string[]>
     {
         int check;
 
+        // Конструктор класса
         public NameComparer(int check)
         {
             this.check = check;
         }
 
+        // Метод сравнивания
         public int Compare(string[] o1, string[] o2)
         {
             if (check == 0)

@@ -13,8 +13,10 @@ using System.Windows.Forms;
 
 namespace Chainword
 {
+    // Класс заполнения и редактирования кроссворда
     public partial class FillingCross : Form
     {
+        // Поля с некоторыми параметрами кроссворда + поля, необходимые для работы алгоритмов класса
         bool open_next = false;
         string dictionary;
         string name_cross;
@@ -61,7 +63,7 @@ namespace Chainword
             this.dictionary = Environment.CurrentDirectory + '\\' + path;
         }
 
-        // Конструктор для создания кроссворда
+        // Конструктор для создания кроссворда с некоторыми параметрами кроссворда
         public FillingCross(string name_cross, string dictionary, int type_cross, int cross_letters, int length_cross)
         {
             InitializeComponent();
@@ -86,6 +88,7 @@ namespace Chainword
             this.dictionary = Environment.CurrentDirectory + '\\' + path;
         }
 
+        // Метод чтения информации из файла словаря
         void File_Reader()
         {
             AvailableWords.Items.Clear();
@@ -346,6 +349,7 @@ namespace Chainword
                 AddWord.Enabled = true;
         }
 
+        // Прогрессбар
         static void SampleThreadMethod()
         {
             ProgressBar pb = new ProgressBar();
@@ -436,6 +440,7 @@ namespace Chainword
             }
         }
 
+        #region Методы оформления placeholder в полях ввода
         private void WordSearch_MouseClick(object sender, MouseEventArgs e)
         {
             if (WordSearch.ForeColor == System.Drawing.Color.Gray)
@@ -453,7 +458,9 @@ namespace Chainword
                 WordSearch.ForeColor = System.Drawing.Color.Gray;
             }
         }
+        #endregion
 
+        // Метод выбора метода сортировки
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBox1.SelectedIndex == 0)
@@ -466,6 +473,7 @@ namespace Chainword
                 SortingListBox(1);
         }
 
+        // Кнопка создания кроссворда
         private void CreateCross_button_Click(object sender, EventArgs e)
         {
             open_next = true;
@@ -501,6 +509,7 @@ namespace Chainword
             this.Close();
         }
 
+        // Метод получения понятий из Листбокса добавленных слов
         private string[] GetWords()
         {
             string[] words_to_cross = new string[AddedWords.Items.Count];
@@ -515,6 +524,7 @@ namespace Chainword
             return words_to_cross;
         }
 
+        // Метод обнуления поискового запроса, в случае, если администратор удалит все символы из поля ввода поискового слова
         private void WordSearch_TextChanged(object sender, EventArgs e)
         {
             if (WordSearch.Text.Length == 0 && WordSearch.ForeColor == System.Drawing.Color.Black)
@@ -523,7 +533,7 @@ namespace Chainword
             }
         }
 
-        // Сортировка слов
+        // Реализация 4 видов сортировки слов
         void SortingListBox(int x)
         {
             Thread thread = new Thread(SampleThreadMethod);
@@ -546,6 +556,7 @@ namespace Chainword
             thread.Abort();
         }
 
+        // Событийный метод. Срабатывает при закрытии формы. Открывает форму меню администратора
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             if (!open_next)

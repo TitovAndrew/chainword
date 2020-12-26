@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace Chainword
 {
+    // Класс автоматической генерации кроссворда
     class AutoCreateCross
     {
         string dictionary;
@@ -17,6 +18,7 @@ namespace Chainword
         int cross_letters, length_cross, type_cross;
         Crossword cross;
 
+        // Конструктор класса с некоторыми параметрами будущего кроссворда 
         public AutoCreateCross(string name_cross, string dictionary, int type_cross, int cross_letters, int length_cross)
         {
             try
@@ -35,7 +37,7 @@ namespace Chainword
 
         }
 
-        // Создать кроссовд
+        // Метод создания кроссворда с инициализацией полей класса Crossword и сериализацией
         public void CreateCross()
         {
             Thread thread = new Thread(SampleThreadMethod);
@@ -66,6 +68,7 @@ namespace Chainword
 
         }
 
+        // Метод для открытия формы с прогрессбаром
         static void SampleThreadMethod()
         {
             ProgressBar pb = new ProgressBar();
@@ -73,7 +76,7 @@ namespace Chainword
             pb.BringToFront();
         }
 
-        // Получить все слова
+        // Метод получения случайных слов, которые пойдут в будущий кроссворд
         private string[] GetWords()
         {
             Thread thread = new Thread(SampleThreadMethod);
@@ -186,7 +189,7 @@ namespace Chainword
             return result;
         }
 
-        // Поиск слов по маске
+        // Поиск слов по маске (последние буквы последнего добавленного слова)
         private List<string> SearchWordsMask(string[] arr_only_words, char[] letters)
         {
             List<string> suitable_words = new List<string>();

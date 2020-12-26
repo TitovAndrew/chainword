@@ -10,16 +10,13 @@ using System.Windows.Forms;
 
 namespace Chainword
 {
+    // Класс прогрессбара
     public partial class ProgressBar : Form
     {
+        // Коструктор класса
         public ProgressBar()
         {
             InitializeComponent();
-        }
-
-        private void progressBar1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

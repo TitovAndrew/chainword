@@ -11,6 +11,7 @@ using System.Windows.Forms;
 
 namespace Chainword
 {
+    // Класс, отображающий сведения о разработчиках
     public partial class Info : Form
     {
         public Info()
@@ -24,11 +25,13 @@ namespace Chainword
             GetInfo();
         }
 
+        // Открытие html файла
         void GetInfo()
         {
             Process.Start(Environment.CurrentDirectory + "\\userguide\\help.html");
         }
 
+        // Событийный метод. Срабатывает при закрытии формы. Открывает форму авторизации
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             Form ifrm = Application.OpenForms[0];

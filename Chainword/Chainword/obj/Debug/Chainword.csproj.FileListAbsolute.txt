@@ -92,3 +92,22 @@ C:\Users\Danila\Desktop\Programmnaya_inzheneria\Программная инже�
 C:\Users\Danila\Desktop\Programmnaya_inzheneria\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.exe
 C:\Users\Danila\Desktop\Programmnaya_inzheneria\Программная инженерия\chainword\Chainword\Chainword\obj\Debug\Chainword.pdb
 D:\Учеба\4 курс\1 семестр\Программная инженерия\Курсач\chainword\Chainword\Chainword\obj\Debug\Chainword.ProgressBar.resources
+C:\Программная инженерия\chainword_new\Chainword\Chainword\bin\Debug\Chainword.exe.config
+C:\Программная инженерия\chainword_new\Chainword\Chainword\bin\Debug\Chainword.exe
+C:\Программная инженерия\chainword_new\Chainword\Chainword\bin\Debug\Chainword.pdb
+C:\Программная инженерия\chainword_new\Chainword\Chainword\obj\Debug\Chainword.csprojAssemblyReference.cache
+C:\Программная инженерия\chainword_new\Chainword\Chainword\obj\Debug\Chainword.CreateCross.resources
+C:\Программная инженерия\chainword_new\Chainword\Chainword\obj\Debug\Chainword.CreateDictionary.resources
+C:\Программная инженерия\chainword_new\Chainword\Chainword\obj\Debug\Chainword.FillingCross.resources
+C:\Программная инженерия\chainword_new\Chainword\Chainword\obj\Debug\Chainword.FillingDictionary.resources
+C:\Программная инженерия\chainword_new\Chainword\Chainword\obj\Debug\Chainword.Info.resources
+C:\Программная инженерия\chainword_new\Chainword\Chainword\obj\Debug\Chainword.AuthorizationForm.resources
+C:\Программная инженерия\chainword_new\Chainword\Chainword\obj\Debug\Chainword.MenuUser.resources
+C:\Программная инженерия\chainword_new\Chainword\Chainword\obj\Debug\Chainword.MenuAdmin.resources
+C:\Программная инженерия\chainword_new\Chainword\Chainword\obj\Debug\Chainword.ProgressBar.resources
+C:\Программная инженерия\chainword_new\Chainword\Chainword\obj\Debug\Chainword.Properties.Resources.resources
+C:\Программная инженерия\chainword_new\Chainword\Chainword\obj\Debug\Chainword.SolvingCrossword.resources
+C:\Программная инженерия\chainword_new\Chainword\Chainword\obj\Debug\Chainword.csproj.GenerateResource.cache
+C:\Программная инженерия\chainword_new\Chainword\Chainword\obj\Debug\Chainword.csproj.CoreCompileInputs.cache
+C:\Программная инженерия\chainword_new\Chainword\Chainword\obj\Debug\Chainword.exe
+C:\Программная инженерия\chainword_new\Chainword\Chainword\obj\Debug\Chainword.pdb

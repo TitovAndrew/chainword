@@ -12,18 +12,20 @@ using System.Windows.Forms;
 
 namespace Chainword
 {
+    // Класс задания имени будущего словаря. Первый этап создания словаря
     public partial class CreateDictionary : Form
     {
         bool open_next = false;
         FileWorker fw;
 
+        // Конструктор класс с инициализациями
         public CreateDictionary()
         {
             InitializeComponent();
             fw = new FileWorker();
         }
 
-        // Создать словарь
+        // Кнопка открывает форму заполнения словаря
         private void CreateDictionary_Button_Click(object sender, EventArgs e)
         {
             open_next = true;
@@ -44,6 +46,7 @@ namespace Chainword
             }
         }
 
+        // Событийный метод. Срабатывает при закрытии формы. Открывает форму авторизации
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             if (open_next == false)

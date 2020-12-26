@@ -12,10 +12,12 @@ using System.Windows.Forms;
 
 namespace Chainword
 {
+    // Класс меню администратора
     public partial class MenuAdmin : Form
     {
         bool open_next = false;
 
+        // Коструктор класса, инициализирует компоненты и выводит список словарей и кроссвордов
         public MenuAdmin()
         {
             InitializeComponent();
@@ -25,6 +27,7 @@ namespace Chainword
             Delete_button.Enabled = false;
         }
 
+        // Событийный метод. Срабатывает при закрытии формы. Открывает форму меню администратора
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             if (!open_next)
@@ -61,6 +64,7 @@ namespace Chainword
             }
         }
 
+        // Метод создания словаря
         private void Create_button_Click_1(object sender, EventArgs e)
         {
             open_next = true;
@@ -108,6 +112,7 @@ namespace Chainword
             this.Close();
         }
 
+        // Прогрессбар
         static void SampleThreadMethod()
         {
             ProgressBar pb = new ProgressBar();
@@ -138,6 +143,7 @@ namespace Chainword
             Delete_button.Enabled = false;
         }
 
+        #region Методы запрета открытия сразу нескольких файлов 
         private void CrossWord_listBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (CrossWord_listBox.SelectedIndex != -1)
@@ -157,5 +163,6 @@ namespace Chainword
                 CrossWord_listBox.SelectedIndex = -1;
             }
         }
+        #endregion
     }
 }

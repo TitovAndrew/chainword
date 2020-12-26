@@ -6,22 +6,23 @@ using System.Threading.Tasks;
 
 namespace Chainword
 {
+    // Класс кроссворда
     [Serializable]
     class Crossword
     {
         // Поля основываются на форме CreateCross
-        private string login_user; // Первичный ключ - Будем сохранять инфу пользователя о кроссворде по login_user
+        private string login_user; // Первичный ключ - Будем сохранять информацию пользователя о кроссворде по login_user
         private string name; // Имя кроссворда
         private int length; // Длина кроссворда в словах
 
         private string[] allwords; // Массив всех слов
-        // Добавил своего
         private int display_type; // Вид отображения
         private string dictionary; // Словарь
         private int cross_letters; // Количество букв в пересечении
         private char[] all_symbols;
         private int hint; // Подсказки
         private double progress;
+        // Геттеры и сеттеры вышеописанных полей
         public string Name
         {
             get
@@ -137,6 +138,7 @@ namespace Chainword
             }
         }
 
+        // Добавление слов в поле allwords
         public void AddWords(string[] words, int length)
         {
             allwords = new string[length];

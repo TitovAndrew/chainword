@@ -13,10 +13,12 @@ using System.Windows.Forms;
 
 namespace Chainword
 {
+    // Класс задания параметров будущего кроссворда - первый этап создания кроссворда
     public partial class CreateCross : Form
     {
         bool open_next = false;
 
+        // Конструктор класс, который инициализирует компоненты на форме + выдает список доступных словарей
         public CreateCross()
         {
             InitializeComponent();
@@ -29,7 +31,7 @@ namespace Chainword
             CreateCross_button.Enabled = false;
         }
 
-        // Вывести список словарей
+        // Метод вывода всех достпуных словарей в comboBox
         void ShowAllFiles(string rootDirectory, string fileExtension, ComboBox files)
         {
             string test = null;
@@ -50,6 +52,8 @@ namespace Chainword
                 }
             }
         }
+
+        // Событийный метод. Срабатывает при закрытии формы. Открывает форму авторизации
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             if (!open_next)
@@ -59,7 +63,8 @@ namespace Chainword
             }
         }
 
-        // Создать кроссворд
+        // Кнопка создания кроссворда. Проверяет уникальность имени нового кроссворда, а также открывает форму заполнения кроссворда
+        // Если стоит галочка "Сгенерировать автоматически", выполняет код в классе CreateCross
         private void CreateCross_button_Click(object sender, EventArgs e)
         {
             open_next = true;
@@ -136,6 +141,7 @@ namespace Chainword
             thread.Abort();
         }
 
+        // Прогрессбар
         static void SampleThreadMethod()
         {
             ProgressBar pb = new ProgressBar();
@@ -143,6 +149,8 @@ namespace Chainword
             pb.BringToFront();
         }
 
+        // Событийный метод. Возникает при изменения текста в поле ввода имени кроссворда
+        // В зависимости от заполнения поля, задает кнопку создания кроссворда доступной или недоступной
         private void NameCross_textBox_TextChanged(object sender, EventArgs e)
         {
             if (AvailableDictionary.Text != "" && NameCross_textBox.Text != "")
@@ -155,6 +163,8 @@ namespace Chainword
             }
         }
 
+        // Событийный метод. Возникает при выборе элемента из списка доступных словарей.
+        // В зависимости от выбора словаря, задает кнопку создания кроссворда доступной или недоступной
         private void AvailableDictionary_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (AvailableDictionary.Text != "" && NameCross_textBox.Text != "")

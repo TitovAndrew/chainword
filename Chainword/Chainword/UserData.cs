@@ -10,8 +10,10 @@ using System.Windows.Forms;
 
 namespace Chainword
 {
+    // Класс пользовательских данных
     class UserData
     {
+        // Метод хеширования пароля
         public string GetHash(string input)
         {
             var md5 = MD5.Create();

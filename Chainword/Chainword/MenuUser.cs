@@ -12,11 +12,13 @@ using System.Windows.Forms;
 
 namespace Chainword
 {
+    // Класс меню игрока
     public partial class MenuUser : Form
     {
         string login_name;
         bool open_next = false;
 
+        // Конструктор класса
         public MenuUser(string log)
         {
             InitializeComponent();
@@ -112,6 +114,7 @@ namespace Chainword
             }
         }
 
+        // Событийный метод. Срабатывает при закрытии формы. Открывает форму меню администратора
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             if (!open_next)
@@ -121,6 +124,7 @@ namespace Chainword
             }
         }
 
+        // Кнопка, открывающая выбранный кроссворд
         private void Open_Button_Click(object sender, EventArgs e)
         {
             open_next = true;
@@ -144,6 +148,7 @@ namespace Chainword
             }
         }
 
+        #region Методы запрета открытия сразу нескольких файлов 
         private void NewCross_ListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (NewCross_ListBox.SelectedIndex != -1)
@@ -161,5 +166,6 @@ namespace Chainword
                 NewCross_ListBox.SelectedIndex = -1;
             }
         }
+        #endregion
     }
 }
