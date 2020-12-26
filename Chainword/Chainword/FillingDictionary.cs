@@ -246,19 +246,6 @@ namespace Chainword
         // Метод выбора метода сортировки
         void SortingListBox(int x)
         {
-            Thread thread = new Thread(SampleThreadMethod);    
-            bool e = thread.IsAlive;
-            thread.Start();
-            e = thread.IsAlive;
-            bool r = true;
-            if (AvailableWords.Items.Count > 500)
-            {
-                r = false;
-                //thread.Start();
-                e = thread.IsAlive;
-            }
-               
-
             List<string[]> concept_definition = new List<string[]>();
 
             foreach (var item in AvailableWords.Items)
@@ -268,20 +255,11 @@ namespace Chainword
             }
             AvailableWords.Items.Clear();
 
-
             NameComparer nc = new NameComparer(x);
 
             concept_definition.Sort(nc);
-            thread.Abort();
             for (int i = 0; i < concept_definition.Count; i++)
                 AvailableWords.Items.Add(concept_definition[i][0] + " " + concept_definition[i][1]);
-            e = thread.IsAlive;
-            if (AvailableWords.Items.Count > 500)
-            {
-                //thread.Abort();
-                e = thread.IsAlive;
-            }
-            e = thread.IsAlive;
         }
 
         // Кнопка сохранения словаря

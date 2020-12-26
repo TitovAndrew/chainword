@@ -97,25 +97,44 @@ namespace Chainword
                 string words = null;
                 while (true)
                 {
-                    string tmp = fs.ReadLine();
-                    if (tmp == null) break;
-                    tmp += "\n";
+                    string temp = fs.ReadLine();
+                    if (temp == null) break;
+                    temp += "\n";
                     if (cross_letters == 1)
                     {
-                        words += tmp;
+                        words += AddDefinition(temp);
                     }
-                    else if (cross_letters == 2 && tmp.Split(' ')[0].Length > 4)
+                    else if (cross_letters == 2 && temp.Split(' ')[0].Length > 4)
                     {
-                        words += tmp;
+                        words += AddDefinition(temp);
                     }
-                    else if (cross_letters == 3 && tmp.Split(' ')[0].Length > 6)
+                    else if (cross_letters == 3 && temp.Split(' ')[0].Length > 6)
                     {
-                        words += tmp;
+                        words += AddDefinition(temp);
                     }
                 }
                 string[] arr_words = words.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
                 AvailableWords.Items.AddRange(arr_words);
             }
+        }
+
+        // Добавить определение к слову
+        private string AddDefinition(string temp)
+        {
+            string first_word = "";
+            string tmp = "";
+            for (int i = 0; i < temp.Split(' ').Length; i++)
+            {
+                if (i == 0)
+                    first_word = temp.Split(' ')[0] + " — ";
+                else
+                {
+                    tmp += temp.Split(' ')[i] + " ";
+                }
+            }
+            tmp = tmp.Remove(tmp.Length - 1);
+            temp = first_word + tmp + "\n";
+            return temp;
         }
 
         // Загрузить кроссворд
@@ -142,76 +161,88 @@ namespace Chainword
         private void UpdateAvailableWords()
         {
             AvailableWords.Items.Clear();
-            using (StreamReader fs = new StreamReader(dictionary))
+            if (AddedWords.Items.Count < length_cross)
             {
-                string words = null;
-                while (true)
+                using (StreamReader fs = new StreamReader(dictionary))
                 {
-                    string tmp = fs.ReadLine();
-                    string min_length = "";
-                    if (tmp != null)
-                        min_length = tmp.Split(' ')[0];
-
-
-                    if (tmp == null) break;
-                    tmp += "\n";
-
-                    if (cross_letters == 1)
+                    string words = null;
+                    while (true)
                     {
-                        if (tmp[0].CompareTo(last_chars[2]) == 0)
-                            words += tmp;
+                        string tmp = fs.ReadLine();
+                        string min_length = "";
+                        if (tmp != null)
+                            min_length = tmp.Split(' ')[0];
+
+
+                        if (tmp == null) break;
+                        tmp += "\n";
+
+                        if (cross_letters == 1)
+                        {
+                            if (tmp[0].CompareTo(last_chars[2]) == 0)
+                            {
+                                words += AddDefinition(tmp);
+                            }
+
+                        }
+                        else if (cross_letters == 2)
+                        {
+                            if (tmp[0].CompareTo(last_chars[1]) == 0 &&
+                                tmp[1].CompareTo(last_chars[2]) == 0 &&
+                                min_length.Length > 4)
+                            {
+                                words += AddDefinition(tmp);
+                            }
+
+                        }
+                        else
+                        {
+                            if (tmp[0].CompareTo(last_chars[0]) == 0 &&
+                                tmp[1].CompareTo(last_chars[1]) == 0 &&
+                                tmp[2].CompareTo(last_chars[2]) == 0 &&
+                                min_length.Length > 6)
+                            {
+                                words += AddDefinition(tmp);
+                            }
+
+                        }
                     }
-                    else if (cross_letters == 2)
+                    if (words != null)
                     {
-                        if (tmp[0].CompareTo(last_chars[1]) == 0 &&
-                            tmp[1].CompareTo(last_chars[2]) == 0 &&
-                            min_length.Length > 4)
-                            words += tmp;
+                        string[] arr_words = words.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
+                        List<string> arr_words_list = new List<string>();
+                        string[] x;
+                        for (int i = 0; i < arr_words.Length; i++)
+                        {
+                            foreach (var item in AddedWords.Items)
+                            {
+                                x = ((string)item).Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+                                if (arr_words[i].Contains(x[1] + " "))
+                                {
+                                    check++;
+                                }
+                            }
+                            if (check == 0)
+                            {
+                                arr_words_list.Add(arr_words[i]);
+                            }
+                            check = 0;
+                        }
+
+                        for (int i = 0; i < arr_words_list.Count; i++)
+                            AvailableWords.Items.Add(arr_words_list[i]);
                     }
                     else
                     {
-                        if (tmp[0].CompareTo(last_chars[0]) == 0 &&
-                            tmp[1].CompareTo(last_chars[1]) == 0 &&
-                            tmp[2].CompareTo(last_chars[2]) == 0 &&
-                            min_length.Length > 6)
-                            words += tmp;
-                    }
-                }
-                if (words != null)
-                {
-                    string[] arr_words = words.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
-                    List<string> arr_words_list = new List<string>();
-                    string[] x;
-                    for (int i = 0; i < arr_words.Length; i++)
-                    {
-                        foreach (var item in AddedWords.Items)
+                        if (this.Visible && AddedWords.Items.Count < length_cross)
                         {
-                            x = ((string)item).Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
-                            if (arr_words[i].Contains(x[1] + " "))
-                            {
-                                check++;
-                            }
+                            if (cross_letters == 1)
+                                MessageBox.Show("В словаре невозможно найти слово, начинающееся с буквы " + last_chars[2]);
+                            else if (cross_letters == 2)
+                                MessageBox.Show("В словаре невозможно найти слово, начинающееся с букв " + last_chars[1] + last_chars[2]);
+                            else
+                                MessageBox.Show("В словаре невозможно найти слово, начинающееся с букв " + last_chars[0] + last_chars[1] + last_chars[2]);
                         }
-                        if (check == 0)
-                        {
-                            arr_words_list.Add(arr_words[i]);
-                        }
-                        check = 0;
-                    }
-
-                    for (int i = 0; i < arr_words_list.Count; i++)
-                        AvailableWords.Items.Add(arr_words_list[i]);
-                }
-                else
-                {
-                    if (this.Visible && AddedWords.Items.Count < length_cross)
-                    {
-                        if (cross_letters == 1)
-                            MessageBox.Show("В словаре невозможно найти слово, начинающееся с буквы " + last_chars[2]);
-                        else if (cross_letters == 2)
-                            MessageBox.Show("В словаре невозможно найти слово, начинающееся с букв " + last_chars[1] + last_chars[2]);
-                        else
-                            MessageBox.Show("В словаре невозможно найти слово, начинающееся с букв " + last_chars[0] + last_chars[1] + last_chars[2]);
                     }
                 }
             }
@@ -229,10 +260,7 @@ namespace Chainword
                 first_chars[k] = result[0];
                 k++;
             }
-            Thread thread = new Thread(SampleThreadMethod);
-            thread.Start();
             UpdateAvailableWords();
-            thread.Abort();
 
             DeleteLastWord.Enabled = true;
             if (AddedWords.Items.Count == length_cross)
@@ -262,7 +290,7 @@ namespace Chainword
                         {
                             if (tmp[0].CompareTo(first_chars[k - 1][3]) == 0)
                             {
-                                words += tmp;
+                                words += AddDefinition(tmp);
                             }
                         }
                         else if (cross_letters == 2)
@@ -271,7 +299,7 @@ namespace Chainword
                                 tmp[1].CompareTo(first_chars[k - 1][4]) == 0 &&
                                 tmp.Split(' ')[0].Length > 4)
                             {
-                                words += tmp;
+                                words += AddDefinition(tmp);
                             }
                         }
                         else
@@ -281,7 +309,7 @@ namespace Chainword
                                 tmp[2].CompareTo(first_chars[k - 1][5]) == 0 &&
                                 tmp.Split(' ')[0].Length > 6)
                             {
-                                words += tmp;
+                                words += AddDefinition(tmp);
                             }
                         }
                     }
@@ -291,7 +319,7 @@ namespace Chainword
                         {
                             if (tmp[0].CompareTo(first_chars[k - 1][4]) == 0)
                             {
-                                words += tmp;
+                                words += AddDefinition(tmp);
                             }
                         }
                         else if (cross_letters == 2)
@@ -299,7 +327,7 @@ namespace Chainword
                             if (tmp[0].CompareTo(first_chars[k - 1][4]) == 0
                                 && tmp[1].CompareTo(first_chars[k - 1][5]) == 0)
                             {
-                                words += tmp;
+                                words += AddDefinition(tmp);
                             }
                         }
                         else
@@ -308,7 +336,7 @@ namespace Chainword
                                 tmp[1].CompareTo(first_chars[k - 1][5]) == 0 &&
                                 tmp[2].CompareTo(first_chars[k - 1][6]) == 0)
                             {
-                                words += tmp;
+                                words += AddDefinition(tmp);
                             }
                         }
                     }
@@ -349,19 +377,9 @@ namespace Chainword
                 AddWord.Enabled = true;
         }
 
-        // Прогрессбар
-        static void SampleThreadMethod()
-        {
-            ProgressBar pb = new ProgressBar();
-            pb.ShowDialog();
-            pb.BringToFront();
-        }
-
         // Поиск слова
         private void Search_button_Click(object sender, EventArgs e)
         {
-            Thread thread = new Thread(SampleThreadMethod);
-            thread.Start();
             AvailableWords.Items.Clear();
             using (StreamReader fs = new StreamReader(dictionary))
             {
@@ -384,20 +402,20 @@ namespace Chainword
                         if (cross_letters == 1)
                         {
                             if (tmp[0].CompareTo(f[2]) == 0)
-                                words += tmp;
+                                words += AddDefinition(tmp);
                         }
                         else if (cross_letters == 2)
                         {
                             if (tmp[0].CompareTo(f[1]) == 0 && tmp[1].CompareTo(f[2]) == 0)
-                                words += tmp;
+                                words += AddDefinition(tmp);
                         }
                         else
                         {
                             if (tmp[0].CompareTo(f[0]) == 0 && tmp[1].CompareTo(f[1]) == 0 && tmp[2].CompareTo(f[2]) == 0)
-                                words += tmp;
+                                words += AddDefinition(tmp);
                         }
                     }
-                    else words += tmp;
+                    else words += AddDefinition(tmp);
                 }
 
                 if (words != null)
@@ -436,7 +454,6 @@ namespace Chainword
                 {
                     MessageBox.Show("Ошибка");
                 }
-                thread.Abort();
             }
         }
 
@@ -536,8 +553,6 @@ namespace Chainword
         // Реализация 4 видов сортировки слов
         void SortingListBox(int x)
         {
-            Thread thread = new Thread(SampleThreadMethod);
-            thread.Start();
             List<string[]> concept_definition = new List<string[]>();
 
             foreach (var item in AvailableWords.Items)
@@ -553,7 +568,6 @@ namespace Chainword
 
             for (int i = 0; i < concept_definition.Count; i++)
                 AvailableWords.Items.Add(concept_definition[i][0] + " " + concept_definition[i][1]);
-            thread.Abort();
         }
 
         // Событийный метод. Срабатывает при закрытии формы. Открывает форму меню администратора
