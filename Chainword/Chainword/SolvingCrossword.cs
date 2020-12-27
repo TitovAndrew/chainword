@@ -154,10 +154,15 @@ namespace Chainword
                 {
                     PanelQuestion.Size = new Size(610, 50);
                     PanelQuestion.Location = new Point(2, locateY_TB);
+                }                
+                else if (count_symbols < 170) 
+                {
+                    PanelQuestion.Size = new Size(720, 50);
+                    PanelQuestion.Location = new Point(2, locateY_TB);
                 }
                 else
                 {
-                    PanelQuestion.Size = new Size(720, 50);
+                    PanelQuestion.Size = new Size(1020, 50);
                     PanelQuestion.Location = new Point(2, locateY_TB);
                 }
 
@@ -175,8 +180,9 @@ namespace Chainword
                     this.Size = new Size(595, lx + 80);
                 else if (count_symbols < 100)
                     this.Size = new Size(630, lx + 80);
-                else
+                else if (count_symbols < 170)
                     this.Size = new Size(740, lx + 80);
+                else this.Size = new Size(1020, lx + 80);
             }
             else if (index == 1)
             {
@@ -208,10 +214,15 @@ namespace Chainword
                     PanelQuestion.Size = new Size(610, 50);
                     PanelQuestion.Location = new Point(2, 525);
                 }
-                else
+                else if (count_symbols < 170)
                 {
                     PanelQuestion.Size = new Size(680, 50);
                     PanelQuestion.Location = new Point(2, 600);
+                }
+                else
+                {
+                    PanelQuestion.Size = new Size(1020, 50);
+                    PanelQuestion.Location = new Point(2, 860);
                 }
 
                 CheckButton.Location = new Point(5, PanelQuestion.Location.Y + 60);
@@ -478,7 +489,7 @@ namespace Chainword
                 prevX = 285;
                 prevY = 250;
             }
-            else
+            else if (count_symbols < 170)
             {
                 this.Size = new Size(700, 750);
                 Panel1.Size = new Size(700, 750);
@@ -486,6 +497,15 @@ namespace Chainword
                 HintLabel.Location = new Point(440, 10);
                 prevX = 350;
                 prevY = 300;
+            }
+            else
+            {
+                this.Size = new Size(1020, 1000);
+                Panel1.Size = new Size(1020, 1000);
+                GetHintButton.Location = new Point(970, 7);
+                HintLabel.Location = new Point(760, 10);
+                prevX = 500;
+                prevY = 410;
             }
 
             int kostyl = 0;
@@ -661,13 +681,21 @@ namespace Chainword
                 GetHintButton.Location = new Point(580, 7);
                 HintLabel.Location = new Point(370, 10);
             }
-            else
+            else if (count_symbols < 170)
             {
                 width_cross = 20;
                 this.Size = new Size(740, 610);
                 Panel1.Size = new Size(740, 610);
                 GetHintButton.Location = new Point(690, 7);
                 HintLabel.Location = new Point(480, 10);
+            }
+            else
+            {
+                width_cross = 28;
+                this.Size = new Size(1020, 610);
+                Panel1.Size = new Size(1020, 610);
+                GetHintButton.Location = new Point(970, 7);
+                HintLabel.Location = new Point(760, 10);
             }
 
             int kostyl = 0, turn = width_cross, down = 0, locate_X = 1;
