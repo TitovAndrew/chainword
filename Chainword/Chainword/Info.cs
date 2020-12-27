@@ -22,13 +22,22 @@ namespace Chainword
         // Отобразить справку
         private void InfoSystem_button_Click(object sender, EventArgs e)
         {
-            GetInfo();
+           
+                GetInfo();
+          
         }
 
         // Открытие html файла
         void GetInfo()
         {
-            Process.Start(Environment.CurrentDirectory + "\\userguide\\help.html");
+            try
+            {
+                Process.Start(Environment.CurrentDirectory + "\\userguide\\help.html");
+            }
+            catch
+            {
+                MessageBox.Show("Невозможно открыть справку. Файл справки поврежден или не найден.");
+            }
         }
 
         // Событийный метод. Срабатывает при закрытии формы. Открывает форму авторизации
