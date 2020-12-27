@@ -100,7 +100,12 @@ namespace Chainword
                 cross = formatter.Deserialize(stream) as Crossword;
                 stream.Close();
 
-                arr_started_cross[z] = item.Split('.')[0] + " (" + String.Format("{0:0.00}", cross.Progress) + "%)";
+                if (cross.Progress == 100)
+                {
+                    arr_started_cross[z] = item.Split('.')[0] + " (Завершен)";
+                }
+                else
+                    arr_started_cross[z] = item.Split('.')[0] + " (" + String.Format("{0:0.00}", cross.Progress) + "%)";
                 z++;
             }
 
@@ -132,6 +137,30 @@ namespace Chainword
             {
                 string[] file_name = ((string)item).Split(' ');
                 string[] f = Directory.GetFiles(Environment.CurrentDirectory, file_name[0] + ".cros");
+                if (file_name[1].Contains("Завершен"))
+                {
+                    DialogResult result = MessageBox.Show(
+                         "Вы полностью разгадали данный кроссворд.\nНачать разгадывать заново?",
+                         "Сообщение",
+                         MessageBoxButtons.YesNo,
+                         MessageBoxIcon.Information,
+                         MessageBoxDefaultButton.Button1);
+                    if (result == DialogResult.Yes)
+                    {
+                        try
+                        {
+                            string[] fn = f[0].Split('\\');
+                            string file_cross = fn[fn.Length - 1];
+                            System.IO.File.Delete(Environment.CurrentDirectory + "\\" + login_name + "\\" + file_cross);
+                        }
+                        catch { return; }
+                    }
+                    else
+                    {
+                        open_next = false;
+                        return;
+                    }
+                }
                 Form solving = new SolvingCrossword(f[0], login_name);
                 solving.Show();
                 solving.BringToFront();

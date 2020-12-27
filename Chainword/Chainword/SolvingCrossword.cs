@@ -263,8 +263,12 @@ namespace Chainword
         void Click_CheckButton(object sender, EventArgs e)
         {
             UpdateProgress();
-
-            MessageBox.Show("Прогресс: " + String.Format("{0:0.00}", progress) + "%");
+            if (progress == 100)
+            {
+                MessageBox.Show("Поздравляем! Вы разгадали кроссворд!");
+            }
+            else
+                MessageBox.Show("Прогресс: " + String.Format("{0:0.00}", progress) + "%");
         }
 
         // Метод сохранения прогресса
