@@ -88,10 +88,16 @@ namespace Chainword
                     if (item.ToString().Split(' ')[0] == AddWord_textBox.Text.ToUpper())
                     {
                         MessageBox.Show("Такое понятие уже существует");
-                        AddWord_textBox.Text = "Слово";
-                        AddWord_textBox.ForeColor = System.Drawing.Color.Gray;
-                        AddDefinition_textBox.Text = "Определение";
-                        AddDefinition_textBox.ForeColor = System.Drawing.Color.Gray;
+                        //if (AddWord_textBox.Text == "")
+                        //{
+                        //    AddWord_textBox.Text = "Слово";
+                        //    AddWord_textBox.ForeColor = System.Drawing.Color.Gray;
+                        //}
+                        //if (AddWord_textBox.Text == "")
+                        //{
+                        //    AddDefinition_textBox.Text = "Определение";
+                        //    AddDefinition_textBox.ForeColor = System.Drawing.Color.Gray;
+                        //}
                         AddConcept_button.Enabled = false;
                         return;
                     }    
@@ -99,10 +105,16 @@ namespace Chainword
                 string new_concept = AddWord_textBox.Text.ToUpper() + " — " + AddDefinition_textBox.Text;
                 AvailableWords.Items.Add(new_concept);
                 all_concepts_list.Add(new_concept);
-                AddWord_textBox.Text = "Слово";
-                AddWord_textBox.ForeColor = System.Drawing.Color.Gray;
-                AddDefinition_textBox.Text = "Определение";
-                AddDefinition_textBox.ForeColor = System.Drawing.Color.Gray;
+                //if (AddWord_textBox.Text == "")
+                //{
+                //    AddWord_textBox.Text = "Слово";
+                //    AddWord_textBox.ForeColor = System.Drawing.Color.Gray;
+                //}
+                //if (AddWord_textBox.Text == "")
+                //{
+                //    AddDefinition_textBox.Text = "Определение";
+                //    AddDefinition_textBox.ForeColor = System.Drawing.Color.Gray;
+                //}
                 AddConcept_button.Enabled = false;
             }
         }

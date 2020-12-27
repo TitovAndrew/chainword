@@ -1018,7 +1018,7 @@ namespace Chainword
         // Событийный метод. Срабатывает при закрытии формы. Открывает форму авторизации
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            Form ifrm = Application.OpenForms[0];
+            MenuUser ifrm = new MenuUser(login_name);
             ifrm.Show();
         }
     }
