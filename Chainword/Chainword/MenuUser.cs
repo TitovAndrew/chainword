@@ -27,8 +27,17 @@ namespace Chainword
             if (!Directory.Exists(Environment.CurrentDirectory + "\\" + login_name))
                 Directory.CreateDirectory(Environment.CurrentDirectory + "\\" + login_name);
 
-            ShowAllFiles(Environment.CurrentDirectory, "*.cros", StartedCross_ListBox);
-            ShowAllFiles(Environment.CurrentDirectory, "*.cros", NewCross_ListBox);
+            try
+            {
+                ShowAllFiles(Environment.CurrentDirectory, "*.cros", StartedCross_ListBox);
+                ShowAllFiles(Environment.CurrentDirectory, "*.cros", NewCross_ListBox);
+            }
+            catch
+            {
+                MessageBox.Show("Системные файлы пользователя повреждены.");
+                this.Close();
+                Application.Restart();
+            }
         }
 
         // Отобразить список новых и начатых кроссвордов
