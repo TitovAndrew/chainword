@@ -170,19 +170,35 @@ namespace Chainword
                         return;
                     }
                 }
-                Form solving = new SolvingCrossword(f[0], login_name);
-                solving.Show();
-                solving.BringToFront();
-                this.Close();
+                try
+                {
+                    Form solving = new SolvingCrossword(f[0], login_name);
+                    solving.Show();
+                    solving.BringToFront();
+                    this.Close();
+                }
+                catch
+                {
+                    MessageBox.Show("Файл кроссворда поврежден.");
+                    open_next = false;
+                }
             }
             foreach (var item in NewCross_ListBox.SelectedItems)
             {
-                string file_name = (string)item;
-                string[] f = Directory.GetFiles(Environment.CurrentDirectory, file_name + ".cros");
-                Form solving = new SolvingCrossword(f[0], login_name);
-                solving.Show();
-                solving.BringToFront();
-                this.Close();
+                try
+                {
+                    string file_name = (string)item;
+                    string[] f = Directory.GetFiles(Environment.CurrentDirectory, file_name + ".cros");
+                    Form solving = new SolvingCrossword(f[0], login_name);
+                    solving.Show();
+                    solving.BringToFront();
+                    this.Close();
+                }
+                catch
+                {
+                    MessageBox.Show("Файл кроссворда поврежден.");
+                    open_next = false;
+                }
             }
         }
 
